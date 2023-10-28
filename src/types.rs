@@ -304,6 +304,8 @@ pub enum RegisterLocation {
     Bits32Or64,
     #[strum(serialize = "64-bit")]
     Bits64,
+    #[strum(serialize = "48-bit")]
+    Bits48,
     #[strum(serialize = "32-bit")]
     Bits32,
     #[strum(serialize = "16-bit")]
