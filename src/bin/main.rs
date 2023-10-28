@@ -38,6 +38,12 @@ pub fn main() -> anyhow::Result<()> {
         info!("Populating register set -> x86...");
         let xml_conts_regs_x86 = include_str!("../../registers/x86.xml");
         populate_registers(xml_conts_regs_x86)?
+            .into_iter()
+            .map(|mut reg| {
+                reg.arch = Some(Arch::X86);
+                reg
+            })
+            .collect()
     } else {
         Vec::new()
     };
@@ -46,6 +52,12 @@ pub fn main() -> anyhow::Result<()> {
         info!("Populating register set -> x86_64...");
         let xml_conts_regs_x86_64 = include_str!("../../registers/x86_64.xml");
         populate_registers(xml_conts_regs_x86_64)?
+            .into_iter()
+            .map(|mut reg| {
+                reg.arch = Some(Arch::X86_64);
+                reg
+            })
+            .collect()
     } else {
         Vec::new()
     };
@@ -106,6 +118,8 @@ pub fn main() -> anyhow::Result<()> {
         &x86_64_instructions,
         &mut names_to_instructions,
     );
+
+    //info!("{:?}", names_to_registers);
 
     main_loop(&connection, initialization_params, &names_to_instructions, &names_to_registers)?;
     io_threads.join()?;
@@ -186,14 +200,17 @@ fn main_loop(
                                         names_to_registers.get(&(Arch::X86, &*word)),
                                         names_to_registers.get(&(Arch::X86_64, &*word)),
                                     );
+                                    info!("Word: {}", word);
+                                    info!("Register lookup: {:?} {:?}", x86_register, x86_64_register);
                                     match (x86_register.is_some(), x86_64_register.is_some())
                                     {
                                         (true, _) | (_, true) => {
                                             let mut value = String::new();
-                                            if let Some(x86_register) = x86_instruction {
+                                            if let Some(x86_register) = x86_register {
                                                 value += &format!("{}", x86_register);
+                                                info!("Output: {:?}\n", value);
                                             }
-                                            if let Some(x86_64_register) = x86_64_instruction {
+                                            if let Some(x86_64_register) = x86_64_register {
                                                 value += &format!(
                                                     "{}{}",
                                                     if x86_register.is_some() {

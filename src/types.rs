@@ -41,16 +41,16 @@ impl std::fmt::Display for Register {
         // basic fields
         let header: String;
         if let Some(arch) = &self.arch {
-            header = format!("{} [{}]", &self.name, arch.as_ref());
+            header = format!("{} [{}]", &self.name.to_uppercase(), arch.as_ref());
         } else {
-            header = self.name.clone();
+            header = self.name.to_uppercase();
         }
 
         let mut v: Vec<String> = vec![header.clone(), self.description.clone(), String::from("\n")];
 
         // Register Type
         let reg_type_str = if let Some(reg_type_) = self.reg_type {
-            reg_type_.to_string()
+            format!("Type: {}", reg_type_)
         } else {
             String::new()
         };
@@ -60,7 +60,7 @@ impl std::fmt::Display for Register {
 
         // Register Location
         let reg_loc_str = if let Some(location_) = self.location {
-            location_.to_string()
+            format!("Width: {}", location_)
         } else {
             String::new()
         };
@@ -69,8 +69,15 @@ impl std::fmt::Display for Register {
         }
 
         // Bit-mask meanings if applicable
-        for (i, bit) in self.flag_info.iter().enumerate() {
-            let mut tmp_str = format!("{:2}: {} - {}", i, bit.label, bit.description);
+        if !self.flag_info.is_empty() {
+            v.push(String::from("\n## Flags:"));
+        }
+        for bit in self.flag_info.iter() {
+            let mut tmp_str = if bit.label.is_empty() {
+                format!("{:2}: {}", bit.bit, bit.description)
+            } else {
+                format!("{:2}: {} - {}", bit.bit, bit.label, bit.description)
+            };
             if !bit.pae.is_empty() {
                 tmp_str += &format!(", PAE: {}", bit.pae);
             }
@@ -95,6 +102,14 @@ impl std::fmt::Display for Register {
         Ok(())
     }
 }
+
+impl Register {
+    /// Add a new bit flag entry at the current instruction
+    pub fn push_flag(&mut self, flag: RegisterBitInfo) {
+        self.flag_info.push(flag);
+    }
+}
+
 
 // Instruction ------------------------------------------------------------------------------------
 #[derive(Debug, Clone)]
@@ -288,6 +303,8 @@ pub enum RegisterType {
     EFLAGS,
     #[strum(serialize = "Control Register")]
     Control,
+    #[strum(serialize = "Extended Control Register")]
+    ExtendedControl,
     #[strum(serialize = "Machine State Register")]
     MSR,
     #[strum(serialize = "Debug Register")]
@@ -300,28 +317,29 @@ pub enum RegisterType {
 
 #[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr, Display)]
 pub enum RegisterLocation {
-    #[strum(serialize = "32(64)-bit")]
+    #[strum(serialize = "32(64) bits")]
     Bits32Or64,
-    #[strum(serialize = "64-bit")]
+    #[strum(serialize = "64 bits")]
     Bits64,
-    #[strum(serialize = "48-bit")]
+    #[strum(serialize = "48 bits")]
     Bits48,
-    #[strum(serialize = "32-bit")]
+    #[strum(serialize = "32 bits")]
     Bits32,
-    #[strum(serialize = "16-bit")]
+    #[strum(serialize = "16 bits")]
     Bits16,
     #[strum(serialize = "8 high bits of lower 16 bits")]
     Upper8Lower16,
-    #[strum(serialize = "8-bit")]
+    #[strum(serialize = "8 lower bits")]
     Lower8Lower16,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Default, Deserialize)]
 pub struct RegisterBitInfo {
-    label: String,
-    description: String,
-    pae: String,
-    long_mode: String,
+    pub bit: u32,
+    pub label: String,
+    pub description: String,
+    pub pae: String,
+    pub long_mode: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

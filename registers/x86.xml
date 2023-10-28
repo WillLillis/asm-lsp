@@ -1,96 +1,96 @@
 <?xml version='1.0' encoding='utf-8'?>
-<InstructionSet name="%x86">
-    <Register name="%rax" description="Accumulator" type="GeneralPurpose" location="64-bits">
+<InstructionSet name="x86">
+    <Register name="rax" description="Accumulator" type="General Purpose Register" location="64 bits">
     </Register>
-    <Register name="%eax" description="Accumulator" type="GeneralPurpose" location="32-bits">
+    <Register name="eax" description="Accumulator" type="General Purpose Register" location="32 bits">
     </Register>
-    <Register name="%ax" description="Accumulator" type="GeneralPurpose" location="16-bits">
+    <Register name="ax" description="Accumulator" type="General Purpose Register" location="16 bits">
     </Register>
-    <Register name="%ah" description="Accumulator" type="GeneralPurpose" location="8-high-bits">
+    <Register name="ah" description="Accumulator" type="General Purpose Register" location="8 high bits of lower 16 bits">
     </Register>
-    <Register name="%al" description="Accumulator" type="GeneralPurpose" location="8-low-bits">
+    <Register name="al" description="Accumulator" type="General Purpose Register" location="8 lower bits">
     </Register>
-    <Register name="%rbx" description="Base" type="GeneralPurpose" location="64-bits">
+    <Register name="rbx" description="Base" type="General Purpose Register" location="64 bits">
     </Register>
-    <Register name="%ebx" description="Base" type="GeneralPurpose" location="32-bits">
+    <Register name="ebx" description="Base" type="General Purpose Register" location="32 bits">
     </Register>
-    <Register name="%bx" description="Base" type="GeneralPurpose" location="16-bits">
+    <Register name="bx" description="Base" type="General Purpose Register" location="16 bits">
     </Register>
-    <Register name="%bh" description="Base" type="GeneralPurpose" location="8-high-bits">
+    <Register name="bh" description="Base" type="General Purpose Register" location="8 high bits of lower 16 bits">
     </Register>
-    <Register name="%bl" description="Base" type="GeneralPurpose" location="8-low-bits">
+    <Register name="bl" description="Base" type="General Purpose Register" location="8 lower bits">
     </Register>
-    <Register name="%rcx" description="Counter" type="GeneralPurpose" location="64-bits">
+    <Register name="rcx" description="Counter" type="General Purpose Register" location="64 bits">
     </Register>
-    <Register name="%ecx" description="Counter" type="GeneralPurpose" location="32-bits">
+    <Register name="ecx" description="Counter" type="General Purpose Register" location="32 bits">
     </Register>
-    <Register name="%cx" description="Counter" type="GeneralPurpose" location="16-bits">
+    <Register name="cx" description="Counter" type="General Purpose Register" location="16 bits">
     </Register>
-    <Register name="%ch" description="Counter" type="GeneralPurpose" location="8-high-bits">
+    <Register name="ch" description="Counter" type="General Purpose Register" location="8 high bits of lower 16 bits">
     </Register>
-    <Register name="%cl" description="Counter" type="GeneralPurpose" location="8-low-bits">
+    <Register name="cl" description="Counter" type="General Purpose Register" location="8 lower bits">
     </Register>
-    <Register name="%rdx" description="Data" type="GeneralPurpose" location="64-bits">
+    <Register name="rdx" description="Data" type="General Purpose Register" location="64 bits">
     </Register>
-    <Register name="%edx" description="Data" type="GeneralPurpose" location="32-bits">
+    <Register name="edx" description="Data" type="General Purpose Register" location="32 bits">
     </Register>
-    <Register name="%dx" description="Data" type="GeneralPurpose" location="16-bits">
+    <Register name="dx" description="Data" type="General Purpose Register" location="16 bits">
     </Register>
-    <Register name="%dh" description="Data" type="GeneralPurpose" location="8-high-bits">
+    <Register name="dh" description="Data" type="General Purpose Register" location="8 high bits of lower 16 bits">
     </Register>
-    <Register name="%dl" description="Data" type="GeneralPurpose" location="8-low-bits">
+    <Register name="dl" description="Data" type="General Purpose Register" location="8 lower bits">
     </Register>
-    <Register name="%rsi" description="Source" type="GeneralPurpose" location="64-bits">
+    <Register name="rsi" description="Source" type="General Purpose Register" location="64 bits">
     </Register>
-    <Register name="%esi" description="Source" type="GeneralPurpose" location="32-bits">
+    <Register name="esi" description="Source" type="General Purpose Register" location="32 bits">
     </Register>
-    <Register name="%si" description="Source" type="GeneralPurpose" location="16-bits">
+    <Register name="si" description="Source" type="General Purpose Register" location="16 bits">
     </Register>
-    <Register name="%sil" description="Source" type="GeneralPurpose" location="8-low-bits">
+    <Register name="sil" description="Source" type="General Purpose Register" location="8 lower bits">
     </Register>
-    <Register name="%rdi" description="Destination" type="GeneralPurpose" location="64-bits">
+    <Register name="rdi" description="Destination" type="General Purpose Register" location="64 bits">
     </Register>
-    <Register name="%edi" description="Destination" type="GeneralPurpose" location="32-bits">
+    <Register name="edi" description="Destination" type="General Purpose Register" location="32 bits">
     </Register>
-    <Register name="%di" description="Destination" type="GeneralPurpose" location="16-bits">
+    <Register name="di" description="Destination" type="General Purpose Register" location="16 bits">
     </Register>
-    <Register name="%dil" description="Destination" type="GeneralPurpose" location="8-low-bits">
+    <Register name="dil" description="Destination" type="General Purpose Register" location="8 lower bits">
     </Register>
-    <Register name="%rsp" description="Stack Pointer" type="GeneralPurpose" location="64-bits">
+    <Register name="rsp" description="Stack Pointer" type="General Purpose Register" location="64 bits">
     </Register>
-    <Register name="%esp" description="Stack Pointer" type="GeneralPurpose" location="32-bits">
+    <Register name="esp" description="Stack Pointer" type="General Purpose Register" location="32 bits">
     </Register>
-    <Register name="%sp" description="Stack Pointer" type="GeneralPurpose" location="16-bits">
+    <Register name="sp" description="Stack Pointer" type="General Purpose Register" location="16 bits">
     </Register>
-    <Register name="%spl" description="Stack Pointer" type="GeneralPurpose" location="8-low-bits">
+    <Register name="spl" description="Stack Pointer" type="General Purpose Register" location="8 lower bits">
     </Register>
-    <Register name="%rbp" description="Stack Base Pointer" type="GeneralPurpose" location="64-bits">
+    <Register name="rbp" description="Stack Base Pointer" type="General Purpose Register" location="64 bits">
     </Register>
-    <Register name="%ebp" description="Stack Base Pointer" type="GeneralPurpose" location="32-bits">
+    <Register name="ebp" description="Stack Base Pointer" type="General Purpose Register" location="32 bits">
     </Register>
-    <Register name="%bp" description="Stack Base Pointer" type="GeneralPurpose" location="16-bits">
+    <Register name="bp" description="Stack Base Pointer" type="General Purpose Register" location="16 bits">
     </Register>
-    <Register name="%bpl" description="Stack Base Pointer" type="GeneralPurpose" location="8-low-bits">
+    <Register name="bpl" description="Stack Base Pointer" type="General Purpose Register" location="8 lower bits">
     </Register>
-    <Register name="%rpi" description="Instruction Pointer" type="PointerRegister" location="64-bits">
+    <Register name="rpi" description="Instruction Pointer" type="Pointer Register" location="64 bits">
     </Register>
-    <Register name="%eip" description="Instruction Pointer" type="PointerRegister" location="32-bits">
+    <Register name="eip" description="Instruction Pointer" type="Pointer Register" location="32 bits">
     </Register>
-    <Register name="%ip" description="Instruction Pointer" type="PointerRegister" location="16-bits">
+    <Register name="ip" description="Instruction Pointer" type="Pointer Register" location="16 bits">
     </Register>
-    <Register name="%cs" description="Code Segment" type="SegmentRegister" location="16-bits">
+    <Register name="cs" description="Code Segment" type="Segment Register" location="16 bits">
     </Register>
-    <Register name="%ds" description="Data Segment" type="SegmentRegister" location="16-bits">
+    <Register name="ds" description="Data Segment" type="Segment Register" location="16 bits">
     </Register>
-    <Register name="%es" description="Extra Segment" type="SegmentRegister" location="16-bits">
+    <Register name="es" description="Extra Segment" type="Segment Register" location="16 bits">
     </Register>
-    <Register name="%ss" description="Stack Segment" type="SegmentRegister" location="16-bits">
+    <Register name="ss" description="Stack Segment" type="Segment Register" location="16 bits">
     </Register>
-    <Register name="%fs" description="General Purpose F Segment" type="SegmentRegister" location="16-bits">
+    <Register name="fs" description="General Purpose F Segment" type="Segment Register" location="16 bits">
     </Register>
-    <Register name="%gs" description="General Purpose G Segment" type="SegmentRegister" location="16-bits">
+    <Register name="gs" description="General Purpose G Segment" type="Segment Register" location="16 bits">
     </Register>
-    <Register name="%eflags" description="Extended Flags Register" type="EFLAGSRegister" location="32-bits"i>
+    <Register name="eflags" description="Extended Flags Register" type="EFLAGS Register" location="32 bits">
         <Flags>
             <Flag bit="0" label="CF" description="Carry flag"></Flag>
             <Flag bit="1" label="" description="Reserved"></Flag>
@@ -126,7 +126,7 @@
             <Flag bit="31" label="" description="Reserved"></Flag>
         </Flags>
     </Register>
-    <Register name="%cr0" description="Control Register 0" type="ControlRegister" location="32-bits"i>
+    <Register name="cr0" description="Control Register 0" type="Control Register" location="32 bits">
         <Flags>
             <Flag bit="0" label="PE" description="Protected Mode Enable"></Flag>
             <Flag bit="1" label="MP" description="Monitor co-processor"></Flag>
@@ -162,24 +162,24 @@
             <Flag bit="31" label="PG" description="Paging"></Flag>
         </Flags>
     </Register>
-    <Register name="%cr1" description="Reserved" type="ControlRegister">
+    <Register name="cr1" description="Reserved" type="Control Register">
     </Register>
-    <Register name="%cr2" description="Page Fault Linear Address" type="ControlRegister" location="32(64)-bits">
+    <Register name="cr2" description="Page Fault Linear Address" type="Control Register" location="32(64) bits">
     </Register>
-    <Register name="%cr3" description="Control Register 3" type="ControlRegister">
+    <Register name="cr3" description="Control Register 3" type="Control Register">
         <Flags>
             <Flag bit="0" label="" description="Assumed to be 0"></Flag>
             <Flag bit="1" label="" description="Assumed to be 0"></Flag>
             <Flag bit="2" label="" description="Assumed to be 0"></Flag>
             <Flag bit="3" label="PWT" description="Page-level Write-Through" pae="(Not Used)" longmode="Not used if bit 17 of CR4 is 1"></Flag>
             <Flag bit="4" label="PCD" description="Page-level Cache Disable" pae="(Not Used)" longmode="Not used if bit 17 of CR4 is 1"></Flag>
-            <Flag bit="5" label="" description"Assumed to be 0"></Flag>
-            <Flag bit="6" label="" description"Assumed to be 0"></Flag>
-            <Flag bit="7" label="" description"Assumed to be 0"></Flag>
-            <Flag bit="8" label="" description"Assumed to be 0"></Flag>
-            <Flag bit="9" label="" description"Assumed to be 0"></Flag>
-            <Flag bit="10" label="" description"Assumed to be 0"></Flag>
-            <Flag bit="11" label="" description"Assumed to be 0"></Flag>
+            <Flag bit="5" label="" description="Assumed to be 0"></Flag>
+            <Flag bit="6" label="" description="Assumed to be 0"></Flag>
+            <Flag bit="7" label="" description="Assumed to be 0"></Flag>
+            <Flag bit="8" label="" description="Assumed to be 0"></Flag>
+            <Flag bit="9" label="" description="Assumed to be 0"></Flag>
+            <Flag bit="10" label="" description="Assumed to be 0"></Flag>
+            <Flag bit="11" label="" description="Assumed to be 0"></Flag>
             <Flag bit="12" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
             <Flag bit="13" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
             <Flag bit="14" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
@@ -234,20 +234,20 @@
             <Flag bit="63" label="PDBR" description="(Page Directory Base Register)" pae="(Base of PDPT)" longmode="(Base of PMLT4/PML5T)"></Flag>
         </Flags>
     </Register>
-    <Register name="%cr4" description="Control Register 4" type="ControlRegister" location="32-bits">
+    <Register name="cr4" description="Control Register 4" type="Control Register" location="32 bits">
         <Flags>
             <Flag bit="0" label="VME" description="Virtual 8086 Mode Extensions"></Flag>
             <Flag bit="1" label="PVI" description="Protected-mode Virtual Interrupts"></Flag>
             <Flag bit="2" label="TSD" description="Time Stamp Disable"></Flag>
             <Flag bit="3" label="DE" description="Debugging Extensions"></Flag>
             <Flag bit="4" label="PSE" description="Page Size Extension"></Flag>
-            <Flag bit="5" label="PAE" description"Physical Address Extension"></Flag>
-            <Flag bit="6" label="MCE" description"Machine Check Exception"></Flag>
-            <Flag bit="7" label="PGE" description"Page Global Enabled"></Flag>
-            <Flag bit="8" label="PCE" description"Performance-Monitoring Counter enable"></Flag>
-            <Flag bit="9" label="OSFXSR" description"Operating system support for FXSAVE and FXRSTOR operations"></Flag>
-            <Flag bit="10" label="OSXMMEXCPT" description"Operating System Support for Unmasked SIMD Floating-Point Exceptions"></Flag>
-            <Flag bit="11" label="UMIP" description"User-Mode Instruction Prevention (if set, #GP on SGDT, SIDT, SLDT, SMSW, and STR instructions when CPL>0)"></Flag>
+            <Flag bit="5" label="PAE" description="Physical Address Extension"></Flag>
+            <Flag bit="6" label="MCE" description="Machine Check Exception"></Flag>
+            <Flag bit="7" label="PGE" description="Page Global Enabled"></Flag>
+            <Flag bit="8" label="PCE" description="Performance-Monitoring Counter enable"></Flag>
+            <Flag bit="9" label="OSFXSR" description="Operating system support for FXSAVE and FXRSTOR operations"></Flag>
+            <Flag bit="10" label="OSXMMEXCPT" description="Operating System Support for Unmasked SIMD Floating-Point Exceptions"></Flag>
+            <Flag bit="11" label="UMIP" description="User-Mode Instruction Prevention (if set, #GP on SGDT, SIDT, SLDT, SMSW, and STR instructions when CPL>0)"></Flag>
             <Flag bit="12" label="" description="Reserved"></Flag>
             <Flag bit="13" label="VMXE" description="Virtual Machine Extensions Enable"></Flag>
             <Flag bit="14" label="SMXE" description="Safer Mode Extensions Enable"></Flag>
@@ -270,26 +270,26 @@
             <Flag bit="31" label="" description="Reserved"></Flag>
         </Flags>
     </Register>
-    <Register name="%cr5" description="Reserved" type="ControlRegister">
+    <Register name="cr5" description="Reserved" type="Control Register">
     </Register>
-    <Register name="%cr6" description="Reserved" type="ControlRegister">
+    <Register name="cr6" description="Reserved" type="Control Register">
     </Register>
-    <Register name="%cr7" description="Reserved" type="ControlRegister">
+    <Register name="cr7" description="Reserved" type="Control Register">
     </Register>
-    <Register name="%cr8" description="Control Register 8" type="ControlRegister" location="64-bits">
+    <Register name="cr8" description="Control Register 8" type="Control Register" location="64 bits">
         <Flags>
             <Flag bit="0" label="TPL" description="Task Priority Level"></Flag>
             <Flag bit="1" label="TPL" description="Task Priority Level"></Flag>
             <Flag bit="2" label="TPL" description="Task Priority Level"></Flag>
             <Flag bit="3" label="TPL" description="Task Priority Level"></Flag>
             <Flag bit="4" label="" description="Reserved"></Flag>
-            <Flag bit="5" label="" description"Reserved"></Flag>
-            <Flag bit="6" label="" description"Reserved"></Flag>
-            <Flag bit="7" label="" description"Reserved"></Flag>
-            <Flag bit="8" label="" description"Reserved"></Flag>
-            <Flag bit="9" label="" description"Reserved"></Flag>
-            <Flag bit="10" label="" description"Reserved"></Flag>
-            <Flag bit="11" label="" description"Reserved"></Flag>
+            <Flag bit="5" label="" description="Reserved"></Flag>
+            <Flag bit="6" label="" description="Reserved"></Flag>
+            <Flag bit="7" label="" description="Reserved"></Flag>
+            <Flag bit="8" label="" description="Reserved"></Flag>
+            <Flag bit="9" label="" description="Reserved"></Flag>
+            <Flag bit="10" label="" description="Reserved"></Flag>
+            <Flag bit="11" label="" description="Reserved"></Flag>
             <Flag bit="12" label="" description="Reserved"></Flag>
             <Flag bit="13" label="" description="Reserved"></Flag>
             <Flag bit="14" label="" description="Reserved"></Flag>
@@ -344,20 +344,20 @@
             <Flag bit="63" label="" description="(Reserved)"></Flag>
         </Flags>
     </Register>
-    <Register name="%xcr0" description="Can only be accessed if bit 18 of CR4 is set to 1. XGETBV and XSETBV instructions are used to access XCR0" type="ExtendedControlRegister" location="64-bits">
+    <Register name="xcr0" description="Can only be accessed if bit 18 of CR4 is set to 1. XGETBV and XSETBV instructions are used to access XCR0" type="Extended Control Register" location="64 bits">
         <Flags>
             <Flag bit="0" label="X87" description="x87 FPU/MMX support (must be 1)"></Flag>
             <Flag bit="1" label="SSE" description="XSAVE support for MXCSR and XMM registers"></Flag>
             <Flag bit="2" label="AVX" description="AVX enabled and XSAVE support for upper halves of YMM registers"></Flag>
             <Flag bit="3" label="BNDREG" description="MPX enabled and XSAVE support for BND0-BND3 registers"></Flag>
             <Flag bit="4" label="BNDCSR" description="MPX enabled and XSAVE support for BNDCFGU and BNDSATUS registers"></Flag>
-            <Flag bit="5" label="opmask" description"AVX-512 enabled and XSAVE support for opmask registers k0-k7"></Flag>
-            <Flag bit="6" label="ZMM_Hi256" description"AVX-512 enabled and XSAVE support for upper halves of lower ZMM registers"></Flag>
-            <Flag bit="7" label="Hi16_ZMM" description"AVX-512 enabled and XSAVE support for upper ZMM registers"></Flag>
-            <Flag bit="8" label="" description"Reserved"></Flag>
-            <Flag bit="9" label="PKRU" description"XSAVE support for PKRU register"></Flag>
-            <Flag bit="10" label="" description"Reserved"></Flag>
-            <Flag bit="11" label="" description"Reserved"></Flag>
+            <Flag bit="5" label="opmask" description="AVX-512 enabled and XSAVE support for opmask registers k0-k7"></Flag>
+            <Flag bit="6" label="ZMM_Hi256" description="AVX-512 enabled and XSAVE support for upper halves of lower ZMM registers"></Flag>
+            <Flag bit="7" label="Hi16_ZMM" description="AVX-512 enabled and XSAVE support for upper ZMM registers"></Flag>
+            <Flag bit="8" label="" description="Reserved"></Flag>
+            <Flag bit="9" label="PKRU" description="XSAVE support for PKRU register"></Flag>
+            <Flag bit="10" label="" description="Reserved"></Flag>
+            <Flag bit="11" label="" description="Reserved"></Flag>
             <Flag bit="12" label="" description="Reserved"></Flag>
             <Flag bit="13" label="" description="Reserved"></Flag>
             <Flag bit="14" label="" description="Reserved"></Flag>
@@ -412,15 +412,15 @@
             <Flag bit="63" label="" description="Reserved"></Flag>
         </Flags>
     </Register>
-    <Register name="%dr0" description="Can contain linear address of a breakpoint. If paging is enabled, it is translated to a physical address" type="DebugRegister" location="32-bits">
+    <Register name="dr0" description="Can contain linear address of a breakpoint. If paging is enabled, it is translated to a physical address" type="Debug Register" location="32 bits">
     </Register>
-    <Register name="%dr1" description="Can contain linear address of a breakpoint. If paging is enabled, it is translated to a physical address" type="DebugRegister" location="32-bits">
+    <Register name="dr1" description="Can contain linear address of a breakpoint. If paging is enabled, it is translated to a physical address" type="Debug Register" location="32 bits">
     </Register>
-    <Register name="%dr2" description="Can contain linear address of a breakpoint. If paging is enabled, it is translated to a physical address" type="DebugRegister" location="32-bits">
+    <Register name="dr2" description="Can contain linear address of a breakpoint. If paging is enabled, it is translated to a physical address" type="Debug Register" location="32 bits">
     </Register>
-    <Register name="%dr3" description="Can contain linear address of a breakpoint. If paging is enabled, it is translated to a physical address" type="DebugRegister" location="32-bits">
+    <Register name="dr3" description="Can contain linear address of a breakpoint. If paging is enabled, it is translated to a physical address" type="Debug Register" location="32 bits">
     </Register>
-    <Register name="%dr6" description="Permits the debugger to determine which debug conditions have occurred" type="DebugRegister" location="32-bits">
+    <Register name="dr6" description="Permits the debugger to determine which debug conditions have occurred" type="Debug Register" location="32 bits">
         <Flags>
             <Flag bit="0" label="" description="Indicates, when set, that the associated breakpoint condition was met when a debug exception was generated"></Flag>
             <Flag bit="1" label="" description="Indicates, when set, that the associated breakpoint condition was met when a debug exception was generated"></Flag>
@@ -456,7 +456,7 @@
             <Flag bit="31" label="" description="Reserved"></Flag>
         </Flags>
     </Register>
-    <Register name="%dr7" description="A local breakpoint bit deactivates on hardware task switches, while a global does not. Condition 00b means execution break, 01b means a write watchpoint, and 11b means a R/W watchpoint. 10b is reserved for I/O R/W (unsupported)" type="DebugRegister" location="32-bits">
+    <Register name="dr7" description="A local breakpoint bit deactivates on hardware task switches, while a global does not. Condition 00b means execution break, 01b means a write watchpoint, and 11b means a R/W watchpoint. 10b is reserved for I/O R/W (unsupported)" type="Debug Register" location="32 bits">
         <Flags>
             <Flag bit="0" label="" description="Local DR0 breakpoint"></Flag>
             <Flag bit="1" label="" description="Global DR0 breakpoint"></Flag>
@@ -492,20 +492,20 @@
             <Flag bit="31" label="" description="Size of DR3 breakpoint"></Flag>
         </Flags>
     </Register>
-    <Register name="%tr3" description="Undocumented" type="TestRegister">
+    <Register name="tr3" description="Undocumented" type="Test Register">
     </Register>
-    <Register name="%tr4" description="Undocumented" type="TestRegister">
+    <Register name="tr4" description="Undocumented" type="Test Register">
     </Register>
-    <Register name="%tr5" description="Undocumented" type="TestRegister">
+    <Register name="tr5" description="Undocumented" type="Test Register">
     </Register>
-    <Register name="%tr6" description="Test command register" type="TestRegister">
+    <Register name="tr6" description="Test command register" type="Test Register">
     </Register>
-    <Register name="%tr7" description="Test data register" type="TestRegister">
+    <Register name="tr7" description="Test data register" type="Test Register">
     </Register>
-    <Register name="%gdtr" description="Stores the segment selector of the GDT" type="ProtectedModeRegister" location="48-bits">
+    <Register name="gdtr" description="Stores the segment selector of the GDT" type="Protected Mode Register" location="48 bits">
         <Flags>
-            <Flag bit="0" label="Limit" description"(Size of GDT) - 1"></Flag>
-            <Flag bit="1" label="Limit" description"(Size of GDT) - 1"></Flag>
+            <Flag bit="0" label="Limit" description="(Size of GDT) - 1"></Flag>
+            <Flag bit="1" label="Limit" description="(Size of GDT) - 1"></Flag>
             <Flag bit="2" label="Limit" description="(Size of GDT) - 1"></Flag>
             <Flag bit="3" label="Limit" description="(Size of GDT) - 1"></Flag>
             <Flag bit="4" label="Limit" description="(Size of GDT) - 1"></Flag>
@@ -554,10 +554,10 @@
             <Flag bit="47" label="Base" description="Starting address of GDT"></Flag>
         </Flags>
     </Register>
-    <Register name="%ldtr" description="Stores the segment selector of the LDT" type="ProtectedModeRegister" location="48-bits">
+    <Register name="ldtr" description="Stores the segment selector of the LDT" type="Protected Mode Register" location="48 bits">
         <Flags>
-            <Flag bit="0" label="Limit" description"(Size of LDT) - 1"></Flag>
-            <Flag bit="1" label="Limit" description"(Size of LDT) - 1"></Flag>
+            <Flag bit="0" label="Limit" description="(Size of LDT) - 1"></Flag>
+            <Flag bit="1" label="Limit" description="(Size of LDT) - 1"></Flag>
             <Flag bit="2" label="Limit" description="(Size of LDT) - 1"></Flag>
             <Flag bit="3" label="Limit" description="(Size of LDT) - 1"></Flag>
             <Flag bit="4" label="Limit" description="(Size of LDT) - 1"></Flag>
@@ -606,10 +606,10 @@
             <Flag bit="47" label="Base" description="Starting address of LDT"></Flag>
         </Flags>
     </Register>
-    <Register name="%idtr" description="Stores the segment selector of the IDT" type="ProtectedModeRegister" location="48-bits">
+    <Register name="idtr" description="Stores the segment selector of the IDT" type="Protected Mode Register" location="48 bits">
         <Flags>
-            <Flag bit="0" label="Limit" description"(Size of IDT) - 1"></Flag>
-            <Flag bit="1" label="Limit" description"(Size of IDT) - 1"></Flag>
+            <Flag bit="0" label="Limit" description="(Size of IDT) - 1"></Flag>
+            <Flag bit="1" label="Limit" description="(Size of IDT) - 1"></Flag>
             <Flag bit="2" label="Limit" description="(Size of IDT) - 1"></Flag>
             <Flag bit="3" label="Limit" description="(Size of IDT) - 1"></Flag>
             <Flag bit="4" label="Limit" description="(Size of IDT) - 1"></Flag>

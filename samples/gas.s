@@ -33,8 +33,11 @@ main:
 	movq	%rax, %rdx
 	movzbl	-1(%rbp), %eax
 	andl	$15, %eax
-	movl	%RAX, %esi
+	movl	%rax, %esi
 	movq	%rdx, %rdi
+    %cr3
+    %al
+    %ah
 	call	_ZNSolsEi@PLT
 	movq	%rax, %rdx
 	movq	_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_@GOTPCREL(%rip), %rax
