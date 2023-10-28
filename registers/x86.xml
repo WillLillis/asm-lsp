@@ -436,7 +436,7 @@
             <Flag bit="11" label="" description="Reserved"></Flag>
             <Flag bit="12" label="" description="Reserved"></Flag>
             <Flag bit="13" label="" description="Indicates that the next instruction in the instruction stream accesses one of the debug registers"></Flag>
-            <Flag bit="14" label="" description="Indicates, when set, that the debug exception was triggered by the single-step execution mode (enabled with TF bit in EFLAGS)"></Flag> 
+            <Flag bit="14" label="" description="Indicates, when set, that the debug exception was triggered by the single-step execution mode (enabled with TF bit in EFLAGS)"></Flag>
             <Flag bit="15" label="" description="Indicates, when set, that the debug instruction resulted from a task switch where T flag in the TSS of target task was set"></Flag>
             <Flag bit="16" label="" description="Indicates, when set, that the debug exception or breakpoint occurred inside an RTM region"></Flag>
             <Flag bit="17" label="" description="Reserved"></Flag>
@@ -472,7 +472,7 @@
             <Flag bit="11" label="" description="Reserved"></Flag>
             <Flag bit="12" label="" description="Reserved"></Flag>
             <Flag bit="13" label="" description="Reserved"></Flag>
-            <Flag bit="14" label="" description="Reserved"></Flag> 
+            <Flag bit="14" label="" description="Reserved"></Flag>
             <Flag bit="15" label="" description="Reserved"></Flag>
             <Flag bit="16" label="" description="Condition for DR0"></Flag>
             <Flag bit="17" label="" description="Condition for DR0"></Flag>
