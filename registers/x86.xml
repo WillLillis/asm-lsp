@@ -72,7 +72,7 @@
     </Register>
     <Register name="bpl" description="Stack Base Pointer" type="General Purpose Register" location="8 lower bits">
     </Register>
-    <Register name="rpi" description="Instruction Pointer" type="Pointer Register" location="64 bits">
+    <Register name="rip" description="Instruction Pointer" type="Pointer Register" location="64 bits">
     </Register>
     <Register name="eip" description="Instruction Pointer" type="Pointer Register" location="32 bits">
     </Register>

@@ -35,9 +35,6 @@ main:
 	andl	$15, %eax
 	movl	%rax, %esi
 	movq	%rdx, %rdi
-    %cr3
-    %al
-    %ah
 	call	_ZNSolsEi@PLT
 	movq	%rax, %rdx
 	movq	_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_@GOTPCREL(%rip), %rax
