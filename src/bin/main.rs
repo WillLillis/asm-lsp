@@ -4,7 +4,7 @@ use log::{error, info};
 use lsp_types::request::HoverRequest;
 use lsp_types::*;
 
-use crate::lsp::{instr_filter_targets, get_target_config};
+use crate::lsp::{get_target_config, instr_filter_targets};
 
 use lsp_server::{Connection, Message, Request, RequestId, Response};
 use serde_json::json;
@@ -64,11 +64,7 @@ pub fn main() -> anyhow::Result<()> {
 
     let mut names_to_registers = NameToRegisterMap::new();
     populate_name_to_register_map(Arch::X86, &x86_registers, &mut names_to_registers);
-    populate_name_to_register_map(
-        Arch::X86_64,
-        &x86_64_registers,
-        &mut names_to_registers,
-    );
+    populate_name_to_register_map(Arch::X86_64, &x86_64_registers, &mut names_to_registers);
 
     // create a map of &Instruction_name -> &Instruction - Use that in user queries
     // The Instruction(s) themselves are stored in a vector and we only keep references to the
@@ -121,7 +117,12 @@ pub fn main() -> anyhow::Result<()> {
 
     //info!("{:?}", names_to_registers);
 
-    main_loop(&connection, initialization_params, &names_to_instructions, &names_to_registers)?;
+    main_loop(
+        &connection,
+        initialization_params,
+        &names_to_instructions,
+        &names_to_registers,
+    )?;
     io_threads.join()?;
 
     // Shut down gracefully.
@@ -201,9 +202,11 @@ fn main_loop(
                                         names_to_registers.get(&(Arch::X86_64, &*word)),
                                     );
                                     info!("Word: {}", word);
-                                    info!("Register lookup: {:?} {:?}", x86_register, x86_64_register);
-                                    match (x86_register.is_some(), x86_64_register.is_some())
-                                    {
+                                    info!(
+                                        "Register lookup: {:?} {:?}",
+                                        x86_register, x86_64_register
+                                    );
+                                    match (x86_register.is_some(), x86_64_register.is_some()) {
                                         (true, _) | (_, true) => {
                                             let mut value = String::new();
                                             if let Some(x86_register) = x86_register {

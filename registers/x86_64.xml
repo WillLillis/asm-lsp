@@ -6,7 +6,7 @@
     </Register>
     <Register name="ax" description="Accumulator" type="General Purpose Register" location="16 bits">
     </Register>
-    <Register name="ah" description="Accumulator" type="General Purpose Register" location="8 high bits of lower 16 bits">
+    <Register name="ah" description="Accumulator. Cannot be accessed when using the REX.W instruction prefix. The prefixed is added (automatically by assemblers) when an operand contains a 64-bit register" type="General Purpose Register" location="8 high bits of lower 16 bits">
     </Register>
     <Register name="al" description="Accumulator" type="General Purpose Register" location="8 lower bits">
     </Register>
@@ -16,7 +16,7 @@
     </Register>
     <Register name="bx" description="Base" type="General Purpose Register" location="16 bits">
     </Register>
-    <Register name="bh" description="Base" type="General Purpose Register" location="8 high bits of lower 16 bits">
+    <Register name="bh" description="Base. Cannot be accessed when using the REX.W instruction prefix. The prefixed is added (automatically by assemblers) when an operand contains a 64-bit register" type="General Purpose Register" location="8 high bits of lower 16 bits">
     </Register>
     <Register name="bl" description="Base" type="General Purpose Register" location="8 lower bits">
     </Register>
@@ -26,7 +26,7 @@
     </Register>
     <Register name="cx" description="Counter" type="General Purpose Register" location="16 bits">
     </Register>
-    <Register name="ch" description="Counter" type="General Purpose Register" location="8 high bits of lower 16 bits">
+    <Register name="ch" description="Counter. Cannot be accessed when using the REX.W instruction prefix. The prefixed is added (automatically by assemblers) when an operand contains a 64-bit register" type="General Purpose Register" location="8 high bits of lower 16 bits">
     </Register>
     <Register name="cl" description="Counter" type="General Purpose Register" location="8 lower bits">
     </Register>
@@ -36,7 +36,7 @@
     </Register>
     <Register name="dx" description="Data (commonly extends the A register)" type="General Purpose Register" location="16 bits">
     </Register>
-    <Register name="dh" description="Data (commonly extends the A register)" type="General Purpose Register" location="8 high bits of lower 16 bits">
+    <Register name="dh" description="Data (commonly extends the A register). Cannot be accessed when using the REX.W instruction prefix. The prefixed is added (automatically by assemblers) when an operand contains a 64-bit register" type="General Purpose Register" location="8 high bits of lower 16 bits">
     </Register>
     <Register name="dl" description="Data (commonly extends the A register)" type="General Purpose Register" location="8 lower bits">
     </Register>
@@ -135,5 +135,11 @@
     <Register name="r15w" description="General Purpose" type="General Purpose Register" location="16 bits">
     </Register>
     <Register name="r15b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="rip" description="Instruction Pointer" type="Pointer Register" location="64 bits">
+    </Register>
+    <Register name="eip" description="Instruction Pointer" type="Pointer Register" location="32 bits">
+    </Register>
+    <Register name="ip" description="Instruction Pointer" type="Pointer Register" location="16 bits">
     </Register>
 </InstructionSet>

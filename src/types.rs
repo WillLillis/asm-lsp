@@ -110,7 +110,6 @@ impl Register {
     }
 }
 
-
 // Instruction ------------------------------------------------------------------------------------
 #[derive(Debug, Clone)]
 pub struct Instruction {
@@ -270,8 +269,7 @@ impl std::fmt::Display for InstructionForm {
 pub type NameToInstructionMap<'instruction> =
     HashMap<(Arch, &'instruction str), &'instruction Instruction>;
 
-pub type NameToRegisterMap<'register> = 
-    HashMap<(Arch, &'register str), &'register Register>;
+pub type NameToRegisterMap<'register> = HashMap<(Arch, &'register str), &'register Register>;
 
 #[derive(Debug, Clone, EnumString, AsRefStr)]
 pub enum XMMMode {
