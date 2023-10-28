@@ -87,7 +87,7 @@ impl std::fmt::Display for Register {
             v.push(tmp_str);
         }
 
-        // url
+        // TODO: url
         let more_info: String;
         match &self.url {
             None => {}
@@ -301,6 +301,8 @@ pub enum RegisterType {
     Segment,
     #[strum(serialize = "EFLAGS Register")]
     EFLAGS,
+    #[strum(serialize = "RFLAGS Register")]
+    RFLAGS,
     #[strum(serialize = "Control Register")]
     Control,
     #[strum(serialize = "Extended Control Register")]

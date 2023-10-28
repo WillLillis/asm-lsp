@@ -1,3 +1,139 @@
 <?xml version='1.0' encoding='utf-8'?>
 <InstructionSet name="x86_64">
+    <Register name="rax" description="Accumulator" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="eax" description="Accumulator" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="ax" description="Accumulator" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="ah" description="Accumulator" type="General Purpose Register" location="8 high bits of lower 16 bits">
+    </Register>
+    <Register name="al" description="Accumulator" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="rbx" description="Base" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="ebx" description="Base" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="bx" description="Base" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="bh" description="Base" type="General Purpose Register" location="8 high bits of lower 16 bits">
+    </Register>
+    <Register name="bl" description="Base" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="rcx" description="Counter" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="ecx" description="Counter" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="cx" description="Counter" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="ch" description="Counter" type="General Purpose Register" location="8 high bits of lower 16 bits">
+    </Register>
+    <Register name="cl" description="Counter" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="rdx" description="Data (commonly extends the A register)" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="edx" description="Data (commonly extends the A register)" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="dx" description="Data (commonly extends the A register)" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="dh" description="Data (commonly extends the A register)" type="General Purpose Register" location="8 high bits of lower 16 bits">
+    </Register>
+    <Register name="dl" description="Data (commonly extends the A register)" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="rsi" description="Source index for string operations" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="esi" description="Source index for string operations" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="si" description="Source index for string operations" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="sil" description="Source index for string operations" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="rdi" description="Destination index for string operations" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="edi" description="Destination index for string operations" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="di" description="Destination index for string operations" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="dil" description="Destination index for string operations" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="rsp" description="Stack Pointer" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="esp" description="Stack Pointer" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="sp" description="Stack Pointer" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="spl" description="Stack Pointer" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="rbp" description="Base Pointer (meant for stack frames)" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="ebp" description="Base Pointer (meant for stack frames)" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="bp" description="Base Pointer (meant for stack frames)" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="bpl" description="Base Pointer (meant for stack frames)" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="r8" description="General Purpose" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="r8d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="r8w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="r8b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="r9" description="General Purpose" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="r9d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="r9w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="r9b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="r10" description="General Purpose" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="r10d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="r10w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="r10b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="r11" description="General Purpose" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="r11d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="r11w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="r11b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="r12" description="General Purpose" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="r12d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="r12w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="r12b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="r13" description="General Purpose" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="r13d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="r13w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="r13b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="r14" description="General Purpose" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="r14d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="r14w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="r14b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    </Register>
+    <Register name="r15" description="General Purpose" type="General Purpose Register" location="64 bits">
+    </Register>
+    <Register name="r15d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    </Register>
+    <Register name="r15w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    </Register>
+    <Register name="r15b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    </Register>
 </InstructionSet>
