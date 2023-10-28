@@ -9,9 +9,9 @@ pub struct Register {
     pub description: String,
     pub reg_type: Option<RegisterType>,
     pub location: Option<RegisterLocation>,
-    pub bit_info: Vec<RegisterBitInfo>,
-    pub url: Option<String>,
+    pub flag_info: Vec<RegisterBitInfo>,
     pub arch: Option<Arch>,
+    pub url: Option<String>,
 }
 
 impl Default for Register {
@@ -20,18 +20,18 @@ impl Default for Register {
         let description = String::new();
         let reg_type = None;
         let location = None;
-        let bit_info = vec![];
-        let url = None;
+        let flag_info = vec![];
         let arch = None;
+        let url = None;
 
         Self {
             name,
             description,
             reg_type,
             location,
-            bit_info,
-            url,
+            flag_info,
             arch,
+            url,
         }
     }
 }
@@ -68,9 +68,16 @@ impl std::fmt::Display for Register {
             v.push(reg_loc_str);
         }
 
-        // Bit Meanings
-        for (i, bit) in self.bit_info.iter().enumerate() {
-            v.push(format!("{:2}: {} - {}", i, bit.label, bit.description));
+        // Bit-mask meanings if applicable
+        for (i, bit) in self.flag_info.iter().enumerate() {
+            let mut tmp_str = format!("{:2}: {} - {}", i, bit.label, bit.description);
+            if !bit.pae.is_empty() {
+                tmp_str += &format!(", PAE: {}", bit.pae);
+            }
+            if !bit.long_mode.is_empty() {
+                tmp_str += &format!(", Long Mode: {}", bit.long_mode);
+            }
+            v.push(tmp_str);
         }
 
         // url
@@ -277,8 +284,8 @@ pub enum RegisterType {
     Pointer,
     #[strum(serialize = "Segment Register")]
     Segment,
-    #[strum(serialize = "RFLAGS Register")]
-    RFLAGS,
+    #[strum(serialize = "EFLAGS Register")]
+    EFLAGS,
     #[strum(serialize = "Control Register")]
     Control,
     #[strum(serialize = "Machine State Register")]
@@ -293,6 +300,8 @@ pub enum RegisterType {
 
 #[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr, Display)]
 pub enum RegisterLocation {
+    #[strum(serialize = "32(64)-bit")]
+    Bits32Or64,
     #[strum(serialize = "64-bit")]
     Bits64,
     #[strum(serialize = "32-bit")]
@@ -309,6 +318,8 @@ pub enum RegisterLocation {
 pub struct RegisterBitInfo {
     label: String,
     description: String,
+    pae: String,
+    long_mode: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

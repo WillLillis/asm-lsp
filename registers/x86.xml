@@ -1,75 +1,235 @@
 <?xml version='1.0' encoding='utf-8'?>
 <InstructionSet name="x86">
-    <Register name="rax" description="Accumulator" type="GeneralPurpose" location="64-bit">
+    <Register name="rax" description="Accumulator" type="GeneralPurpose" location="64-bits">
     </Register>
-    <Register name="eax" description="Accumulator" type="GeneralPurpose" location="32-bit">
+    <Register name="eax" description="Accumulator" type="GeneralPurpose" location="32-bits">
     </Register>
-    <Register name="ax" description="Accumulator" type="GeneralPurpose" location="16-bit">
+    <Register name="ax" description="Accumulator" type="GeneralPurpose" location="16-bits">
     </Register>
     <Register name="ah" description="Accumulator" type="GeneralPurpose" location="8-high-bits">
     </Register>
     <Register name="al" description="Accumulator" type="GeneralPurpose" location="8-low-bits">
     </Register>
-    <Register name="rbx" description="Base" type="GeneralPurpose" location="64-bit">
+    <Register name="rbx" description="Base" type="GeneralPurpose" location="64-bits">
     </Register>
-    <Register name="ebx" description="Base" type="GeneralPurpose" location="32-bit">
+    <Register name="ebx" description="Base" type="GeneralPurpose" location="32-bits">
     </Register>
-    <Register name="bx" description="Base" type="GeneralPurpose" location="16-bit">
+    <Register name="bx" description="Base" type="GeneralPurpose" location="16-bits">
     </Register>
     <Register name="bh" description="Base" type="GeneralPurpose" location="8-high-bits">
     </Register>
     <Register name="bl" description="Base" type="GeneralPurpose" location="8-low-bits">
     </Register>
-    <Register name="rcx" description="Counter" type="GeneralPurpose" location="64-bit">
+    <Register name="rcx" description="Counter" type="GeneralPurpose" location="64-bits">
     </Register>
-    <Register name="ecx" description="Counter" type="GeneralPurpose" location="32-bit">
+    <Register name="ecx" description="Counter" type="GeneralPurpose" location="32-bits">
     </Register>
-    <Register name="cx" description="Counter" type="GeneralPurpose" location="16-bit">
+    <Register name="cx" description="Counter" type="GeneralPurpose" location="16-bits">
     </Register>
     <Register name="ch" description="Counter" type="GeneralPurpose" location="8-high-bits">
     </Register>
     <Register name="cl" description="Counter" type="GeneralPurpose" location="8-low-bits">
     </Register>
-    <Register name="rdx" description="Data" type="GeneralPurpose" location="64-bit">
+    <Register name="rdx" description="Data" type="GeneralPurpose" location="64-bits">
     </Register>
-    <Register name="edx" description="Data" type="GeneralPurpose" location="32-bit">
+    <Register name="edx" description="Data" type="GeneralPurpose" location="32-bits">
     </Register>
-    <Register name="dx" description="Data" type="GeneralPurpose" location="16-bit">
+    <Register name="dx" description="Data" type="GeneralPurpose" location="16-bits">
     </Register>
     <Register name="dh" description="Data" type="GeneralPurpose" location="8-high-bits">
     </Register>
     <Register name="dl" description="Data" type="GeneralPurpose" location="8-low-bits">
     </Register>
-    <Register name="rsi" description="Source" type="GeneralPurpose" location="64-bit">
+    <Register name="rsi" description="Source" type="GeneralPurpose" location="64-bits">
     </Register>
-    <Register name="esi" description="Source" type="GeneralPurpose" location="32-bit">
+    <Register name="esi" description="Source" type="GeneralPurpose" location="32-bits">
     </Register>
-    <Register name="si" description="Source" type="GeneralPurpose" location="16-bit">
+    <Register name="si" description="Source" type="GeneralPurpose" location="16-bits">
     </Register>
     <Register name="sil" description="Source" type="GeneralPurpose" location="8-low-bits">
     </Register>
-    <Register name="rdi" description="Destination" type="GeneralPurpose" location="64-bit">
+    <Register name="rdi" description="Destination" type="GeneralPurpose" location="64-bits">
     </Register>
-    <Register name="edi" description="Destination" type="GeneralPurpose" location="32-bit">
+    <Register name="edi" description="Destination" type="GeneralPurpose" location="32-bits">
     </Register>
-    <Register name="di" description="Destination" type="GeneralPurpose" location="16-bit">
+    <Register name="di" description="Destination" type="GeneralPurpose" location="16-bits">
     </Register>
     <Register name="dil" description="Destination" type="GeneralPurpose" location="8-low-bits">
     </Register>
-    <Register name="rsp" description="Stack Pointer" type="GeneralPurpose" location="64-bit">
+    <Register name="rsp" description="Stack Pointer" type="GeneralPurpose" location="64-bits">
     </Register>
-    <Register name="esp" description="Stack Pointer" type="GeneralPurpose" location="32-bit">
+    <Register name="esp" description="Stack Pointer" type="GeneralPurpose" location="32-bits">
     </Register>
-    <Register name="sp" description="Stack Pointer" type="GeneralPurpose" location="16-bit">
+    <Register name="sp" description="Stack Pointer" type="GeneralPurpose" location="16-bits">
     </Register>
     <Register name="spl" description="Stack Pointer" type="GeneralPurpose" location="8-low-bits">
     </Register>
-    <Register name="rbp" description="Stack Base Pointer" type="GeneralPurpose" location="64-bit">
+    <Register name="rbp" description="Stack Base Pointer" type="GeneralPurpose" location="64-bits">
     </Register>
-    <Register name="ebp" description="Stack Base Pointer" type="GeneralPurpose" location="32-bit">
+    <Register name="ebp" description="Stack Base Pointer" type="GeneralPurpose" location="32-bits">
     </Register>
-    <Register name="bp" description="Stack Base Pointer" type="GeneralPurpose" location="16-bit">
+    <Register name="bp" description="Stack Base Pointer" type="GeneralPurpose" location="16-bits">
     </Register>
     <Register name="bpl" description="Stack Base Pointer" type="GeneralPurpose" location="8-low-bits">
+    </Register>
+    <Register name="rpi" description="Instruction Pointer" type="PointerRegister" location="64-bits">
+    </Register>
+    <Register name="eip" description="Instruction Pointer" type="PointerRegister" location="32-bits">
+    </Register>
+    <Register name="ip" description="Instruction Pointer" type="PointerRegister" location="16-bits">
+    </Register>
+    <Register name="cs" description="Code Segment" type="SegmentRegister" location="16-bits">
+    </Register>
+    <Register name="ds" description="Data Segment" type="SegmentRegister" location="16-bits">
+    </Register>
+    <Register name="es" description="Extra Segment" type="SegmentRegister" location="16-bits">
+    </Register>
+    <Register name="ss" description="Stack Segment" type="SegmentRegister" location="16-bits">
+    </Register>
+    <Register name="fs" description="General Purpose F Segment" type="SegmentRegister" location="16-bits">
+    </Register>
+    <Register name="gs" description="General Purpose G Segment" type="SegmentRegister" location="16-bits">
+    </Register>
+    <Register name="eflags" description="Extended Flags Register" type="EFLAGSRegister" location="32-bits"i>
+        <Flags>
+            <Flag bit="0" label="CF" description="Carry flag"></Flag>
+            <Flag bit="1" label="" description="Reserved"></Flag>
+            <Flag bit="2" label="AF" description="Carry flag"></Flag>
+            <Flag bit="3" label="" description="Reserved"></Flag>
+            <Flag bit="4" label="AF" description="Auxiliary flag"></Flag>
+            <Flag bit="5" label="" description="Reserved"></Flag>
+            <Flag bit="6" label="ZF" description="Zero flag"></Flag>
+            <Flag bit="7" label="SF" description="Sign flag"></Flag>
+            <Flag bit="8" label="TF" description="Trap flag"></Flag>
+            <Flag bit="9" label="IF" description="Interrupt enable flag"></Flag>
+            <Flag bit="10" label="DF" description="Direction flag"></Flag>
+            <Flag bit="11" label="OF" description="Overflow flag"></Flag>
+            <Flag bit="12" label="IOPL" description="I/O privilege level"></Flag>
+            <Flag bit="13" label="IOPL" description="I/O privilege level"></Flag>
+            <Flag bit="14" label="NT" description="Nested task flag"></Flag>
+            <Flag bit="15" label="" description="Reserved"></Flag>
+            <Flag bit="16" label="RF" description="Resume flag"></Flag>
+            <Flag bit="17" label="VM" description="Virtual 8086 mode flag"></Flag>
+            <Flag bit="18" label="AC" description="Alignment check"></Flag>
+            <Flag bit="19" label="VIF" description="Virtual interrupt flag"></Flag>
+            <Flag bit="20" label="VIP" description="Virtual interrupt pending"></Flag>
+            <Flag bit="21" label="ID" description="Able to use CPUID instruction"></Flag>
+            <Flag bit="22" label="" description="Reserved"></Flag>
+            <Flag bit="23" label="" description="Reserved"></Flag>
+            <Flag bit="24" label="" description="Reserved"></Flag>
+            <Flag bit="25" label="" description="Reserved"></Flag>
+            <Flag bit="26" label="" description="Reserved"></Flag>
+            <Flag bit="27" label="" description="Reserved"></Flag>
+            <Flag bit="28" label="" description="Reserved"></Flag>
+            <Flag bit="29" label="" description="Reserved"></Flag>
+            <Flag bit="30" label="" description="Reserved"></Flag>
+            <Flag bit="31" label="" description="Reserved"></Flag>
+        </Flags>
+    </Register>
+    <Register name="cr0" description="Control Register 0" type="ControlRegister" location="32-bits"i>
+        <Flags>
+            <Flag bit="0" label="PE" description="Protected Mode Enable"></Flag>
+            <Flag bit="1" label="MP" description="Monitor co-processor"></Flag>
+            <Flag bit="2" label="EM" description="x87 FPU Emulation"></Flag>
+            <Flag bit="3" label="TS" description="Task switched"></Flag>
+            <Flag bit="4" label="ET" description="Extension type"></Flag>
+            <Flag bit="5" label="NE" description="Numeric error"></Flag>
+            <Flag bit="6" label="" description="Reserved"></Flag>
+            <Flag bit="7" label="" description="Reserved"></Flag>
+            <Flag bit="8" label="" description="Reserved"></Flag>
+            <Flag bit="9" label="" description="Reserved"></Flag>
+            <Flag bit="10" label="" description="Reserved"></Flag>
+            <Flag bit="11" label="" description="Reserved"></Flag>
+            <Flag bit="12" label="" description="Reserved"></Flag>
+            <Flag bit="13" label="" description="Reserved"></Flag>
+            <Flag bit="14" label="" description="Reserved"></Flag>
+            <Flag bit="15" label="" description="Reserved"></Flag>
+            <Flag bit="16" label="WP" description="Write protect"></Flag>
+            <Flag bit="17" label="" description="Reserved"></Flag>
+            <Flag bit="18" label="AM" description="Alignment mask"></Flag>
+            <Flag bit="19" label="" description="Reserved"></Flag>
+            <Flag bit="20" label="" description="Reserved"></Flag>
+            <Flag bit="21" label="" description="Reserved"></Flag>
+            <Flag bit="22" label="" description="Reserved"></Flag>
+            <Flag bit="23" label="" description="Reserved"></Flag>
+            <Flag bit="24" label="" description="Reserved"></Flag>
+            <Flag bit="25" label="" description="Reserved"></Flag>
+            <Flag bit="26" label="" description="Reserved"></Flag>
+            <Flag bit="27" label="" description="Reserved"></Flag>
+            <Flag bit="28" label="" description="Reserved"></Flag>
+            <Flag bit="29" label="NW" description="Not-write through"></Flag>
+            <Flag bit="30" label="CD" description="Cache disable"></Flag>
+            <Flag bit="31" label="PG" description="Paging"></Flag>
+        </Flags>
+    </Register>
+    <Register name="cr1" description="Reserved" type="ControlRegister">
+    </Register>
+    <Register name="cr2" description="Page Fault Linear Address" type="ControlRegister" location="32(64)-bits">
+    </Register>
+    <Register name="cr3" description="Control Register 3" type="ControlRegister">
+        <Flags>
+            <Flag bit="0" label="" description="Assumed to be 0"></Flag>
+            <Flag bit="1" label="" description="Assumed to be 0"></Flag>
+            <Flag bit="2" label="" description="Assumed to be 0"></Flag>
+            <Flag bit="3" label="PWT" description="Page-level Write-Through" pae="(Not Used)" longmode="Not used if bit 17 of CR4 is 1"></Flag>
+            <Flag bit="4" label="PCD" description="Page-level Cache Disable" pae="(Not Used)" longmode="Not used if bit 17 of CR4 is 1"></Flag>
+            <Flag bit="5" label="" description"Assumed to be 0"></Flag>
+            <Flag bit="6" label="" description"Assumed to be 0"></Flag>
+            <Flag bit="7" label="" description"Assumed to be 0"></Flag>
+            <Flag bit="8" label="" description"Assumed to be 0"></Flag>
+            <Flag bit="9" label="" description"Assumed to be 0"></Flag>
+            <Flag bit="10" label="" description"Assumed to be 0"></Flag>
+            <Flag bit="11" label="" description"Assumed to be 0"></Flag>
+            <Flag bit="12" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="13" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="14" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="15" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="16" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="17" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="18" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="19" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="20" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="21" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="22" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="23" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="24" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="25" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="26" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="27" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="28" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="29" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="30" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="31" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="32" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="33" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="34" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="35" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="36" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="37" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="38" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="39" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="40" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="41" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="42" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="43" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="44" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="45" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="46" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="47" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="48" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="49" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="50" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="51" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="52" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="53" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="54" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="55" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="56" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="57" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="58" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="59" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="60" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+            <Flag bit="61" label="PDBR" description="Page Directory Base Register" pae="Base of PDPT" longmode="Base of PMLT4/PML5T"></Flag>
+        </Flags>
     </Register>
 </InstructionSet>
