@@ -161,6 +161,7 @@ impl std::fmt::Display for InstructionForm {
 #[derive(Debug, Clone)]
 pub struct Register {
     pub name: String,
+    pub names: Vec<String>,
     pub description: String,
     pub reg_type: Option<RegisterType>,
     pub location: Option<RegisterLocation>,
@@ -172,6 +173,7 @@ pub struct Register {
 impl Default for Register {
     fn default() -> Self {
         let name = String::new();
+        let names = vec![];
         let description = String::new();
         let reg_type = None;
         let location = None;
@@ -181,6 +183,7 @@ impl Default for Register {
 
         Self {
             name,
+            names,
             description,
             reg_type,
             location,
@@ -258,10 +261,22 @@ impl std::fmt::Display for Register {
     }
 }
 
-impl Register {
+impl<'own> Register {
     /// Add a new bit flag entry at the current instruction
     pub fn push_flag(&mut self, flag: RegisterBitInfo) {
         self.flag_info.push(flag);
+    }
+
+    /// get the names of all the associated commands (includes Go and Gas forms)
+    pub fn get_associated_names(&'own self) -> Vec<&'own str> {
+        let mut names = Vec::<&'own str>::new();
+        names.push(&self.name);
+
+        for name in self.names.iter() {
+            names.push(name);
+        }
+
+        names
     }
 }
 

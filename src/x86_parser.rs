@@ -316,8 +316,15 @@ pub fn populate_registers(xml_contents: &str) -> anyhow::Result<Vec<Register>> {
                             let Attribute { key, value } = attr.unwrap();
                             match str::from_utf8(key.into_inner()).unwrap() {
                                 "name" => unsafe {
-                                    curr_register.name =
-                                        String::from(str::from_utf8_unchecked(&value));
+                                    let name_ = String::from(str::from_utf8_unchecked(&value));
+                                    curr_register.names.push(name_.clone());
+                                    curr_register.names.push(name_.to_uppercase());
+                                    curr_register.name = name_;
+                                },
+                                "synonym" => unsafe {
+                                    let name_ = String::from(str::from_utf8_unchecked(&value));
+                                    curr_register.names.push(name_.clone());
+                                    curr_register.names.push(name_.to_uppercase());
                                 },
                                 "description" => unsafe {
                                     curr_register.description =
@@ -409,7 +416,9 @@ pub fn populate_name_to_register_map<'register>(
     names_to_registers: &mut NameToRegisterMap<'register>,
 ) {
     for register in registers {
-        names_to_registers.insert((arch, &register.name), register);
+        for name in &register.get_associated_names() {
+            names_to_registers.insert((arch, name), register);
+        }
     }
 }
 
