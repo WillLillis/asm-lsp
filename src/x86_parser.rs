@@ -291,7 +291,6 @@ mod tests {
 /// Current function assumes that the XML file is already read and that it's been given a reference
 /// to its contents (`&str`).
 pub fn populate_registers(xml_contents: &str) -> anyhow::Result<Vec<Register>> {
-    // initialise the instruction set
     let mut registers_map = HashMap::<String, Register>::new();
 
     // iterate through the XML --------------------------------------------------------------------
