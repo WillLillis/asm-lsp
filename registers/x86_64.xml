@@ -437,9 +437,9 @@
     <Register name="cr7" description="Control Register 7. Reserved, CPU will throw a #ud exception when trying to access." type="Control Register">
     </Register>
     <Register name="cr8" description="Control Register 8. CR8 is used to prioritize external interrupts and is referred to as the task-priority register (TPR).
-    
+
 The AMD64 architecture allows software to define up to 15 external interrupt-priority classes. Priority classes are numbered from 1 to 15, with priority-class 1 being the lowest and priority-class 15 the highest. CR8 uses the four low-order bits for specifying a task priority and the remaining 60 bits are reserved and must be written with zeros.
-    
+
 System software can use the TPR register to temporarily block low-priority interrupts from interrupting a high-priority task. This is accomplished by loading TPR with a value corresponding to the highest-priority interrupt that is to be blocked. For example, loading TPR with a value of 9 (1001b) blocks all interrupts with a priority class of 9 or less, while allowing all interrupts with a priority class of 10 or more to be recognized. Loading TPR with 0 enables all external interrupts. Loading TPR with 15 (1111b) disables all external interrupts.
 
 The TPR is cleared to 0 on reset."

@@ -34,7 +34,6 @@ pub fn main() -> anyhow::Result<()> {
     let params: InitializeParams = serde_json::from_value(initialization_params.clone()).unwrap();
     let target_config = get_target_config(&params);
 
-
     // create a map of &Instruction_name -> &Instruction - Use that in user queries
     // The Instruction(s) themselves are stored in a vector and we only keep references to the
     // former map
@@ -96,7 +95,7 @@ pub fn main() -> anyhow::Result<()> {
                 reg.arch = Some(Arch::X86);
                 reg
             })
-        .collect()
+            .collect()
     } else {
         Vec::new()
     };
@@ -110,7 +109,7 @@ pub fn main() -> anyhow::Result<()> {
                 reg.arch = Some(Arch::X86_64);
                 reg
             })
-        .collect()
+            .collect()
     } else {
         Vec::new()
     };
