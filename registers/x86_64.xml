@@ -510,7 +510,7 @@ The TPR is cleared to 0 on reset."
             <Flag bit="62" label="" description="Reserved"></Flag>
             <Flag bit="63" label="" description="Reserved"></Flag>
         </Flags>
-    </Register>    
+    </Register>
     <Register name="cr9" description="Control Register 9. Reserved, CPU will throw a #ud exception when trying to access." type="Control Register">
     </Register>
     <Register name="cr10" description="Control Register 10. Reserved, CPU will throw a #ud exception when trying to access." type="Control Register">
