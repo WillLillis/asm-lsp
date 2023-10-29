@@ -136,10 +136,22 @@
     </Register>
     <Register name="r15b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
     </Register>
-    <Register name="rip" description="Instruction Pointer" type="Pointer Register" location="64 bits">
+    <Register name="rip" description="Instruction Pointer. Can only be used in RIP-relative addressing." type="Pointer Register" location="64 bits">
     </Register>
-    <Register name="eip" description="Instruction Pointer" type="Pointer Register" location="32 bits">
+    <Register name="eip" description="Instruction Pointer. Can only be used in RIP-relative addressing." type="Pointer Register" location="32 bits">
     </Register>
-    <Register name="ip" description="Instruction Pointer" type="Pointer Register" location="16 bits">
+    <Register name="ip" description="Instruction Pointer. Can only be used in RIP-relative addressing." type="Pointer Register" location="16 bits">
+    </Register>
+    <Register name="cs" description="Code Segment. Treated as if its base is 0 no matter what the segment descriptors in the GDT say." type="Segment Register" location="16 bits">
+    </Register>
+    <Register name="ds" description="Data Segment. Treated as if its base is 0 no matter what the segment descriptors in the GDT say." type="Segment Register" location="16 bits">
+    </Register>
+    <Register name="ss" description="Stack Segment. Treated as if its base is 0 no matter what the segment descriptors in the GDT say." type="Segment Register" location="16 bits">
+    </Register>
+    <Register name="es" description="Extra Segment (used for string operations). Treated as if its base is 0 no matter what the segment descriptors in the GDT say." type="Segment Register" location="16 bits">
+    </Register>
+    <Register name="fs" description="General Purpose F Segment. MSRs can change its base." type="Segment Register" location="16 bits">
+    </Register>
+    <Register name="gs" description="General Purpose G Segment. MSRs can change its base." type="Segment Register" location="16 bits">
     </Register>
 </InstructionSet>
