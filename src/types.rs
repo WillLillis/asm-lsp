@@ -46,7 +46,7 @@ impl std::fmt::Display for Register {
             header = self.name.to_uppercase();
         }
 
-        let mut v: Vec<String> = vec![header.clone(), self.description.clone(), String::from("\n")];
+        let mut v: Vec<String> = vec![header, self.description.clone(), String::from("\n")];
 
         // Register Type
         let reg_type_str = if let Some(reg_type_) = self.reg_type {
@@ -93,7 +93,7 @@ impl std::fmt::Display for Register {
             None => {}
             Some(url_) => {
                 more_info = format!("\nMore info: {}", url_);
-                v.push(more_info.clone());
+                v.push(more_info);
             }
         }
 
@@ -297,10 +297,8 @@ pub enum RegisterType {
     Pointer,
     #[strum(serialize = "Segment Register")]
     Segment,
-    #[strum(serialize = "EFLAGS Register")]
-    EFLAGS,
-    #[strum(serialize = "RFLAGS Register")]
-    RFLAGS,
+    #[strum(serialize = "Flag Register")]
+    Flag,
     #[strum(serialize = "Control Register")]
     Control,
     #[strum(serialize = "Extended Control Register")]
@@ -317,6 +315,8 @@ pub enum RegisterType {
 
 #[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr, Display)]
 pub enum RegisterLocation {
+    #[strum(serialize = "80 bits")]
+    Bits80,
     #[strum(serialize = "32(64) bits")]
     Bits32Or64,
     #[strum(serialize = "64 bits")]

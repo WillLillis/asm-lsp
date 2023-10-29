@@ -90,11 +90,11 @@
     </Register>
     <Register name="gs" description="General Purpose G Segment" type="Segment Register" location="16 bits">
     </Register>
-    <Register name="eflags" description="Extended Flags Register" type="EFLAGS Register" location="32 bits">
+    <Register name="eflags" description="Extended Flags Register" type="Flag Register" location="32 bits">
         <Flags>
             <Flag bit="0" label="CF" description="Carry flag"></Flag>
             <Flag bit="1" label="" description="Reserved"></Flag>
-            <Flag bit="2" label="AF" description="Carry flag"></Flag>
+            <Flag bit="2" label="PF" description="Parity flag"></Flag>
             <Flag bit="3" label="" description="Reserved"></Flag>
             <Flag bit="4" label="AF" description="Auxiliary flag"></Flag>
             <Flag bit="5" label="" description="Reserved"></Flag>
@@ -164,7 +164,7 @@
     </Register>
     <Register name="cr1" description="Reserved" type="Control Register">
     </Register>
-    <Register name="cr2" description="Page Fault Linear Address" type="Control Register" location="32(64) bits">
+    <Register name="cr2" description="Control Register 2. Page Fault Linear Address" type="Control Register" location="32(64) bits">
     </Register>
     <Register name="cr3" description="Control Register 3" type="Control Register">
         <Flags>
