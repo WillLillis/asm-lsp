@@ -16,126 +16,7 @@ use std::path::PathBuf;
 use std::str;
 use std::str::FromStr;
 
-/// Parse the provided XML contents and return a vector of all the instrucitons based on that.
-/// If parsing fails, the appropriate error will be returned instead.
-///
-/// Current function assumes that the XML file is already read and that it's been given a reference
-/// to its contents (`&str`).
-pub fn populate_registers(xml_contents: &str) -> anyhow::Result<Vec<Register>> {
-    // initialise the instruction set
-    let mut registers_map = HashMap::<String, Register>::new();
-
-    // iterate through the XML --------------------------------------------------------------------
-    let mut reader = Reader::from_str(xml_contents);
-    reader.trim_text(true);
-
-    // ref to the register that's currently under construction
-    let mut curr_register = Register::default();
-    let mut curr_bit_flag = RegisterBitInfo::default();
-
-    debug!("Parsing XML contents...");
-    loop {
-        match reader.read_event() {
-            // start event ------------------------------------------------------------------------
-            Ok(Event::Start(ref e)) => {
-                match e.name() {
-                    QName(b"Register") => {
-                        // start of a new register
-                        curr_register = Register::default();
-
-                        // iterate over the attributes
-                        for attr in e.attributes() {
-                            let Attribute { key, value } = attr.unwrap();
-                            match str::from_utf8(key.into_inner()).unwrap() {
-                                "name" => unsafe {
-                                    curr_register.name =
-                                        String::from(str::from_utf8_unchecked(&value));
-                                },
-                                "description" => unsafe {
-                                    curr_register.description =
-                                        String::from(str::from_utf8_unchecked(&value));
-                                },
-                                "type" => unsafe {
-                                    curr_register.reg_type = match RegisterType::from_str(
-                                        str::from_utf8_unchecked(&value),
-                                    ) {
-                                        Ok(reg) => Some(reg),
-                                        _ => None,
-                                    }
-                                },
-                                "location" => unsafe {
-                                    curr_register.location = match RegisterLocation::from_str(
-                                        str::from_utf8_unchecked(&value),
-                                    ) {
-                                        Ok(loc) => Some(loc),
-                                        _ => None,
-                                    }
-                                },
-                                _ => {}
-                            }
-                        }
-                    }
-                    QName(b"Flags") => {} // it's just a wrapper...
-                    QName(b"Flag") => {
-                        curr_bit_flag = RegisterBitInfo::default();
-
-                        for attr in e.attributes() {
-                            let Attribute { key, value } = attr.unwrap();
-                            match str::from_utf8(key.into_inner()).unwrap() {
-                                "bit" => unsafe {
-                                    curr_bit_flag.bit =
-                                        str::from_utf8_unchecked(&value).parse::<u32>().unwrap();
-                                },
-                                "label" => unsafe {
-                                    curr_bit_flag.label =
-                                        String::from(str::from_utf8_unchecked(&value));
-                                },
-                                "description" => unsafe {
-                                    curr_bit_flag.description =
-                                        String::from(str::from_utf8_unchecked(&value));
-                                },
-                                "pae" => unsafe {
-                                    curr_bit_flag.pae =
-                                        String::from(str::from_utf8_unchecked(&value));
-                                },
-                                "longmode" => unsafe {
-                                    curr_bit_flag.long_mode =
-                                        String::from(str::from_utf8_unchecked(&value));
-                                },
-                                _ => {}
-                            }
-                        }
-                    }
-                    _ => (), // unknown event
-                }
-            }
-            // end event --------------------------------------------------------------------------
-            Ok(Event::End(ref e)) => {
-                match e.name() {
-                    QName(b"Register") => {
-                        // finish instruction
-                        registers_map.insert(curr_register.name.clone(), curr_register.clone());
-                    }
-                    QName(b"Flag") => {
-                        curr_register.push_flag(curr_bit_flag.clone());
-                    }
-                    _ => (), // unknown event
-                }
-            }
-            Ok(Event::Eof) => break,
-            Err(e) => panic!("Error at position {}: {:?}", reader.buffer_position(), e),
-            _ => (), // rest of events that we don't consider
-        }
-    }
-
-    // TODO: Add to URL fields here?
-    // https://wiki.osdev.org/CPU_Registers_x86 is less straightforward
-    // compared to the instruction set site
-
-    Ok(registers_map.into_values().collect())
-}
-
-/// Parse the provided XML contents and return a vector of all the instrucitons based on that.
+/// Parse the provided XML contents and return a vector of all the instructions based on that.
 /// If parsing fails, the appropriate error will be returned instead.
 ///
 /// Current function assumes that the XML file is already read and that it's been given a reference
@@ -403,6 +284,124 @@ mod tests {
 
         mock.assert();
     }
+
+/// Parse the provided XML contents and return a vector of all the registers based on that.
+/// If parsing fails, the appropriate error will be returned instead.
+///
+/// Current function assumes that the XML file is already read and that it's been given a reference
+/// to its contents (`&str`).
+pub fn populate_registers(xml_contents: &str) -> anyhow::Result<Vec<Register>> {
+    // initialise the instruction set
+    let mut registers_map = HashMap::<String, Register>::new();
+
+    // iterate through the XML --------------------------------------------------------------------
+    let mut reader = Reader::from_str(xml_contents);
+    reader.trim_text(true);
+
+    // ref to the register that's currently under construction
+    let mut curr_register = Register::default();
+    let mut curr_bit_flag = RegisterBitInfo::default();
+
+    debug!("Parsing XML contents...");
+    loop {
+        match reader.read_event() {
+            // start event ------------------------------------------------------------------------
+            Ok(Event::Start(ref e)) => {
+                match e.name() {
+                    QName(b"Register") => {
+                        // start of a new register
+                        curr_register = Register::default();
+
+                        // iterate over the attributes
+                        for attr in e.attributes() {
+                            let Attribute { key, value } = attr.unwrap();
+                            match str::from_utf8(key.into_inner()).unwrap() {
+                                "name" => unsafe {
+                                    curr_register.name =
+                                        String::from(str::from_utf8_unchecked(&value));
+                                },
+                                "description" => unsafe {
+                                    curr_register.description =
+                                        String::from(str::from_utf8_unchecked(&value));
+                                },
+                                "type" => unsafe {
+                                    curr_register.reg_type = match RegisterType::from_str(
+                                        str::from_utf8_unchecked(&value),
+                                    ) {
+                                        Ok(reg) => Some(reg),
+                                        _ => None,
+                                    }
+                                },
+                                "location" => unsafe {
+                                    curr_register.location = match RegisterLocation::from_str(
+                                        str::from_utf8_unchecked(&value),
+                                    ) {
+                                        Ok(loc) => Some(loc),
+                                        _ => None,
+                                    }
+                                },
+                                _ => {}
+                            }
+                        }
+                    }
+                    QName(b"Flags") => {} // it's just a wrapper...
+                    QName(b"Flag") => {
+                        curr_bit_flag = RegisterBitInfo::default();
+
+                        for attr in e.attributes() {
+                            let Attribute { key, value } = attr.unwrap();
+                            match str::from_utf8(key.into_inner()).unwrap() {
+                                "bit" => unsafe {
+                                    curr_bit_flag.bit =
+                                        str::from_utf8_unchecked(&value).parse::<u32>().unwrap();
+                                },
+                                "label" => unsafe {
+                                    curr_bit_flag.label =
+                                        String::from(str::from_utf8_unchecked(&value));
+                                },
+                                "description" => unsafe {
+                                    curr_bit_flag.description =
+                                        String::from(str::from_utf8_unchecked(&value));
+                                },
+                                "pae" => unsafe {
+                                    curr_bit_flag.pae =
+                                        String::from(str::from_utf8_unchecked(&value));
+                                },
+                                "longmode" => unsafe {
+                                    curr_bit_flag.long_mode =
+                                        String::from(str::from_utf8_unchecked(&value));
+                                },
+                                _ => {}
+                            }
+                        }
+                    }
+                    _ => (), // unknown event
+                }
+            }
+            // end event --------------------------------------------------------------------------
+            Ok(Event::End(ref e)) => {
+                match e.name() {
+                    QName(b"Register") => {
+                        // finish instruction
+                        registers_map.insert(curr_register.name.clone(), curr_register.clone());
+                    }
+                    QName(b"Flag") => {
+                        curr_register.push_flag(curr_bit_flag.clone());
+                    }
+                    _ => (), // unknown event
+                }
+            }
+            Ok(Event::Eof) => break,
+            Err(e) => panic!("Error at position {}: {:?}", reader.buffer_position(), e),
+            _ => (), // rest of events that we don't consider
+        }
+    }
+
+    // TODO: Add to URL fields here?
+    // https://wiki.osdev.org/CPU_Registers_x86 is less straightforward
+    // compared to the instruction set site
+
+    Ok(registers_map.into_values().collect())
 }
 
 pub fn populate_name_to_register_map<'register>(
