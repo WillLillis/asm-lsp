@@ -207,7 +207,6 @@ fn main_loop(
                                             let mut value = String::new();
                                             if let Some(x86_register) = x86_register {
                                                 value += &format!("{}", x86_register);
-                                                info!("Output: {:?}\n", value);
                                             }
                                             if let Some(x86_64_register) = x86_64_register {
                                                 value += &format!(
