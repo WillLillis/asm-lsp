@@ -2,114 +2,6 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use strum_macros::{AsRefStr, Display, EnumString};
 
-// Register ---------------------------------------------------------------------------------------
-#[derive(Debug, Clone)]
-pub struct Register {
-    pub name: String,
-    pub description: String,
-    pub reg_type: Option<RegisterType>,
-    pub location: Option<RegisterLocation>,
-    pub flag_info: Vec<RegisterBitInfo>,
-    pub arch: Option<Arch>,
-    pub url: Option<String>,
-}
-
-impl Default for Register {
-    fn default() -> Self {
-        let name = String::new();
-        let description = String::new();
-        let reg_type = None;
-        let location = None;
-        let flag_info = vec![];
-        let arch = None;
-        let url = None;
-
-        Self {
-            name,
-            description,
-            reg_type,
-            location,
-            flag_info,
-            arch,
-            url,
-        }
-    }
-}
-
-impl std::fmt::Display for Register {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        // basic fields
-        let header: String;
-        if let Some(arch) = &self.arch {
-            header = format!("{} [{}]", &self.name.to_uppercase(), arch.as_ref());
-        } else {
-            header = self.name.to_uppercase();
-        }
-
-        let mut v: Vec<String> = vec![header, self.description.clone(), String::from("\n")];
-
-        // Register Type
-        let reg_type_str = if let Some(reg_type_) = self.reg_type {
-            format!("Type: {}", reg_type_)
-        } else {
-            String::new()
-        };
-        if !reg_type_str.is_empty() {
-            v.push(reg_type_str);
-        }
-
-        // Register Location
-        let reg_loc_str = if let Some(location_) = self.location {
-            format!("Width: {}", location_)
-        } else {
-            String::new()
-        };
-        if !reg_loc_str.is_empty() {
-            v.push(reg_loc_str);
-        }
-
-        // Bit-mask meanings if applicable
-        if !self.flag_info.is_empty() {
-            v.push(String::from("\n## Flags:"));
-        }
-        for bit in self.flag_info.iter() {
-            let mut tmp_str = if bit.label.is_empty() {
-                format!("{:2}: {}", bit.bit, bit.description)
-            } else {
-                format!("{:2}: {} - {}", bit.bit, bit.label, bit.description)
-            };
-            if !bit.pae.is_empty() {
-                tmp_str += &format!(", PAE: {}", bit.pae);
-            }
-            if !bit.long_mode.is_empty() {
-                tmp_str += &format!(", Long Mode: {}", bit.long_mode);
-            }
-            v.push(tmp_str);
-        }
-
-        // TODO: url
-        let more_info: String;
-        match &self.url {
-            None => {}
-            Some(url_) => {
-                more_info = format!("\nMore info: {}", url_);
-                v.push(more_info);
-            }
-        }
-
-        let s = v.join("\n");
-        write!(f, "{}", s)?;
-        Ok(())
-    }
-}
-
-impl Register {
-    /// Add a new bit flag entry at the current instruction
-    pub fn push_flag(&mut self, flag: RegisterBitInfo) {
-        self.flag_info.push(flag);
-    }
-}
-
 // Instruction ------------------------------------------------------------------------------------
 #[derive(Debug, Clone)]
 pub struct Instruction {
@@ -262,6 +154,114 @@ impl std::fmt::Display for InstructionForm {
 
         write!(f, "{}", s)?;
         Ok(())
+    }
+}
+
+// Register ---------------------------------------------------------------------------------------
+#[derive(Debug, Clone)]
+pub struct Register {
+    pub name: String,
+    pub description: String,
+    pub reg_type: Option<RegisterType>,
+    pub location: Option<RegisterLocation>,
+    pub flag_info: Vec<RegisterBitInfo>,
+    pub arch: Option<Arch>,
+    pub url: Option<String>,
+}
+
+impl Default for Register {
+    fn default() -> Self {
+        let name = String::new();
+        let description = String::new();
+        let reg_type = None;
+        let location = None;
+        let flag_info = vec![];
+        let arch = None;
+        let url = None;
+
+        Self {
+            name,
+            description,
+            reg_type,
+            location,
+            flag_info,
+            arch,
+            url,
+        }
+    }
+}
+
+impl std::fmt::Display for Register {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        // basic fields
+        let header: String;
+        if let Some(arch) = &self.arch {
+            header = format!("{} [{}]", &self.name.to_uppercase(), arch.as_ref());
+        } else {
+            header = self.name.to_uppercase();
+        }
+
+        let mut v: Vec<String> = vec![header, self.description.clone(), String::from("\n")];
+
+        // Register Type
+        let reg_type_str = if let Some(reg_type_) = self.reg_type {
+            format!("Type: {}", reg_type_)
+        } else {
+            String::new()
+        };
+        if !reg_type_str.is_empty() {
+            v.push(reg_type_str);
+        }
+
+        // Register Location
+        let reg_loc_str = if let Some(location_) = self.location {
+            format!("Width: {}", location_)
+        } else {
+            String::new()
+        };
+        if !reg_loc_str.is_empty() {
+            v.push(reg_loc_str);
+        }
+
+        // Bit-mask meanings if applicable
+        if !self.flag_info.is_empty() {
+            v.push(String::from("\n## Flags:"));
+        }
+        for bit in self.flag_info.iter() {
+            let mut tmp_str = if bit.label.is_empty() {
+                format!("{:2}: {}", bit.bit, bit.description)
+            } else {
+                format!("{:2}: {} - {}", bit.bit, bit.label, bit.description)
+            };
+            if !bit.pae.is_empty() {
+                tmp_str += &format!(", PAE: {}", bit.pae);
+            }
+            if !bit.long_mode.is_empty() {
+                tmp_str += &format!(", Long Mode: {}", bit.long_mode);
+            }
+            v.push(tmp_str);
+        }
+
+        // TODO: url
+        let more_info: String;
+        match &self.url {
+            None => {}
+            Some(url_) => {
+                more_info = format!("\nMore info: {}", url_);
+                v.push(more_info);
+            }
+        }
+
+        let s = v.join("\n");
+        write!(f, "{}", s)?;
+        Ok(())
+    }
+}
+
+impl Register {
+    /// Add a new bit flag entry at the current instruction
+    pub fn push_flag(&mut self, flag: RegisterBitInfo) {
+        self.flag_info.push(flag);
     }
 }
 
