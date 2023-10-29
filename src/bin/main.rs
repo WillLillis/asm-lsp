@@ -198,10 +198,9 @@ fn main_loop(
                                     };
                                 // If no instructions matched, check the registers
                                 let hover_res = if hover_res.is_none() {
-                                    let (x86_register, x86_64_register) = (
-                                        names_to_registers.get(&(Arch::X86, &*word)),
-                                        names_to_registers.get(&(Arch::X86_64, &*word)),
-                                    );
+                                    let (x86_register, x86_64_register) =
+                                        search_for_reg(&word, names_to_registers);
+
                                     match (x86_register.is_some(), x86_64_register.is_some()) {
                                         (true, _) | (_, true) => {
                                             let mut value = String::new();

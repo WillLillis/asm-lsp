@@ -1,5 +1,5 @@
 use crate::types::Column;
-use crate::{Arch, Instruction, NameToInstructionMap, TargetConfig};
+use crate::{Arch, Instruction, NameToInstructionMap, NameToRegisterMap, Register, TargetConfig};
 use log::{error, info};
 use lsp_types::{InitializeParams, TextDocumentPositionParams, Url};
 use std::fs::File;
@@ -59,6 +59,25 @@ pub fn search_for_instr<'a: 'b, 'b>(
     word: &str,
     map: &'a NameToInstructionMap<'a>,
 ) -> (Option<&'b Instruction>, Option<&'b Instruction>) {
+    let raised_word = word.to_uppercase();
+    let x86_instruction = map
+        .get(&(Arch::X86, word))
+        .or_else(|| map.get(&(Arch::X86, &raised_word)))
+        .cloned();
+    let x86_64_instruction = map
+        .get(&(Arch::X86_64, word))
+        .or_else(|| map.get(&(Arch::X86_64, &raised_word)))
+        .cloned();
+
+    (x86_instruction, x86_64_instruction)
+}
+
+// Note: Have to call .cloned() on the results of .get()
+// here because of compiler issue regarding entangled lifetimes: https://github.com/rust-lang/rust/issues/80389
+pub fn search_for_reg<'a: 'b, 'b>(
+    word: &str,
+    map: &'a NameToRegisterMap<'a>,
+) -> (Option<&'b Register>, Option<&'b Register>) {
     let raised_word = word.to_uppercase();
     let x86_instruction = map
         .get(&(Arch::X86, word))

@@ -318,13 +318,11 @@ pub fn populate_registers(xml_contents: &str) -> anyhow::Result<Vec<Register>> {
                                 "name" => unsafe {
                                     let name_ = String::from(str::from_utf8_unchecked(&value));
                                     curr_register.names.push(name_.clone());
-                                    curr_register.names.push(name_.to_uppercase());
                                     curr_register.name = name_;
                                 },
                                 "synonym" => unsafe {
                                     let name_ = String::from(str::from_utf8_unchecked(&value));
-                                    curr_register.names.push(name_.clone());
-                                    curr_register.names.push(name_.to_uppercase());
+                                    curr_register.names.push(name_);
                                 },
                                 "description" => unsafe {
                                     curr_register.description =
