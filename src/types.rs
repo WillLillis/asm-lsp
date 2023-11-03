@@ -161,7 +161,7 @@ impl std::fmt::Display for InstructionForm {
 #[derive(Debug, Clone)]
 pub struct Register {
     pub name: String,
-    pub names: Vec<String>,
+    pub alt_names: Vec<String>,
     pub description: Option<String>,
     pub reg_type: Option<RegisterType>,
     pub width: Option<RegisterWidth>,
@@ -173,7 +173,7 @@ pub struct Register {
 impl Default for Register {
     fn default() -> Self {
         let name = String::new();
-        let names = vec![];
+        let alt_names = vec![];
         let description = None;
         let reg_type = None;
         let width = None;
@@ -183,7 +183,7 @@ impl Default for Register {
 
         Self {
             name,
-            names,
+            alt_names,
             description,
             reg_type,
             width,
@@ -273,12 +273,12 @@ impl<'own> Register {
         self.flag_info.push(flag);
     }
 
-    /// get the names of all the associated commands (includes Go and Gas forms)
+    /// get the names of all the associated registers
     pub fn get_associated_names(&'own self) -> Vec<&'own str> {
         let mut names = Vec::<&'own str>::new();
         names.push(&self.name);
 
-        for name in self.names.iter() {
+        for name in self.alt_names.iter() {
             names.push(name);
         }
 

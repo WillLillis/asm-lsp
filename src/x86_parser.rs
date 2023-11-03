@@ -284,6 +284,19 @@ mod tests {
 
         mock.assert();
     }
+}
+
+pub fn populate_name_to_instruction_map<'instruction>(
+    arch: Arch,
+    instructions: &'instruction Vec<Instruction>,
+    names_to_instructions: &mut NameToInstructionMap<'instruction>,
+) {
+    for instruction in instructions {
+        for name in &instruction.get_associated_names() {
+            names_to_instructions.insert((arch, name), instruction);
+        }
+    }
+}
 
 /// Parse the provided XML contents and return a vector of all the registers based on that.
 /// If parsing fails, the appropriate error will be returned instead.
@@ -317,12 +330,13 @@ pub fn populate_registers(xml_contents: &str) -> anyhow::Result<Vec<Register>> {
                             match str::from_utf8(key.into_inner()).unwrap() {
                                 "name" => unsafe {
                                     let name_ = String::from(str::from_utf8_unchecked(&value));
-                                    curr_register.names.push(name_.clone());
+                                    curr_register.alt_names.push(name_.clone());
                                     curr_register.name = name_;
                                 },
-                                "synonym" => unsafe {
-                                    let name_ = String::from(str::from_utf8_unchecked(&value));
-                                    curr_register.names.push(name_);
+                                "altname" => unsafe {
+                                    curr_register
+                                        .alt_names
+                                        .push(String::from(str::from_utf8_unchecked(&value)));
                                 },
                                 "description" => unsafe {
                                     curr_register.description =
@@ -402,8 +416,8 @@ pub fn populate_registers(xml_contents: &str) -> anyhow::Result<Vec<Register>> {
     }
 
     // TODO: Add to URL fields here?
-    // https://wiki.osdev.org/CPU_Registers_x86 is less straightforward
-    // compared to the instruction set site
+    // https://wiki.osdev.org/CPU_Registers_x86 and https://wiki.osdev.org/CPU_Registers_x86-64
+    // are less straightforward compared to the instruction set site
 
     Ok(registers_map.into_values().collect())
 }
@@ -416,18 +430,6 @@ pub fn populate_name_to_register_map<'register>(
     for register in registers {
         for name in &register.get_associated_names() {
             names_to_registers.insert((arch, name), register);
-        }
-    }
-}
-
-pub fn populate_name_to_instruction_map<'instruction>(
-    arch: Arch,
-    instructions: &'instruction Vec<Instruction>,
-    names_to_instructions: &mut NameToInstructionMap<'instruction>,
-) {
-    for instruction in instructions {
-        for name in &instruction.get_associated_names() {
-            names_to_instructions.insert((arch, name), instruction);
         }
     }
 }
