@@ -336,8 +336,12 @@ pub enum RegisterType {
 
 #[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr, Display)]
 pub enum RegisterWidth {
-    #[strum(serialize = "80 bits")]
-    Bits80,
+    #[strum(serialize = "512 bits")]
+    Bits512,
+    #[strum(serialize = "256 bits")]
+    Bits256,
+    #[strum(serialize = "128 bits")]
+    Bits128,
     #[strum(serialize = "32(64) bits")]
     Bits32Or64,
     #[strum(serialize = "64 bits")]

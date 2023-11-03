@@ -658,4 +658,28 @@
             <Flag bit="47" label="Base" description="Starting address of IDT"></Flag>
         </Flags>
     </Register>
+    <Register name="xmm0" description="A SIMD register. Under SSE, this register can be used to store four 32-bit single-precision floating point numbers. SSE2 would later expand its usage to also allow two 64-bit double-precision floating point numbers, two 64-bit integers, four 32-bit integers, eight 16-bit short integers, or sixteen 8-bit bytes or characters." 
+    type="SIMD Register" width="128 bits">
+    </Register>
+    <Register name="xmm1" description="A SIMD register. Under SSE, this register can be used to store four 32-bit single-precision floating point numbers. SSE2 would later expand its usage to also allow two 64-bit double-precision floating point numbers, two 64-bit integers, four 32-bit integers, eight 16-bit short integers, or sixteen 8-bit bytes or characters." 
+    type="SIMD Register" width="128 bits">
+    </Register>
+    <Register name="xmm2" description="A SIMD register. Under SSE, this register can be used to store four 32-bit single-precision floating point numbers. SSE2 would later expand its usage to also allow two 64-bit double-precision floating point numbers, two 64-bit integers, four 32-bit integers, eight 16-bit short integers, or sixteen 8-bit bytes or characters." 
+    type="SIMD Register" width="128 bits">
+    </Register>
+    <Register name="xmm3" description="A SIMD register. Under SSE, this register can be used to store four 32-bit single-precision floating point numbers. SSE2 would later expand its usage to also allow two 64-bit double-precision floating point numbers, two 64-bit integers, four 32-bit integers, eight 16-bit short integers, or sixteen 8-bit bytes or characters." 
+    type="SIMD Register" width="128 bits">
+    </Register>
+    <Register name="xmm4" description="A SIMD register. Under SSE, this register can be used to store four 32-bit single-precision floating point numbers. SSE2 would later expand its usage to also allow two 64-bit double-precision floating point numbers, two 64-bit integers, four 32-bit integers, eight 16-bit short integers, or sixteen 8-bit bytes or characters." 
+    type="SIMD Register" width="128 bits">
+    </Register>
+    <Register name="xmm5" description="A SIMD register. Under SSE, this register can be used to store four 32-bit single-precision floating point numbers. SSE2 would later expand its usage to also allow two 64-bit double-precision floating point numbers, two 64-bit integers, four 32-bit integers, eight 16-bit short integers, or sixteen 8-bit bytes or characters." 
+    type="SIMD Register" width="128 bits">
+    </Register>
+    <Register name="xmm6" description="A SIMD register. Under SSE, this register can be used to store four 32-bit single-precision floating point numbers. SSE2 would later expand its usage to also allow two 64-bit double-precision floating point numbers, two 64-bit integers, four 32-bit integers, eight 16-bit short integers, or sixteen 8-bit bytes or characters." 
+    type="SIMD Register" width="128 bits">
+    </Register>
+    <Register name="xmm7" description="A SIMD register. Under SSE, this register can be used to store four 32-bit single-precision floating point numbers. SSE2 would later expand its usage to also allow two 64-bit double-precision floating point numbers, two 64-bit integers, four 32-bit integers, eight 16-bit short integers, or sixteen 8-bit bytes or characters." 
+    type="SIMD Register" width="128 bits">
+    </Register>
 </InstructionSet>
