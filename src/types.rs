@@ -162,9 +162,9 @@ impl std::fmt::Display for InstructionForm {
 pub struct Register {
     pub name: String,
     pub names: Vec<String>,
-    pub description: String,
+    pub description: Option<String>,
     pub reg_type: Option<RegisterType>,
-    pub location: Option<RegisterLocation>,
+    pub width: Option<RegisterWidth>,
     pub flag_info: Vec<RegisterBitInfo>,
     pub arch: Option<Arch>,
     pub url: Option<String>,
@@ -174,9 +174,9 @@ impl Default for Register {
     fn default() -> Self {
         let name = String::new();
         let names = vec![];
-        let description = String::new();
+        let description = None;
         let reg_type = None;
-        let location = None;
+        let width = None;
         let flag_info = vec![];
         let arch = None;
         let url = None;
@@ -186,7 +186,7 @@ impl Default for Register {
             names,
             description,
             reg_type,
-            location,
+            width,
             flag_info,
             arch,
             url,
@@ -204,7 +204,13 @@ impl std::fmt::Display for Register {
             header = self.name.to_uppercase();
         }
 
-        let mut v: Vec<String> = vec![header, self.description.clone(), String::from("\n")];
+        let mut v: Vec<String> = vec![header];
+
+        if let Some(description_) = &self.description {
+            v.push(description_.clone());
+        }
+
+        v.push(String::from("\n"));
 
         // Register Type
         let reg_type_str = if let Some(reg_type_) = self.reg_type {
@@ -217,13 +223,13 @@ impl std::fmt::Display for Register {
         }
 
         // Register Location
-        let reg_loc_str = if let Some(location_) = self.location {
-            format!("Width: {}", location_)
+        let reg_width_str = if let Some(width_) = self.width {
+            format!("Width: {}", width_)
         } else {
             String::new()
         };
-        if !reg_loc_str.is_empty() {
-            v.push(reg_loc_str);
+        if !reg_width_str.is_empty() {
+            v.push(reg_width_str);
         }
 
         // Bit-mask meanings if applicable
@@ -245,7 +251,7 @@ impl std::fmt::Display for Register {
             v.push(tmp_str);
         }
 
-        // TODO: url
+        // TODO: URL support
         let more_info: String;
         match &self.url {
             None => {}
@@ -329,7 +335,7 @@ pub enum RegisterType {
 }
 
 #[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr, Display)]
-pub enum RegisterLocation {
+pub enum RegisterWidth {
     #[strum(serialize = "80 bits")]
     Bits80,
     #[strum(serialize = "32(64) bits")]

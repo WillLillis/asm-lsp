@@ -326,7 +326,7 @@ pub fn populate_registers(xml_contents: &str) -> anyhow::Result<Vec<Register>> {
                                 },
                                 "description" => unsafe {
                                     curr_register.description =
-                                        String::from(str::from_utf8_unchecked(&value));
+                                        Some(String::from(str::from_utf8_unchecked(&value)));
                                 },
                                 "type" => unsafe {
                                     curr_register.reg_type = match RegisterType::from_str(
@@ -336,11 +336,11 @@ pub fn populate_registers(xml_contents: &str) -> anyhow::Result<Vec<Register>> {
                                         _ => None,
                                     }
                                 },
-                                "location" => unsafe {
-                                    curr_register.location = match RegisterLocation::from_str(
+                                "width" => unsafe {
+                                    curr_register.width = match RegisterWidth::from_str(
                                         str::from_utf8_unchecked(&value),
                                     ) {
-                                        Ok(loc) => Some(loc),
+                                        Ok(width) => Some(width),
                                         _ => None,
                                     }
                                 },

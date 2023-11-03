@@ -1,160 +1,160 @@
 <?xml version='1.0' encoding='utf-8'?>
 <InstructionSet name="x86_64">
-    <Register name="rax" description="Accumulator" type="General Purpose Register" location="64 bits">
+    <Register name="rax" description="Accumulator" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="eax" description="Accumulator" type="General Purpose Register" location="32 bits">
+    <Register name="eax" description="Accumulator" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="ax" description="Accumulator" type="General Purpose Register" location="16 bits">
+    <Register name="ax" description="Accumulator" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="ah" description="Accumulator. Cannot be accessed when using the REX.W instruction prefix. The prefixed is added (automatically by assemblers) when an operand contains a 64-bit register" type="General Purpose Register" location="8 high bits of lower 16 bits">
+    <Register name="ah" description="Accumulator. Cannot be accessed when using the REX.W instruction prefix. The prefixed is added (automatically by assemblers) when an operand contains a 64-bit register" type="General Purpose Register" width="8 high bits of lower 16 bits">
     </Register>
-    <Register name="al" description="Accumulator" type="General Purpose Register" location="8 lower bits">
+    <Register name="al" description="Accumulator" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="rbx" description="Base" type="General Purpose Register" location="64 bits">
+    <Register name="rbx" description="Base" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="ebx" description="Base" type="General Purpose Register" location="32 bits">
+    <Register name="ebx" description="Base" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="bx" description="Base" type="General Purpose Register" location="16 bits">
+    <Register name="bx" description="Base" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="bh" description="Base. Cannot be accessed when using the REX.W instruction prefix. The prefixed is added (automatically by assemblers) when an operand contains a 64-bit register" type="General Purpose Register" location="8 high bits of lower 16 bits">
+    <Register name="bh" description="Base. Cannot be accessed when using the REX.W instruction prefix. The prefixed is added (automatically by assemblers) when an operand contains a 64-bit register" type="General Purpose Register" width="8 high bits of lower 16 bits">
     </Register>
-    <Register name="bl" description="Base" type="General Purpose Register" location="8 lower bits">
+    <Register name="bl" description="Base" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="rcx" description="Counter" type="General Purpose Register" location="64 bits">
+    <Register name="rcx" description="Counter" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="ecx" description="Counter" type="General Purpose Register" location="32 bits">
+    <Register name="ecx" description="Counter" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="cx" description="Counter" type="General Purpose Register" location="16 bits">
+    <Register name="cx" description="Counter" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="ch" description="Counter. Cannot be accessed when using the REX.W instruction prefix. The prefixed is added (automatically by assemblers) when an operand contains a 64-bit register" type="General Purpose Register" location="8 high bits of lower 16 bits">
+    <Register name="ch" description="Counter. Cannot be accessed when using the REX.W instruction prefix. The prefixed is added (automatically by assemblers) when an operand contains a 64-bit register" type="General Purpose Register" width="8 high bits of lower 16 bits">
     </Register>
-    <Register name="cl" description="Counter" type="General Purpose Register" location="8 lower bits">
+    <Register name="cl" description="Counter" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="rdx" description="Data (commonly extends the A register)" type="General Purpose Register" location="64 bits">
+    <Register name="rdx" description="Data (commonly extends the A register)" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="edx" description="Data (commonly extends the A register)" type="General Purpose Register" location="32 bits">
+    <Register name="edx" description="Data (commonly extends the A register)" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="dx" description="Data (commonly extends the A register)" type="General Purpose Register" location="16 bits">
+    <Register name="dx" description="Data (commonly extends the A register)" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="dh" description="Data (commonly extends the A register). Cannot be accessed when using the REX.W instruction prefix. The prefixed is added (automatically by assemblers) when an operand contains a 64-bit register" type="General Purpose Register" location="8 high bits of lower 16 bits">
+    <Register name="dh" description="Data (commonly extends the A register). Cannot be accessed when using the REX.W instruction prefix. The prefixed is added (automatically by assemblers) when an operand contains a 64-bit register" type="General Purpose Register" width="8 high bits of lower 16 bits">
     </Register>
-    <Register name="dl" description="Data (commonly extends the A register)" type="General Purpose Register" location="8 lower bits">
+    <Register name="dl" description="Data (commonly extends the A register)" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="rsi" description="Source index for string operations" type="General Purpose Register" location="64 bits">
+    <Register name="rsi" description="Source index for string operations" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="esi" description="Source index for string operations" type="General Purpose Register" location="32 bits">
+    <Register name="esi" description="Source index for string operations" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="si" description="Source index for string operations" type="General Purpose Register" location="16 bits">
+    <Register name="si" description="Source index for string operations" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="sil" description="Source index for string operations" type="General Purpose Register" location="8 lower bits">
+    <Register name="sil" description="Source index for string operations" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="rdi" description="Destination index for string operations" type="General Purpose Register" location="64 bits">
+    <Register name="rdi" description="Destination index for string operations" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="edi" description="Destination index for string operations" type="General Purpose Register" location="32 bits">
+    <Register name="edi" description="Destination index for string operations" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="di" description="Destination index for string operations" type="General Purpose Register" location="16 bits">
+    <Register name="di" description="Destination index for string operations" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="dil" description="Destination index for string operations" type="General Purpose Register" location="8 lower bits">
+    <Register name="dil" description="Destination index for string operations" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="rsp" description="Stack Pointer" type="General Purpose Register" location="64 bits">
+    <Register name="rsp" description="Stack Pointer" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="esp" description="Stack Pointer" type="General Purpose Register" location="32 bits">
+    <Register name="esp" description="Stack Pointer" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="sp" description="Stack Pointer" type="General Purpose Register" location="16 bits">
+    <Register name="sp" description="Stack Pointer" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="spl" description="Stack Pointer" type="General Purpose Register" location="8 lower bits">
+    <Register name="spl" description="Stack Pointer" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="rbp" description="Base Pointer (meant for stack frames)" type="General Purpose Register" location="64 bits">
+    <Register name="rbp" description="Base Pointer (meant for stack frames)" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="ebp" description="Base Pointer (meant for stack frames)" type="General Purpose Register" location="32 bits">
+    <Register name="ebp" description="Base Pointer (meant for stack frames)" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="bp" description="Base Pointer (meant for stack frames)" type="General Purpose Register" location="16 bits">
+    <Register name="bp" description="Base Pointer (meant for stack frames)" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="bpl" description="Base Pointer (meant for stack frames)" type="General Purpose Register" location="8 lower bits">
+    <Register name="bpl" description="Base Pointer (meant for stack frames)" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="r8" description="General Purpose" type="General Purpose Register" location="64 bits">
+    <Register name="r8" description="General Purpose" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="r8d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    <Register name="r8d" description="General Purpose" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="r8w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    <Register name="r8w" description="General Purpose" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="r8b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    <Register name="r8b" description="General Purpose" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="r9" description="General Purpose" type="General Purpose Register" location="64 bits">
+    <Register name="r9" description="General Purpose" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="r9d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    <Register name="r9d" description="General Purpose" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="r9w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    <Register name="r9w" description="General Purpose" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="r9b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    <Register name="r9b" description="General Purpose" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="r10" description="General Purpose" type="General Purpose Register" location="64 bits">
+    <Register name="r10" description="General Purpose" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="r10d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    <Register name="r10d" description="General Purpose" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="r10w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    <Register name="r10w" description="General Purpose" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="r10b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    <Register name="r10b" description="General Purpose" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="r11" description="General Purpose" type="General Purpose Register" location="64 bits">
+    <Register name="r11" description="General Purpose" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="r11d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    <Register name="r11d" description="General Purpose" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="r11w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    <Register name="r11w" description="General Purpose" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="r11b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    <Register name="r11b" description="General Purpose" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="r12" description="General Purpose" type="General Purpose Register" location="64 bits">
+    <Register name="r12" description="General Purpose" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="r12d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    <Register name="r12d" description="General Purpose" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="r12w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    <Register name="r12w" description="General Purpose" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="r12b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    <Register name="r12b" description="General Purpose" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="r13" description="General Purpose" type="General Purpose Register" location="64 bits">
+    <Register name="r13" description="General Purpose" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="r13d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    <Register name="r13d" description="General Purpose" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="r13w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    <Register name="r13w" description="General Purpose" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="r13b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    <Register name="r13b" description="General Purpose" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="r14" description="General Purpose" type="General Purpose Register" location="64 bits">
+    <Register name="r14" description="General Purpose" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="r14d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    <Register name="r14d" description="General Purpose" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="r14w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    <Register name="r14w" description="General Purpose" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="r14b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    <Register name="r14b" description="General Purpose" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="r15" description="General Purpose" type="General Purpose Register" location="64 bits">
+    <Register name="r15" description="General Purpose" type="General Purpose Register" width="64 bits">
     </Register>
-    <Register name="r15d" description="General Purpose" type="General Purpose Register" location="32 bits">
+    <Register name="r15d" description="General Purpose" type="General Purpose Register" width="32 bits">
     </Register>
-    <Register name="r15w" description="General Purpose" type="General Purpose Register" location="16 bits">
+    <Register name="r15w" description="General Purpose" type="General Purpose Register" width="16 bits">
     </Register>
-    <Register name="r15b" description="General Purpose" type="General Purpose Register" location="8 lower bits">
+    <Register name="r15b" description="General Purpose" type="General Purpose Register" width="8 lower bits">
     </Register>
-    <Register name="rip" description="Instruction Pointer. Can only be used in RIP-relative addressing." type="Pointer Register" location="64 bits">
+    <Register name="rip" description="Instruction Pointer. Can only be used in RIP-relative addressing." type="Pointer Register" width="64 bits">
     </Register>
-    <Register name="eip" description="Instruction Pointer. Can only be used in RIP-relative addressing." type="Pointer Register" location="32 bits">
+    <Register name="eip" description="Instruction Pointer. Can only be used in RIP-relative addressing." type="Pointer Register" width="32 bits">
     </Register>
-    <Register name="ip" description="Instruction Pointer. Can only be used in RIP-relative addressing." type="Pointer Register" location="16 bits">
+    <Register name="ip" description="Instruction Pointer. Can only be used in RIP-relative addressing." type="Pointer Register" width="16 bits">
     </Register>
-    <Register name="cs" description="Code Segment. Treated as if its base is 0 no matter what the segment descriptors in the GDT say." type="Segment Register" location="16 bits">
+    <Register name="cs" description="Code Segment. Treated as if its base is 0 no matter what the segment descriptors in the GDT say." type="Segment Register" width="16 bits">
     </Register>
-    <Register name="ds" description="Data Segment. Treated as if its base is 0 no matter what the segment descriptors in the GDT say." type="Segment Register" location="16 bits">
+    <Register name="ds" description="Data Segment. Treated as if its base is 0 no matter what the segment descriptors in the GDT say." type="Segment Register" width="16 bits">
     </Register>
-    <Register name="ss" description="Stack Segment. Treated as if its base is 0 no matter what the segment descriptors in the GDT say." type="Segment Register" location="16 bits">
+    <Register name="ss" description="Stack Segment. Treated as if its base is 0 no matter what the segment descriptors in the GDT say." type="Segment Register" width="16 bits">
     </Register>
-    <Register name="es" description="Extra Segment (used for string operations). Treated as if its base is 0 no matter what the segment descriptors in the GDT say." type="Segment Register" location="16 bits">
+    <Register name="es" description="Extra Segment (used for string operations). Treated as if its base is 0 no matter what the segment descriptors in the GDT say." type="Segment Register" width="16 bits">
     </Register>
-    <Register name="fs" description="General Purpose F Segment. MSRs can change its base." type="Segment Register" location="16 bits">
+    <Register name="fs" description="General Purpose F Segment. MSRs can change its base." type="Segment Register" width="16 bits">
     </Register>
-    <Register name="gs" description="General Purpose G Segment. MSRs can change its base." type="Segment Register" location="16 bits">
+    <Register name="gs" description="General Purpose G Segment. MSRs can change its base." type="Segment Register" width="16 bits">
     </Register>
-    <Register name="rflags" description="Reserved Flags Register" type="Flag Register" location="64 bits">
+    <Register name="rflags" description="Reserved Flags Register" type="Flag Register" width="64 bits">
         <Flags>
             <Flag bit="0" label="CF" description="Carry flag"></Flag>
             <Flag bit="1" label="" description="Reserved"></Flag>
@@ -222,7 +222,7 @@
             <Flag bit="63" label="" description="Reserved"></Flag>
         </Flags>
     </Register>
-    <Register name="cr0" description="Control Register 0. This is the only control register that can be written and read via 2 ways unlike the others that can be accessed only via the MOV instruction." type="Control Register" location="64 bits">
+    <Register name="cr0" description="Control Register 0. This is the only control register that can be written and read via 2 ways unlike the others that can be accessed only via the MOV instruction." type="Control Register" width="64 bits">
         <Flags>
             <Flag bit="0" label="PE" description="Protected Mode Enable"></Flag>
             <Flag bit="1" label="MP" description="Monitor co-processor"></Flag>
@@ -292,9 +292,9 @@
     </Register>
     <register name="cr1" description="Control register 1. Reserved, CPU will throw a #ud exception when trying to access." type="Control Register">
     </register>
-    <Register name="cr2" description="Control Register 2. This control register contains the linear (virtual) address whcih triggered a page fault, available in the page fault's interrupt hander." type="Control Register" location="64 bits">
+    <Register name="cr2" description="Control Register 2. This control register contains the linear (virtual) address whcih triggered a page fault, available in the page fault's interrupt hander." type="Control Register" width="64 bits">
     </Register>
-    <Register name="cr3" description="Control Register 3. This must be page aligned." type="Control Register" location="64 bits">
+    <Register name="cr3" description="Control Register 3. This must be page aligned." type="Control Register" width="64 bits">
         <Flags>
             <Flag bit="0" label="" description="Reserved if CR4.PCIDE = 0. PCID if CR4.PCIDE = 1"></Flag>
             <Flag bit="1" label="" description="Reserved if CR4.PCIDE = 0. PCID if CR4.PCIDE = 1"></Flag>
@@ -362,7 +362,7 @@
             <Flag bit="63" label="" description="Physical Base Address of the PML4"></Flag>
         </Flags>
     </Register>
-    <Register name="cr4" description="Control Register 4" type="Control Register" location="64 bits">
+    <Register name="cr4" description="Control Register 4" type="Control Register" width="64 bits">
         <Flags>
             <Flag bit="0" label="VME" description="Virtual 8086 Mode Extensions"></Flag>
             <Flag bit="1" label="PVI" description="Protected-mode Virtual Interrupts"></Flag>
@@ -443,7 +443,7 @@ The AMD64 architecture allows software to define up to 15 external interrupt-pri
 System software can use the TPR register to temporarily block low-priority interrupts from interrupting a high-priority task. This is accomplished by loading TPR with a value corresponding to the highest-priority interrupt that is to be blocked. For example, loading TPR with a value of 9 (1001b) blocks all interrupts with a priority class of 9 or less, while allowing all interrupts with a priority class of 10 or more to be recognized. Loading TPR with 0 enables all external interrupts. Loading TPR with 15 (1111b) disables all external interrupts.
 
 The TPR is cleared to 0 on reset."
-        type="Control Register" location="64 bits">
+        type="Control Register" width="64 bits">
         <Flags>
             <Flag bit="0" label="" description="Priority"></Flag>
             <Flag bit="1" label="" description="Priority"></Flag>
@@ -525,7 +525,7 @@ The TPR is cleared to 0 on reset."
     </Register>
     <Register name="cr15" description="Control Register 15. Reserved, CPU will throw a #ud exception when trying to access." type="Control Register">
     </Register>
-    <Register name="ia32_efer" description="The Extended Feature Enable Register (EFER) is a model-specific register added in the AMD K6 processor, to allow enabling the SYSCALL/SYSRET instruction, and later for entering and exiting long mode. This register becomes architectural in AMD64 and has been adopted by Intel. Its MSR number is 0xC0000080." type="Machine State Register" location="64 bits">
+    <Register name="ia32_efer" description="The Extended Feature Enable Register (EFER) is a model-specific register added in the AMD K6 processor, to allow enabling the SYSCALL/SYSRET instruction, and later for entering and exiting long mode. This register becomes architectural in AMD64 and has been adopted by Intel. Its MSR number is 0xC0000080." type="Machine State Register" width="64 bits">
         <Flags>
             <Flag bit="0" label="SCE" description="System Call Extensions"></Flag>
             <Flag bit="1" label="" description="Reserved"></Flag>
@@ -616,7 +616,7 @@ In newer CPUs, this can also be written with the WRGSBASE instruction at any pri
     </Register>
     <Register name="dr6" description="Permits the debugger to determine which debug conditions have occurred. When an enabled debug exception is triggered, low order bits 0-3 are set before entering debug exception handler.">
     </Register>
-    <Register name="dr7" description="A local breakpoint bit deactivates on hardware task switches, while a global does not. Condition 00b means execution break, 01b means a write watchpoint, and 11b means a R/W watchpoint. 10b is reserved for I/O R/W (unsupported)" type="Debug Register" location="32 bits">
+    <Register name="dr7" description="A local breakpoint bit deactivates on hardware task switches, while a global does not. Condition 00b means execution break, 01b means a write watchpoint, and 11b means a R/W watchpoint. 10b is reserved for I/O R/W (unsupported)" type="Debug Register" width="32 bits">
         <Flags>
             <Flag bit="0" label="" description="Local DR0 breakpoint"></Flag>
             <Flag bit="1" label="" description="Global DR0 breakpoint"></Flag>
@@ -662,7 +662,7 @@ In newer CPUs, this can also be written with the WRGSBASE instruction at any pri
     </Register>
     <Register name="tr7" description="Test data register" type="Test Register">
     </Register>
-    <Register name="gdtr" description="" type="Protected Mode Register" location="80 bits">
+    <Register name="gdtr" description="" type="Protected Mode Register" width="80 bits">
         <Flags>
             <Flag bit="0" label="Limit" description="Size of GDT"></Flag>
             <Flag bit="1" label="Limit" description="Size of GDT"></Flag>
@@ -750,7 +750,7 @@ In newer CPUs, this can also be written with the WRGSBASE instruction at any pri
     </Register>
     <Register name="tr" description="Stores the segment selector of the TSS" type="Protected Mode Register">
     </Register>
-    <Register name="idtr" description="" type="Protected Mode Register" location="80 bits">
+    <Register name="idtr" description="" type="Protected Mode Register" width="80 bits">
         <Flags>
             <Flag bit="0" label="Limit" description="Size of IDT"></Flag>
             <Flag bit="1" label="Limit" description="Size of IDT"></Flag>
