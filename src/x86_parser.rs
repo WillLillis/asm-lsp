@@ -264,7 +264,7 @@ mod tests {
         // Need to clear the cache file (if there is one)
         // to ensure a request is made for each test call
         let mut x86_cache_path = get_cache_dir().unwrap();
-        x86_cache_path.push("x86_docs.html");
+        x86_cache_path.push("x86_instr_docs.html");
         if x86_cache_path.is_file() {
             std::fs::remove_file(&x86_cache_path).unwrap();
         }
