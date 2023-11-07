@@ -363,6 +363,7 @@ pub fn populate_registers(xml_contents: &str) -> anyhow::Result<Vec<Register>> {
                         }
                     }
                     QName(b"Flags") => {} // it's just a wrapper...
+                    // Actual flag bit info
                     QName(b"Flag") => {
                         curr_bit_flag = RegisterBitInfo::default();
 
