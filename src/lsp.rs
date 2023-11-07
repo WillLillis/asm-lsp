@@ -78,15 +78,8 @@ pub fn search_for_reg<'a: 'b, 'b>(
     word: &str,
     map: &'a NameToRegisterMap<'a>,
 ) -> (Option<&'b Register>, Option<&'b Register>) {
-    let raised_word = word.to_uppercase();
-    let x86_instruction = map
-        .get(&(Arch::X86, word))
-        .or_else(|| map.get(&(Arch::X86, &raised_word)))
-        .cloned();
-    let x86_64_instruction = map
-        .get(&(Arch::X86_64, word))
-        .or_else(|| map.get(&(Arch::X86_64, &raised_word)))
-        .cloned();
+    let x86_instruction = map.get(&(Arch::X86, word)).cloned();
+    let x86_64_instruction = map.get(&(Arch::X86_64, word)).cloned();
 
     (x86_instruction, x86_64_instruction)
 }

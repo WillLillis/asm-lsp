@@ -330,7 +330,7 @@ pub fn populate_registers(xml_contents: &str) -> anyhow::Result<Vec<Register>> {
                             match str::from_utf8(key.into_inner()).unwrap() {
                                 "name" => unsafe {
                                     let name_ = String::from(str::from_utf8_unchecked(&value));
-                                    curr_register.alt_names.push(name_.clone());
+                                    curr_register.alt_names.push(name_.to_uppercase());
                                     curr_register.name = name_;
                                 },
                                 "altname" => unsafe {
