@@ -21,7 +21,6 @@ main:
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
-    %zmm0
 	.cfi_def_cfa_register 6
 	subq	$32, %rsp
 	MOVLPS
