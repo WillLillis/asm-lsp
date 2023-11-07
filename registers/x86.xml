@@ -378,38 +378,38 @@
             <Flag bit="29" label="" description="Reserved"></Flag>
             <Flag bit="30" label="" description="Reserved"></Flag>
             <Flag bit="31" label="" description="Reserved"></Flag>
-            <Flag bit="32" label="" description="Reserved"></Flag>
-            <Flag bit="33" label="" description="Reserved"></Flag>
-            <Flag bit="34" label="" description="Reserved"></Flag>
-            <Flag bit="35" label="" description="Reserved"></Flag>
-            <Flag bit="36" label="" description="Reserved"></Flag>
-            <Flag bit="37" label="" description="Reserved"></Flag>
-            <Flag bit="38" label="" description="Reserved"></Flag>
-            <Flag bit="39" label="" description="Reserved"></Flag>
-            <Flag bit="40" label="" description="Reserved"></Flag>
-            <Flag bit="41" label="" description="Reserved"></Flag>
-            <Flag bit="42" label="" description="Reserved"></Flag>
-            <Flag bit="43" label="" description="Reserved"></Flag>
-            <Flag bit="44" label="" description="Reserved"></Flag>
-            <Flag bit="45" label="" description="Reserved"></Flag>
-            <Flag bit="46" label="" description="Reserved"></Flag>
-            <Flag bit="47" label="" description="Reserved"></Flag>
-            <Flag bit="48" label="" description="Reserved"></Flag>
-            <Flag bit="49" label="" description="Reserved"></Flag>
-            <Flag bit="50" label="" description="Reserved"></Flag>
-            <Flag bit="51" label="" description="Reserved"></Flag>
-            <Flag bit="52" label="" description="Reserved"></Flag>
-            <Flag bit="53" label="" description="Reserved"></Flag>
-            <Flag bit="54" label="" description="Reserved"></Flag>
-            <Flag bit="55" label="" description="Reserved"></Flag>
-            <Flag bit="56" label="" description="Reserved"></Flag>
-            <Flag bit="57" label="" description="Reserved"></Flag>
-            <Flag bit="58" label="" description="Reserved"></Flag>
-            <Flag bit="59" label="" description="Reserved"></Flag>
-            <Flag bit="60" label="" description="Reserved"></Flag>
-            <Flag bit="61" label="" description="Reserved"></Flag>
-            <Flag bit="62" label="" description="Reserved"></Flag>
-            <Flag bit="63" label="" description="Reserved"></Flag>
+            <Flag bit="32" label="" description="(Reserved)"></Flag>
+            <Flag bit="33" label="" description="(Reserved)"></Flag>
+            <Flag bit="34" label="" description="(Reserved)"></Flag>
+            <Flag bit="35" label="" description="(Reserved)"></Flag>
+            <Flag bit="36" label="" description="(Reserved)"></Flag>
+            <Flag bit="37" label="" description="(Reserved)"></Flag>
+            <Flag bit="38" label="" description="(Reserved)"></Flag>
+            <Flag bit="39" label="" description="(Reserved)"></Flag>
+            <Flag bit="40" label="" description="(Reserved)"></Flag>
+            <Flag bit="41" label="" description="(Reserved)"></Flag>
+            <Flag bit="42" label="" description="(Reserved)"></Flag>
+            <Flag bit="43" label="" description="(Reserved)"></Flag>
+            <Flag bit="44" label="" description="(Reserved)"></Flag>
+            <Flag bit="45" label="" description="(Reserved)"></Flag>
+            <Flag bit="46" label="" description="(Reserved)"></Flag>
+            <Flag bit="47" label="" description="(Reserved)"></Flag>
+            <Flag bit="48" label="" description="(Reserved)"></Flag>
+            <Flag bit="49" label="" description="(Reserved)"></Flag>
+            <Flag bit="50" label="" description="(Reserved)"></Flag>
+            <Flag bit="51" label="" description="(Reserved)"></Flag>
+            <Flag bit="52" label="" description="(Reserved)"></Flag>
+            <Flag bit="53" label="" description="(Reserved)"></Flag>
+            <Flag bit="54" label="" description="(Reserved)"></Flag>
+            <Flag bit="55" label="" description="(Reserved)"></Flag>
+            <Flag bit="56" label="" description="(Reserved)"></Flag>
+            <Flag bit="57" label="" description="(Reserved)"></Flag>
+            <Flag bit="58" label="" description="(Reserved)"></Flag>
+            <Flag bit="59" label="" description="(Reserved)"></Flag>
+            <Flag bit="60" label="" description="(Reserved)"></Flag>
+            <Flag bit="61" label="" description="(Reserved)"></Flag>
+            <Flag bit="62" label="" description="(Reserved)"></Flag>
+            <Flag bit="63" label="" description="(Reserved)"></Flag>
         </Flags>
     </Register>
     <Register name="dr0" description="Can contain linear address of a breakpoint. If paging is enabled, it is translated to a physical address" type="Debug Register" width="32 bits">
