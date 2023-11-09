@@ -2,6 +2,10 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use strum_macros::{AsRefStr, Display, EnumString};
 
+// Define a trait for types we display on Hover Requests so we can avoid some
+// duplicate code
+pub trait Hoverable {}
+
 // Instruction ------------------------------------------------------------------------------------
 #[derive(Debug, Clone)]
 pub struct Instruction {
@@ -11,6 +15,8 @@ pub struct Instruction {
     pub url: Option<String>,
     pub arch: Option<Arch>,
 }
+
+impl Hoverable for Instruction {}
 
 impl Default for Instruction {
     fn default() -> Self {
@@ -169,6 +175,8 @@ pub struct Register {
     pub arch: Option<Arch>,
     pub url: Option<String>,
 }
+
+impl Hoverable for Register {}
 
 impl Default for Register {
     fn default() -> Self {

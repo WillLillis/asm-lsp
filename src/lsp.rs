@@ -1,7 +1,13 @@
 use crate::types::Column;
-use crate::{Arch, Instruction, NameToInstructionMap, NameToRegisterMap, Register, TargetConfig};
+use crate::{
+    Arch, Hoverable, Instruction, NameToInstructionMap, NameToRegisterMap, Register, TargetConfig,
+};
 use log::{error, info};
-use lsp_types::{InitializeParams, TextDocumentPositionParams, Url};
+use lsp_types::{
+    Documentation, Hover, HoverContents, InitializeParams, TextDocumentPositionParams, Url,
+};
+use std::collections::HashMap;
+use std::fmt::Display;
 use std::fs::File;
 use std::io::BufRead;
 use std::path::PathBuf;
@@ -51,6 +57,48 @@ pub fn get_word_from_file_params(
         }
         Err(_) => Err(anyhow::anyhow!("filepath get error")),
     }
+}
+
+pub fn get_hover_resp<T: Hoverable + Display>(
+    word: &str,
+    map: &HashMap<(Arch, &str), T>,
+) -> Option<Hover> {
+    let (x86_res, x86_64_res) = search_for_hoverable(word, map);
+
+    let hover_res: Option<Hover> = match (x86_res.is_some(), x86_64_res.is_some()) {
+        (true, _) | (_, true) => {
+            let mut value = String::new();
+            if let Some(x86_res) = x86_res {
+                value += &format!("{}", x86_res);
+            }
+            if let Some(x86_64_res) = x86_64_res {
+                value += &format!(
+                    "{}{}",
+                    if x86_res.is_some() { "\n\n" } else { "" },
+                    x86_64_res
+                );
+            }
+            Some(Hover {
+                contents: HoverContents::Markup(MarkupContent {
+                    kind: MarkupKind::Markdown,
+                    value,
+                }),
+                range: None,
+            })
+        }
+        _ => {
+            // don't know of this word
+            None
+        }
+    };
+    None
+}
+
+fn search_for_hoverable<'a: 'b, 'b, T: Hoverable>(
+    word: &str,
+    map: &'a HashMap<(Arch, &str), T>,
+) -> (Option<&'b T>, Option<&'b T>) {
+    (None, None)
 }
 
 // Note: Have to call .cloned() on the results of .get()
