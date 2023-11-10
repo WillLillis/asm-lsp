@@ -48,8 +48,9 @@ pub fn populate_instructions(xml_contents: &str) -> anyhow::Result<Vec<Instructi
                             let Attribute { key, value } = attr.unwrap();
                             match str::from_utf8(key.into_inner()).unwrap() {
                                 "name" => unsafe {
-                                    curr_instruction.name =
-                                        String::from(str::from_utf8_unchecked(&value));
+                                    let name = String::from(str::from_utf8_unchecked(&value));
+                                    curr_instruction.alt_names.push(name.to_uppercase());
+                                    curr_instruction.name = name;
                                 },
                                 "summary" => unsafe {
                                     curr_instruction.summary =

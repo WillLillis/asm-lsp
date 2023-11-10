@@ -6,6 +6,7 @@ use strum_macros::{AsRefStr, Display, EnumString};
 #[derive(Debug, Clone)]
 pub struct Instruction {
     pub name: String,
+    pub alt_names: Vec<String>,
     pub summary: String,
     pub forms: Vec<InstructionForm>,
     pub url: Option<String>,
@@ -17,6 +18,7 @@ impl Hoverable for &Instruction {}
 impl Default for Instruction {
     fn default() -> Self {
         let name = String::new();
+        let alt_names = vec![];
         let summary = String::new();
         let forms = vec![];
         let url = None;
@@ -24,6 +26,7 @@ impl Default for Instruction {
 
         Self {
             name,
+            alt_names,
             summary,
             forms,
             url,
@@ -77,6 +80,10 @@ impl<'own> Instruction {
     pub fn get_associated_names(&'own self) -> Vec<&'own str> {
         let mut names = Vec::<&'own str>::new();
         names.push(&self.name);
+
+        for name in &self.alt_names {
+            names.push(name);
+        }
 
         for f in &self.forms {
             for name in [&f.gas_name, &f.go_name].iter().copied().flatten() {
@@ -282,7 +289,7 @@ impl<'own> Register {
         let mut names = Vec::<&'own str>::new();
         names.push(&self.name);
 
-        for name in self.alt_names.iter() {
+        for name in &self.alt_names {
             names.push(name);
         }
 
