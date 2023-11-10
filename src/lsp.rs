@@ -1,13 +1,8 @@
 use crate::types::Column;
-use crate::{
-    Arch, Hoverable, Instruction, NameToInstructionMap, NameToRegisterMap, Register, TargetConfig,
-};
+use crate::{Arch, Hoverable, Instruction, TargetConfig};
 use log::{error, info};
-use lsp_types::{
-    Documentation, Hover, HoverContents, InitializeParams, TextDocumentPositionParams, Url,
-};
+use lsp_types::*;
 use std::collections::HashMap;
-use std::fmt::Display;
 use std::fs::File;
 use std::io::BufRead;
 use std::path::PathBuf;
@@ -59,13 +54,10 @@ pub fn get_word_from_file_params(
     }
 }
 
-pub fn get_hover_resp<T: Hoverable + Display>(
-    word: &str,
-    map: &HashMap<(Arch, &str), T>,
-) -> Option<Hover> {
+pub fn get_hover_resp<T: Hoverable>(word: &str, map: &HashMap<(Arch, &str), T>) -> Option<Hover> {
     let (x86_res, x86_64_res) = search_for_hoverable(word, map);
 
-    let hover_res: Option<Hover> = match (x86_res.is_some(), x86_64_res.is_some()) {
+    match (x86_res.is_some(), x86_64_res.is_some()) {
         (true, _) | (_, true) => {
             let mut value = String::new();
             if let Some(x86_res) = x86_res {
@@ -90,46 +82,19 @@ pub fn get_hover_resp<T: Hoverable + Display>(
             // don't know of this word
             None
         }
-    };
-    None
+    }
 }
 
+// Note: Have to call .cloned() on the results of .get()
+// here because of compiler issue regarding entangled lifetimes: https://github.com/rust-lang/rust/issues/80389
 fn search_for_hoverable<'a: 'b, 'b, T: Hoverable>(
     word: &str,
     map: &'a HashMap<(Arch, &str), T>,
-) -> (Option<&'b T>, Option<&'b T>) {
-    (None, None)
-}
+) -> (Option<T>, Option<T>) {
+    let x86_res = map.get(&(Arch::X86, word)).cloned();
+    let x86_64_res = map.get(&(Arch::X86_64, word)).cloned();
 
-// Note: Have to call .cloned() on the results of .get()
-// here because of compiler issue regarding entangled lifetimes: https://github.com/rust-lang/rust/issues/80389
-pub fn search_for_instr<'a: 'b, 'b>(
-    word: &str,
-    map: &'a NameToInstructionMap<'a>,
-) -> (Option<&'b Instruction>, Option<&'b Instruction>) {
-    let raised_word = word.to_uppercase();
-    let x86_instruction = map
-        .get(&(Arch::X86, word))
-        .or_else(|| map.get(&(Arch::X86, &raised_word)))
-        .cloned();
-    let x86_64_instruction = map
-        .get(&(Arch::X86_64, word))
-        .or_else(|| map.get(&(Arch::X86_64, &raised_word)))
-        .cloned();
-
-    (x86_instruction, x86_64_instruction)
-}
-
-// Note: Have to call .cloned() on the results of .get()
-// here because of compiler issue regarding entangled lifetimes: https://github.com/rust-lang/rust/issues/80389
-pub fn search_for_reg<'a: 'b, 'b>(
-    word: &str,
-    map: &'a NameToRegisterMap<'a>,
-) -> (Option<&'b Register>, Option<&'b Register>) {
-    let x86_instruction = map.get(&(Arch::X86, word)).cloned();
-    let x86_64_instruction = map.get(&(Arch::X86_64, word)).cloned();
-
-    (x86_instruction, x86_64_instruction)
+    (x86_res, x86_64_res)
 }
 
 pub fn get_target_config(params: &InitializeParams) -> TargetConfig {

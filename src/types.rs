@@ -1,10 +1,12 @@
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
+use std::{collections::HashMap, fmt::Display};
 use strum_macros::{AsRefStr, Display, EnumString};
 
 // Define a trait for types we display on Hover Requests so we can avoid some
 // duplicate code
-pub trait Hoverable {}
+// way to require Display and Clone here?
+//#[derive(Display, Clone, Copy)]
+pub trait Hoverable: Display + Clone + Copy {}
 
 // Instruction ------------------------------------------------------------------------------------
 #[derive(Debug, Clone)]
@@ -16,7 +18,7 @@ pub struct Instruction {
     pub arch: Option<Arch>,
 }
 
-impl Hoverable for Instruction {}
+impl Hoverable for &Instruction {}
 
 impl Default for Instruction {
     fn default() -> Self {
@@ -176,7 +178,7 @@ pub struct Register {
     pub url: Option<String>,
 }
 
-impl Hoverable for Register {}
+impl Hoverable for &Register {}
 
 impl Default for Register {
     fn default() -> Self {

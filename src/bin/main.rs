@@ -161,76 +161,10 @@ fn main_loop(
                         // format response
                         match word {
                             Ok(word) => {
-                                let (x86_instruction, x86_64_instruction) =
-                                    search_for_instr(&word, names_to_instructions);
-
-                                let hover_res: Option<Hover> =
-                                    match (x86_instruction.is_some(), x86_64_instruction.is_some())
-                                    {
-                                        (true, _) | (_, true) => {
-                                            let mut value = String::new();
-                                            if let Some(x86_instruction) = x86_instruction {
-                                                value += &format!("{}", x86_instruction);
-                                            }
-                                            if let Some(x86_64_instruction) = x86_64_instruction {
-                                                value += &format!(
-                                                    "{}{}",
-                                                    if x86_instruction.is_some() {
-                                                        "\n\n"
-                                                    } else {
-                                                        ""
-                                                    },
-                                                    x86_64_instruction
-                                                );
-                                            }
-                                            Some(Hover {
-                                                contents: HoverContents::Markup(MarkupContent {
-                                                    kind: MarkupKind::Markdown,
-                                                    value,
-                                                }),
-                                                range: None,
-                                            })
-                                        }
-                                        _ => {
-                                            // don't know of this word
-                                            None
-                                        }
-                                    };
+                                let hover_res = get_hover_resp(&word, names_to_instructions);
                                 // If no instructions matched, check the registers
                                 let hover_res = if hover_res.is_none() {
-                                    let (x86_register, x86_64_register) =
-                                        search_for_reg(&word, names_to_registers);
-
-                                    match (x86_register.is_some(), x86_64_register.is_some()) {
-                                        (true, _) | (_, true) => {
-                                            let mut value = String::new();
-                                            if let Some(x86_register) = x86_register {
-                                                value += &format!("{}", x86_register);
-                                            }
-                                            if let Some(x86_64_register) = x86_64_register {
-                                                value += &format!(
-                                                    "{}{}",
-                                                    if x86_register.is_some() {
-                                                        "\n\n"
-                                                    } else {
-                                                        ""
-                                                    },
-                                                    x86_64_register
-                                                );
-                                            }
-                                            Some(Hover {
-                                                contents: HoverContents::Markup(MarkupContent {
-                                                    kind: MarkupKind::Markdown,
-                                                    value,
-                                                }),
-                                                range: None,
-                                            })
-                                        }
-                                        _ => {
-                                            // don't know of this word
-                                            None
-                                        }
-                                    }
+                                    get_hover_resp(&word, names_to_registers)
                                 } else {
                                     hover_res
                                 };
