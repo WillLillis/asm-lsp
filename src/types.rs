@@ -2,12 +2,6 @@ use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, fmt::Display};
 use strum_macros::{AsRefStr, Display, EnumString};
 
-// Define a trait for types we display on Hover Requests so we can avoid some
-// duplicate code
-// way to require Display and Clone here?
-//#[derive(Display, Clone, Copy)]
-pub trait Hoverable: Display + Clone + Copy {}
-
 // Instruction ------------------------------------------------------------------------------------
 #[derive(Debug, Clone)]
 pub struct Instruction {
@@ -301,6 +295,9 @@ pub type NameToInstructionMap<'instruction> =
     HashMap<(Arch, &'instruction str), &'instruction Instruction>;
 
 pub type NameToRegisterMap<'register> = HashMap<(Arch, &'register str), &'register Register>;
+
+// Define a trait for types we display on Hover Requests so we can avoid some duplicate code
+pub trait Hoverable: Display + Clone + Copy {}
 
 #[derive(Debug, Clone, EnumString, AsRefStr)]
 pub enum XMMMode {
