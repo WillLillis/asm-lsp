@@ -45,7 +45,7 @@ impl std::fmt::Display for Instruction {
             header = self.name.clone();
         }
 
-        let mut v: Vec<&'_ str> = vec![&header, &self.summary, "\n", "## Forms", "\n"];
+        let mut v: Vec<&str> = vec![&header, &self.summary, "\n", "## Forms", "\n"];
 
         // instruction forms
         let instruction_form_strs: Vec<String> =
@@ -215,61 +215,45 @@ impl std::fmt::Display for Register {
             header = self.name.to_uppercase();
         }
 
-        let mut v: Vec<String> = vec![header];
-
-        if let Some(description_) = &self.description {
-            v.push(description_.clone());
-        }
-
-        v.push(String::from("\n"));
+        let mut v: Vec<&str> = if let Some(description_) = &self.description {
+            vec![&header, description_, "\n"]
+        } else {
+            vec![&header, "\n"]
+        };
 
         // Register Type
-        let reg_type_str = if let Some(reg_type_) = self.reg_type {
-            format!("Type: {}", reg_type_)
-        } else {
-            String::new()
-        };
-        if !reg_type_str.is_empty() {
-            v.push(reg_type_str);
+        let reg_type;
+        if let Some(reg_type_) = &self.reg_type {
+            reg_type = format!("Type: {}", reg_type_);
+            v.push(reg_type.as_str());
         }
 
-        // Register Location
-        let reg_width_str = if let Some(width_) = self.width {
-            format!("Width: {}", width_)
-        } else {
-            String::new()
-        };
-        if !reg_width_str.is_empty() {
-            v.push(reg_width_str);
+        // Register Width
+        let reg_width;
+        if let Some(reg_width_) = &self.width {
+            reg_width = format!("Width: {}", reg_width_);
+            v.push(reg_width.as_str());
         }
 
-        // Bit-mask meanings if applicable
+        // Bit-mask flag meanings if applicable
+        let flag_heading = "\n## Flags:";
         if !self.flag_info.is_empty() {
-            v.push(String::from("\n## Flags:"));
+            v.push(flag_heading);
         }
-        for bit in self.flag_info.iter() {
-            let mut tmp_str = if bit.label.is_empty() {
-                format!("{:2}: {}", bit.bit, bit.description)
-            } else {
-                format!("{:2}: {} - {}", bit.bit, bit.label, bit.description)
-            };
-            if !bit.pae.is_empty() {
-                tmp_str += &format!(", PAE: {}", bit.pae);
-            }
-            if !bit.long_mode.is_empty() {
-                tmp_str += &format!(", Long Mode: {}", bit.long_mode);
-            }
-            v.push(tmp_str);
+        let flags: Vec<String> = self
+            .flag_info
+            .iter()
+            .map(|flag| format!("{}", flag))
+            .collect();
+        for flag in flags.iter() {
+            v.push(flag.as_str());
         }
 
         // TODO: URL support
-        let more_info: String;
-        match &self.url {
-            None => {}
-            Some(url_) => {
-                more_info = format!("\nMore info: {}", url_);
-                v.push(more_info);
-            }
+        let more_info;
+        if let Some(url_) = &self.url {
+            more_info = format!("\nMore info: {}", url_);
+            v.push(more_info.as_str());
         }
 
         let s = v.join("\n");
@@ -379,6 +363,25 @@ pub struct RegisterBitInfo {
     pub description: String,
     pub pae: String,
     pub long_mode: String,
+}
+
+impl std::fmt::Display for RegisterBitInfo {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut s = if self.label.is_empty() {
+            format!("{:2}: {}", self.bit, self.description)
+        } else {
+            format!("{:2}: {} - {}", self.bit, self.label, self.description)
+        };
+        if !self.pae.is_empty() {
+            s += &format!(", PAE: {}", self.pae);
+        }
+        if !self.long_mode.is_empty() {
+            s += &format!(", Long Mode: {}", self.long_mode);
+        }
+
+        write!(f, "{}", s)?;
+        Ok(())
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
