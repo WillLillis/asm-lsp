@@ -85,14 +85,17 @@ pub fn get_hover_resp<T: Hoverable>(word: &str, map: &HashMap<(Arch, &str), T>) 
     }
 }
 
-// Note: Have to call .cloned() on the results of .get()
-// here because of compiler issue regarding entangled lifetimes: https://github.com/rust-lang/rust/issues/80389
-fn search_for_hoverable<'a: 'b, 'b, T: Hoverable>(
-    word: &str,
+// Note: Some issues here regarding entangled lifetimes
+// -- https://github.com/rust-lang/rust/issues/80389
+// If issue is resolved, can add a separate lifetime "'b" to "word"
+// parameter such that 'a: 'b
+// For now, using 'a for both isn't strictly necessary, but fits our use case
+fn search_for_hoverable<'a, T: Hoverable>(
+    word: &'a str,
     map: &'a HashMap<(Arch, &str), T>,
-) -> (Option<T>, Option<T>) {
-    let x86_res = map.get(&(Arch::X86, word)).cloned();
-    let x86_64_res = map.get(&(Arch::X86_64, word)).cloned();
+) -> (Option<&'a T>, Option<&'a T>) {
+    let x86_res = map.get(&(Arch::X86, word));
+    let x86_64_res = map.get(&(Arch::X86_64, word));
 
     (x86_res, x86_64_res)
 }
