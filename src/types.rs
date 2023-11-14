@@ -215,45 +215,43 @@ impl std::fmt::Display for Register {
             header = self.name.to_uppercase();
         }
 
-        let mut v: Vec<&str> = if let Some(description_) = &self.description {
-            vec![&header, description_, "\n"]
+        let mut v: Vec<String> = if let Some(description_) = &self.description {
+            vec![header, description_.clone(), String::from("\n")]
         } else {
-            vec![&header, "\n"]
+            vec![header, String::from("\n")]
         };
 
         // Register Type
-        let reg_type;
         if let Some(reg_type_) = &self.reg_type {
-            reg_type = format!("Type: {}", reg_type_);
-            v.push(reg_type.as_str());
+            let reg_type = format!("Type: {}", reg_type_);
+            v.push(reg_type);
         }
 
         // Register Width
-        let reg_width;
-        if let Some(reg_width_) = &self.width {
-            reg_width = format!("Width: {}", reg_width_);
-            v.push(reg_width.as_str());
+        if let Some(reg_width_) = self.width {
+            let reg_width = format!("Width: {}", reg_width_);
+            v.push(reg_width);
         }
 
         // Bit-mask flag meanings if applicable
-        let flag_heading = "\n## Flags:";
         if !self.flag_info.is_empty() {
+            let flag_heading = String::from("\n## Flags:");
             v.push(flag_heading);
-        }
-        let flags: Vec<String> = self
-            .flag_info
-            .iter()
-            .map(|flag| format!("{}", flag))
-            .collect();
-        for flag in flags.iter() {
-            v.push(flag.as_str());
+
+            let flags: Vec<String> = self
+                .flag_info
+                .iter()
+                .map(|flag| format!("{}", flag))
+                .collect();
+            for flag in flags.iter() {
+                v.push(flag.clone());
+            }
         }
 
         // TODO: URL support
-        let more_info;
         if let Some(url_) = &self.url {
-            more_info = format!("\nMore info: {}", url_);
-            v.push(more_info.as_str());
+            let more_info = format!("\nMore info: {}", url_);
+            v.push(more_info);
         }
 
         let s = v.join("\n");
