@@ -1,0 +1,4094 @@
+<?xml version="1.0" ?>
+<InstructionSet name="z80">
+	<Instruction name="ADC" summary="todo...">
+		<InstructionForm upper="ADC" lower="adc">
+			<Encoding>
+				<Opcode byte="8E"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="ADC" lower="adc">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="8E"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="ADC" lower="adc">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="8E"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="ADC" lower="adc">
+			<Encoding>
+				<Opcode byte="CE"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADC" lower="adc">
+			<Encoding>
+				<Opcode byte="88+r"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="ADC" lower="adc">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="88+p"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADC" lower="adc">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="88+q"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADC" lower="adc">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="4A"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADC" lower="adc">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="5A"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADC" lower="adc">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="6A"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADC" lower="adc">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="7A"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="ADD" summary="todo...">
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="86"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="86"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="86"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="C6"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="80+r"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="80+p"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="80+q"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="9"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="19"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="29"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="39"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="09"/>
+			</Encoding>
+			<Argument reg="ix"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="19"/>
+			</Encoding>
+			<Argument reg="ix"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="29"/>
+			</Encoding>
+			<Argument reg="ix"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="39"/>
+			</Encoding>
+			<Argument reg="ix"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="09"/>
+			</Encoding>
+			<Argument reg="iy"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="19"/>
+			</Encoding>
+			<Argument reg="iy"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="29"/>
+			</Encoding>
+			<Argument reg="iy"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="ADD" lower="add">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="39"/>
+			</Encoding>
+			<Argument reg="iy"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="AND" summary="todo...">
+		<InstructionForm upper="AND" lower="and">
+			<Encoding>
+				<Opcode byte="A6"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="AND" lower="and">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="A6"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="AND" lower="and">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="A6"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="AND" lower="and">
+			<Encoding>
+				<Opcode byte="E6"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument arg="n"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="AND" lower="and">
+			<Encoding>
+				<Opcode byte="A0+r"/>
+			</Encoding>
+			<Argument arg="r"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="AND" lower="and">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="A0+p"/>
+			</Encoding>
+			<Argument arg="ixp"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="AND" lower="and">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="A0+q"/>
+			</Encoding>
+			<Argument arg="iyq"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="BIT" summary="todo...">
+		<InstructionForm upper="BIT" lower="bit">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="46+8*b"/>
+			</Encoding>
+			<Argument arg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5"/>
+		<InstructionForm upper="BIT" lower="bit">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="46+8*b"/>
+			</Encoding>
+			<Argument arg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="20"/>
+		<TimingZ80M1 value="22"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="BIT" lower="bit">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="46+8*b"/>
+			</Encoding>
+			<Argument arg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="20"/>
+		<TimingZ80M1 value="22"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="BIT" lower="bit">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="40+8*b+r"/>
+			</Encoding>
+			<Argument arg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="CALL" summary="todo...">
+		<InstructionForm upper="CALL" lower="call">
+			<Encoding>
+				<Opcode byte="CD"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="nn"/>
+		</InstructionForm>
+		<TimingZ80 value="17"/>
+		<TimingZ80M1 value="18"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="8/7"/>
+		<InstructionForm upper="CALL" lower="call">
+			<Encoding>
+				<Opcode byte="DC"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="17/10"/>
+		<TimingZ80M1 value="18/11"/>
+		<TimingR800 value="5/3"/>
+		<TimingR800Wait value="8/7/3"/>
+		<InstructionForm upper="CALL" lower="call">
+			<Encoding>
+				<Opcode byte="FC"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="m"/>
+		</InstructionForm>
+		<TimingZ80 value="17/10"/>
+		<TimingZ80M1 value="18/11"/>
+		<TimingR800 value="5/3"/>
+		<TimingR800Wait value="8/7/3"/>
+		<InstructionForm upper="CALL" lower="call">
+			<Encoding>
+				<Opcode byte="D4"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="nc"/>
+		</InstructionForm>
+		<TimingZ80 value="17/10"/>
+		<TimingZ80M1 value="18/11"/>
+		<TimingR800 value="5/3"/>
+		<TimingR800Wait value="8/7/3"/>
+		<InstructionForm upper="CALL" lower="call">
+			<Encoding>
+				<Opcode byte="C4"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="nz"/>
+		</InstructionForm>
+		<TimingZ80 value="17/10"/>
+		<TimingZ80M1 value="18/11"/>
+		<TimingR800 value="5/3"/>
+		<TimingR800Wait value="8/7/3"/>
+		<InstructionForm upper="CALL" lower="call">
+			<Encoding>
+				<Opcode byte="F4"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="p"/>
+		</InstructionForm>
+		<TimingZ80 value="17/10"/>
+		<TimingZ80M1 value="18/11"/>
+		<TimingR800 value="5/3"/>
+		<TimingR800Wait value="8/7/3"/>
+		<InstructionForm upper="CALL" lower="call">
+			<Encoding>
+				<Opcode byte="EC"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="pe"/>
+		</InstructionForm>
+		<TimingZ80 value="17/10"/>
+		<TimingZ80M1 value="18/11"/>
+		<TimingR800 value="5/3"/>
+		<TimingR800Wait value="8/7/3"/>
+		<InstructionForm upper="CALL" lower="call">
+			<Encoding>
+				<Opcode byte="E4"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="po"/>
+		</InstructionForm>
+		<TimingZ80 value="17/10"/>
+		<TimingZ80M1 value="18/11"/>
+		<TimingR800 value="5/3"/>
+		<TimingR800Wait value="8/7/3"/>
+		<InstructionForm upper="CALL" lower="call">
+			<Encoding>
+				<Opcode byte="CC"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="z"/>
+		</InstructionForm>
+		<TimingZ80 value="17/10"/>
+		<TimingZ80M1 value="18/11"/>
+		<TimingR800 value="5/3"/>
+		<TimingR800Wait value="8/7/3"/>
+	</Instruction>
+	<Instruction name="CCF" summary="todo...">
+		<InstructionForm upper="CCF" lower="ccf">
+			<Encoding>
+				<Opcode byte="3F"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="CP" summary="todo...">
+		<InstructionForm upper="CP" lower="cp">
+			<Encoding>
+				<Opcode byte="BE"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="CP" lower="cp">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="BE"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="CP" lower="cp">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="BE"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="CP" lower="cp">
+			<Encoding>
+				<Opcode byte="FE"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument arg="n"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="CP" lower="cp">
+			<Encoding>
+				<Opcode byte="B8+r"/>
+			</Encoding>
+			<Argument arg="r"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="CP" lower="cp">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="B8+p"/>
+			</Encoding>
+			<Argument arg="ixp"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="CP" lower="cp">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="B8+q"/>
+			</Encoding>
+			<Argument arg="iyq"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="CPD" summary="todo...">
+		<InstructionForm upper="CPD" lower="cpd">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="A9"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="16"/>
+		<TimingZ80M1 value="18"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6"/>
+	</Instruction>
+	<Instruction name="CPDR" summary="todo...">
+		<InstructionForm upper="CPDR" lower="cpdr">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="B9"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="21/16"/>
+		<TimingZ80M1 value="23/18"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="?/8"/>
+	</Instruction>
+	<Instruction name="CPI" summary="todo...">
+		<InstructionForm upper="CPI" lower="cpi">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="A1"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="16"/>
+		<TimingZ80M1 value="18"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6"/>
+	</Instruction>
+	<Instruction name="CPIR" summary="todo...">
+		<InstructionForm upper="CPIR" lower="cpir">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="B1"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="21/16"/>
+		<TimingZ80M1 value="23/18"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="?/8"/>
+	</Instruction>
+	<Instruction name="CPL" summary="todo...">
+		<InstructionForm upper="CPL" lower="cpl">
+			<Encoding>
+				<Opcode byte="2F"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="DAA" summary="todo...">
+		<InstructionForm upper="DAA" lower="daa">
+			<Encoding>
+				<Opcode byte="27"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="DEC" summary="todo...">
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="35"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="35"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="35"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="3D"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="5"/>
+			</Encoding>
+			<Argument reg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="0B"/>
+			</Encoding>
+			<Argument reg="bc"/>
+		</InstructionForm>
+		<TimingZ80 value="6"/>
+		<TimingZ80M1 value="7"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="0D"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="15"/>
+			</Encoding>
+			<Argument reg="d"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="1B"/>
+			</Encoding>
+			<Argument reg="de"/>
+		</InstructionForm>
+		<TimingZ80 value="6"/>
+		<TimingZ80M1 value="7"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="1D"/>
+			</Encoding>
+			<Argument reg="e"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="25"/>
+			</Encoding>
+			<Argument reg="h"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="2B"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="6"/>
+		<TimingZ80M1 value="7"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="2B"/>
+			</Encoding>
+			<Argument reg="ix"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="2B"/>
+			</Encoding>
+			<Argument reg="iy"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="05+8*p"/>
+			</Encoding>
+			<Argument arg="ixp"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="05+8*q"/>
+			</Encoding>
+			<Argument arg="iyq"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="2D"/>
+			</Encoding>
+			<Argument reg="l"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="DEC" lower="dec">
+			<Encoding>
+				<Opcode byte="3B"/>
+			</Encoding>
+			<Argument reg="sp"/>
+		</InstructionForm>
+		<TimingZ80 value="6"/>
+		<TimingZ80M1 value="7"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="DI" summary="todo...">
+		<InstructionForm upper="DI" lower="di">
+			<Encoding>
+				<Opcode byte="F3"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="DJNZ" summary="todo...">
+		<InstructionForm upper="DJNZ" lower="djnz">
+			<Encoding>
+				<Opcode byte="10"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="o"/>
+		</InstructionForm>
+		<TimingZ80 value="13/8"/>
+		<TimingZ80M1 value="14/9"/>
+		<TimingR800 value="3/2"/>
+		<TimingR800Wait value="3/2"/>
+	</Instruction>
+	<Instruction name="EI" summary="todo...">
+		<InstructionForm upper="EI" lower="ei">
+			<Encoding>
+				<Opcode byte="FB"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="EX" summary="todo...">
+		<InstructionForm upper="EX" lower="ex">
+			<Encoding>
+				<Opcode byte="E3"/>
+			</Encoding>
+			<Argument arg="(sp)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="20"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="EX" lower="ex">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="E3"/>
+			</Encoding>
+			<Argument arg="(sp)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="6"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="EX" lower="ex">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="E3"/>
+			</Encoding>
+			<Argument arg="(sp)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="6"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="EX" lower="ex">
+			<Encoding>
+				<Opcode byte="8"/>
+			</Encoding>
+			<Argument arg="af"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="EX" lower="ex">
+			<Encoding>
+				<Opcode byte="EB"/>
+			</Encoding>
+			<Argument reg="de"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="EXX" summary="todo...">
+		<InstructionForm upper="EXX" lower="exx">
+			<Encoding>
+				<Opcode byte="D9"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="HALT" summary="todo...">
+		<InstructionForm upper="HALT" lower="halt">
+			<Encoding>
+				<Opcode byte="76"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="IM" summary="todo...">
+		<InstructionForm upper="IM" lower="im">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="46"/>
+			</Encoding>
+			<Argument arg="0"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="3"/>
+		<InstructionForm upper="IM" lower="im">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="56"/>
+			</Encoding>
+			<Argument arg="1"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="3"/>
+		<InstructionForm upper="IM" lower="im">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="5E"/>
+			</Encoding>
+			<Argument arg="2"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="3"/>
+	</Instruction>
+	<Instruction name="IN" summary="todo...">
+		<InstructionForm upper="IN" lower="in">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="78"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="IN" lower="in">
+			<Encoding>
+				<Opcode byte="DB"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="IN" lower="in">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="40"/>
+			</Encoding>
+			<Argument reg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="IN" lower="in">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="48"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="IN" lower="in">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="50"/>
+			</Encoding>
+			<Argument reg="d"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="IN" lower="in">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="58"/>
+			</Encoding>
+			<Argument reg="e"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="IN" lower="in">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="60"/>
+			</Encoding>
+			<Argument reg="h"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="IN" lower="in">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="68"/>
+			</Encoding>
+			<Argument reg="l"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="IN" lower="in">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="70"/>
+			</Encoding>
+			<Argument arg="f"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+	</Instruction>
+	<Instruction name="INC" summary="todo...">
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="34"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="34"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="34"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="3C"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="4"/>
+			</Encoding>
+			<Argument reg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="3"/>
+			</Encoding>
+			<Argument reg="bc"/>
+		</InstructionForm>
+		<TimingZ80 value="6"/>
+		<TimingZ80M1 value="7"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="0C"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="14"/>
+			</Encoding>
+			<Argument reg="d"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="13"/>
+			</Encoding>
+			<Argument reg="de"/>
+		</InstructionForm>
+		<TimingZ80 value="6"/>
+		<TimingZ80M1 value="7"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="1C"/>
+			</Encoding>
+			<Argument reg="e"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="24"/>
+			</Encoding>
+			<Argument reg="h"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="23"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="6"/>
+		<TimingZ80M1 value="7"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="23"/>
+			</Encoding>
+			<Argument reg="ix"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="23"/>
+			</Encoding>
+			<Argument reg="iy"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="04+8*p"/>
+			</Encoding>
+			<Argument arg="ixp"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="04+8*q"/>
+			</Encoding>
+			<Argument arg="iyq"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="2C"/>
+			</Encoding>
+			<Argument reg="l"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="INC" lower="inc">
+			<Encoding>
+				<Opcode byte="33"/>
+			</Encoding>
+			<Argument reg="sp"/>
+		</InstructionForm>
+		<TimingZ80 value="6"/>
+		<TimingZ80M1 value="7"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="IND" summary="todo...">
+		<InstructionForm upper="IND" lower="ind">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="AA"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="16"/>
+		<TimingZ80M1 value="18"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="12/11"/>
+	</Instruction>
+	<Instruction name="INDR" summary="todo...">
+		<InstructionForm upper="INDR" lower="indr">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="BA"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="21/16"/>
+		<TimingZ80M1 value="23/18"/>
+		<TimingR800 value="4/3"/>
+		<TimingR800Wait value="?/12/11"/>
+	</Instruction>
+	<Instruction name="INI" summary="todo...">
+		<InstructionForm upper="INI" lower="ini">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="A2"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="16"/>
+		<TimingZ80M1 value="18"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="12/11"/>
+	</Instruction>
+	<Instruction name="INIR" summary="todo...">
+		<InstructionForm upper="INIR" lower="inir">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="B2"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="21/16"/>
+		<TimingZ80M1 value="23/18"/>
+		<TimingR800 value="4/3"/>
+		<TimingR800Wait value="?/12/11"/>
+	</Instruction>
+	<Instruction name="JP" summary="todo...">
+		<InstructionForm upper="JP" lower="jp">
+			<Encoding>
+				<Opcode byte="C3"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="nn"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5"/>
+		<InstructionForm upper="JP" lower="jp">
+			<Encoding>
+				<Opcode byte="E9"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="3"/>
+		<InstructionForm upper="JP" lower="jp">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="E9"/>
+			</Encoding>
+			<Argument arg="(ix)"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="JP" lower="jp">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="E9"/>
+			</Encoding>
+			<Argument arg="(iy)"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="JP" lower="jp">
+			<Encoding>
+				<Opcode byte="DA"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5/3"/>
+		<InstructionForm upper="JP" lower="jp">
+			<Encoding>
+				<Opcode byte="FA"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="m"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5/3"/>
+		<InstructionForm upper="JP" lower="jp">
+			<Encoding>
+				<Opcode byte="D2"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="nc"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5/3"/>
+		<InstructionForm upper="JP" lower="jp">
+			<Encoding>
+				<Opcode byte="C2"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="nz"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5/3"/>
+		<InstructionForm upper="JP" lower="jp">
+			<Encoding>
+				<Opcode byte="F2"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="p"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5/3"/>
+		<InstructionForm upper="JP" lower="jp">
+			<Encoding>
+				<Opcode byte="EA"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="pe"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5/3"/>
+		<InstructionForm upper="JP" lower="jp">
+			<Encoding>
+				<Opcode byte="E2"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="po"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5/3"/>
+		<InstructionForm upper="JP" lower="jp">
+			<Encoding>
+				<Opcode byte="CA"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="z"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5/3"/>
+	</Instruction>
+	<Instruction name="JR" summary="todo...">
+		<InstructionForm upper="JR" lower="jr">
+			<Encoding>
+				<Opcode byte="18"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="o"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="13"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="3"/>
+		<InstructionForm upper="JR" lower="jr">
+			<Encoding>
+				<Opcode byte="38"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="12/7"/>
+		<TimingZ80M1 value="13/8"/>
+		<TimingR800 value="3/2"/>
+		<TimingR800Wait value="3/2"/>
+		<InstructionForm upper="JR" lower="jr">
+			<Encoding>
+				<Opcode byte="30"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="nc"/>
+		</InstructionForm>
+		<TimingZ80 value="12/7"/>
+		<TimingZ80M1 value="13/8"/>
+		<TimingR800 value="3/2"/>
+		<TimingR800Wait value="3/2"/>
+		<InstructionForm upper="JR" lower="jr">
+			<Encoding>
+				<Opcode byte="20"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="nz"/>
+		</InstructionForm>
+		<TimingZ80 value="12/7"/>
+		<TimingZ80M1 value="13/8"/>
+		<TimingR800 value="3/2"/>
+		<TimingR800Wait value="3/2"/>
+		<InstructionForm upper="JR" lower="jr">
+			<Encoding>
+				<Opcode byte="28"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="z"/>
+		</InstructionForm>
+		<TimingZ80 value="12/7"/>
+		<TimingZ80M1 value="13/8"/>
+		<TimingR800 value="3/2"/>
+		<TimingR800Wait value="3/2"/>
+	</Instruction>
+	<Instruction name="LD" summary="todo...">
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="2"/>
+			</Encoding>
+			<Argument arg="(bc)"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="12"/>
+			</Encoding>
+			<Argument arg="(de)"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="36"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="70+r"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="36"/>
+				<Opcode byte="o"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="70+r"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="36"/>
+				<Opcode byte="o"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="70+r"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="32"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="(nn)"/>
+		</InstructionForm>
+		<TimingZ80 value="13"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="43"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="(nn)"/>
+		</InstructionForm>
+		<TimingZ80 value="20"/>
+		<TimingZ80M1 value="22"/>
+		<TimingR800 value="6"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="53"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="(nn)"/>
+		</InstructionForm>
+		<TimingZ80 value="20"/>
+		<TimingZ80M1 value="22"/>
+		<TimingR800 value="6"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="22"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="(nn)"/>
+		</InstructionForm>
+		<TimingZ80 value="16"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="22"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="(nn)"/>
+		</InstructionForm>
+		<TimingZ80 value="20"/>
+		<TimingZ80M1 value="22"/>
+		<TimingR800 value="6"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="22"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="(nn)"/>
+		</InstructionForm>
+		<TimingZ80 value="20"/>
+		<TimingZ80M1 value="22"/>
+		<TimingR800 value="6"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="73"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument arg="(nn)"/>
+		</InstructionForm>
+		<TimingZ80 value="20"/>
+		<TimingZ80M1 value="22"/>
+		<TimingR800 value="6"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="0A"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="1A"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="7E"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="7E"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="7E"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="3A"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="13"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="3E"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="78+r"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="78+p"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="78+q"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="57"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="9"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="5F"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="9"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="46"/>
+			</Encoding>
+			<Argument reg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="46"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="46"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="06"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument reg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="40+r"/>
+			</Encoding>
+			<Argument reg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="40+p"/>
+			</Encoding>
+			<Argument reg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="40+q"/>
+			</Encoding>
+			<Argument reg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="4B"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="bc"/>
+		</InstructionForm>
+		<TimingZ80 value="20"/>
+		<TimingZ80M1 value="22"/>
+		<TimingR800 value="6"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="01"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="bc"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="3"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="4E"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="4E"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="4E"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="0E"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="48+r"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="48+p"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="48+q"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="56"/>
+			</Encoding>
+			<Argument reg="d"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="56"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="d"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="56"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="d"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="16"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument reg="d"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="50+r"/>
+			</Encoding>
+			<Argument reg="d"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="50+p"/>
+			</Encoding>
+			<Argument reg="d"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="50+q"/>
+			</Encoding>
+			<Argument reg="d"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="5B"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="de"/>
+		</InstructionForm>
+		<TimingZ80 value="20"/>
+		<TimingZ80M1 value="22"/>
+		<TimingR800 value="6"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="11"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="de"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="3"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="5E"/>
+			</Encoding>
+			<Argument reg="e"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="5E"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="e"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="5E"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="e"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="1E"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument reg="e"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="58+r"/>
+			</Encoding>
+			<Argument reg="e"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="58+p"/>
+			</Encoding>
+			<Argument reg="e"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="58+q"/>
+			</Encoding>
+			<Argument reg="e"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="66"/>
+			</Encoding>
+			<Argument reg="h"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="66"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="h"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="66"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="h"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="26"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument reg="h"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="60+r"/>
+			</Encoding>
+			<Argument reg="h"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="2A"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="16"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="21"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="3"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="47"/>
+			</Encoding>
+			<Argument reg="i"/>
+		</InstructionForm>
+		<TimingZ80 value="9"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="2A"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="ix"/>
+		</InstructionForm>
+		<TimingZ80 value="20"/>
+		<TimingZ80M1 value="22"/>
+		<TimingR800 value="6"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="21"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="ix"/>
+		</InstructionForm>
+		<TimingZ80 value="14"/>
+		<TimingZ80M1 value="16"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="26"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument arg="ixh"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="13"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="3"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="60+p"/>
+			</Encoding>
+			<Argument arg="ixh"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="2E"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument arg="ixl"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="13"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="3"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="68+p"/>
+			</Encoding>
+			<Argument arg="ixl"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="2A"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="iy"/>
+		</InstructionForm>
+		<TimingZ80 value="20"/>
+		<TimingZ80M1 value="22"/>
+		<TimingR800 value="6"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="21"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="iy"/>
+		</InstructionForm>
+		<TimingZ80 value="14"/>
+		<TimingZ80M1 value="16"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="26"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument arg="iyh"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="13"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="3"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="60+q"/>
+			</Encoding>
+			<Argument arg="iyh"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="2E"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument arg="iyl"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="13"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="3"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="68+q"/>
+			</Encoding>
+			<Argument arg="iyl"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="6E"/>
+			</Encoding>
+			<Argument reg="l"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="6E"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="l"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="6E"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="l"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="2E"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument reg="l"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="68+r"/>
+			</Encoding>
+			<Argument reg="l"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="4F"/>
+			</Encoding>
+			<Argument arg="r"/>
+		</InstructionForm>
+		<TimingZ80 value="9"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="7B"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="sp"/>
+		</InstructionForm>
+		<TimingZ80 value="20"/>
+		<TimingZ80M1 value="22"/>
+		<TimingR800 value="6"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="F9"/>
+			</Encoding>
+			<Argument reg="sp"/>
+		</InstructionForm>
+		<TimingZ80 value="6"/>
+		<TimingZ80M1 value="7"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="F9"/>
+			</Encoding>
+			<Argument reg="sp"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="F9"/>
+			</Encoding>
+			<Argument reg="sp"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="LD" lower="ld">
+			<Encoding>
+				<Opcode byte="31"/>
+				<Opcode byte="nn"/>
+				<Opcode byte="nn"/>
+			</Encoding>
+			<Argument reg="sp"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="3"/>
+	</Instruction>
+	<Instruction name="LDD" summary="todo...">
+		<InstructionForm upper="LDD" lower="ldd">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="A8"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="16"/>
+		<TimingZ80M1 value="18"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="7"/>
+	</Instruction>
+	<Instruction name="LDDR" summary="todo...">
+		<InstructionForm upper="LDDR" lower="lddr">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="B8"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="21/16"/>
+		<TimingZ80M1 value="23/18"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="?/7"/>
+	</Instruction>
+	<Instruction name="LDI" summary="todo...">
+		<InstructionForm upper="LDI" lower="ldi">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="A0"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="16"/>
+		<TimingZ80M1 value="18"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="7"/>
+	</Instruction>
+	<Instruction name="LDIR" summary="todo...">
+		<InstructionForm upper="LDIR" lower="ldir">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="B0"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="21/16"/>
+		<TimingZ80M1 value="23/18"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="?/7"/>
+	</Instruction>
+	<Instruction name="MULUB" summary="todo...">
+		<InstructionForm upper="MULUB" lower="mulub">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="C1+8*r"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="nan"/>
+		<TimingZ80M1 value="nan"/>
+		<TimingR800 value="14"/>
+		<TimingR800Wait value="14"/>
+	</Instruction>
+	<Instruction name="MULUW" summary="todo...">
+		<InstructionForm upper="MULUW" lower="muluw">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="C3"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="nan"/>
+		<TimingZ80M1 value="nan"/>
+		<TimingR800 value="36"/>
+		<TimingR800Wait value="36"/>
+		<InstructionForm upper="MULUW" lower="muluw">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="F3"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="nan"/>
+		<TimingZ80M1 value="nan"/>
+		<TimingR800 value="36"/>
+		<TimingR800Wait value="36"/>
+	</Instruction>
+	<Instruction name="NEG" summary="todo...">
+		<InstructionForm upper="NEG" lower="neg">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="44"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="NOP" summary="todo...">
+		<InstructionForm upper="NOP" lower="nop">
+			<Encoding>
+				<Opcode byte="0"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="OR" summary="todo...">
+		<InstructionForm upper="OR" lower="or">
+			<Encoding>
+				<Opcode byte="B6"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="OR" lower="or">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="B6"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="OR" lower="or">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="B6"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="OR" lower="or">
+			<Encoding>
+				<Opcode byte="F6"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument arg="n"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="OR" lower="or">
+			<Encoding>
+				<Opcode byte="B0+r"/>
+			</Encoding>
+			<Argument arg="r"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="OR" lower="or">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="B0+p"/>
+			</Encoding>
+			<Argument arg="ixp"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="OR" lower="or">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="B0+q"/>
+			</Encoding>
+			<Argument arg="iyq"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="OTDR" summary="todo...">
+		<InstructionForm upper="OTDR" lower="otdr">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="BB"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="21/16"/>
+		<TimingZ80M1 value="23/18"/>
+		<TimingR800 value="4/3"/>
+		<TimingR800Wait value="?/12/11"/>
+	</Instruction>
+	<Instruction name="OTIR" summary="todo...">
+		<InstructionForm upper="OTIR" lower="otir">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="B3"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="21/16"/>
+		<TimingZ80M1 value="23/18"/>
+		<TimingR800 value="4/3"/>
+		<TimingR800Wait value="?/12/11"/>
+	</Instruction>
+	<Instruction name="OUT" summary="todo...">
+		<InstructionForm upper="OUT" lower="out">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="79"/>
+			</Encoding>
+			<Argument arg="(c)"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="OUT" lower="out">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="41"/>
+			</Encoding>
+			<Argument arg="(c)"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="OUT" lower="out">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="49"/>
+			</Encoding>
+			<Argument arg="(c)"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="OUT" lower="out">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="51"/>
+			</Encoding>
+			<Argument arg="(c)"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="OUT" lower="out">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="59"/>
+			</Encoding>
+			<Argument arg="(c)"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="OUT" lower="out">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="61"/>
+			</Encoding>
+			<Argument arg="(c)"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="OUT" lower="out">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="69"/>
+			</Encoding>
+			<Argument arg="(c)"/>
+		</InstructionForm>
+		<TimingZ80 value="12"/>
+		<TimingZ80M1 value="14"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+		<InstructionForm upper="OUT" lower="out">
+			<Encoding>
+				<Opcode byte="D3"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument arg="(n)"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="10/9"/>
+	</Instruction>
+	<Instruction name="OUTD" summary="todo...">
+		<InstructionForm upper="OUTD" lower="outd">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="AB"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="16"/>
+		<TimingZ80M1 value="18"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="12/11"/>
+	</Instruction>
+	<Instruction name="OUTI" summary="todo...">
+		<InstructionForm upper="OUTI" lower="outi">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="A3"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="16"/>
+		<TimingZ80M1 value="18"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="12/11"/>
+	</Instruction>
+	<Instruction name="POP" summary="todo...">
+		<InstructionForm upper="POP" lower="pop">
+			<Encoding>
+				<Opcode byte="F1"/>
+			</Encoding>
+			<Argument arg="af"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5"/>
+		<InstructionForm upper="POP" lower="pop">
+			<Encoding>
+				<Opcode byte="C1"/>
+			</Encoding>
+			<Argument reg="bc"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5"/>
+		<InstructionForm upper="POP" lower="pop">
+			<Encoding>
+				<Opcode byte="D1"/>
+			</Encoding>
+			<Argument reg="de"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5"/>
+		<InstructionForm upper="POP" lower="pop">
+			<Encoding>
+				<Opcode byte="E1"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5"/>
+		<InstructionForm upper="POP" lower="pop">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="E1"/>
+			</Encoding>
+			<Argument reg="ix"/>
+		</InstructionForm>
+		<TimingZ80 value="14"/>
+		<TimingZ80M1 value="16"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6"/>
+		<InstructionForm upper="POP" lower="pop">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="E1"/>
+			</Encoding>
+			<Argument reg="iy"/>
+		</InstructionForm>
+		<TimingZ80 value="14"/>
+		<TimingZ80M1 value="16"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6"/>
+	</Instruction>
+	<Instruction name="PUSH" summary="todo...">
+		<InstructionForm upper="PUSH" lower="push">
+			<Encoding>
+				<Opcode byte="F5"/>
+			</Encoding>
+			<Argument arg="af"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6"/>
+		<InstructionForm upper="PUSH" lower="push">
+			<Encoding>
+				<Opcode byte="C5"/>
+			</Encoding>
+			<Argument reg="bc"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6"/>
+		<InstructionForm upper="PUSH" lower="push">
+			<Encoding>
+				<Opcode byte="D5"/>
+			</Encoding>
+			<Argument reg="de"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6"/>
+		<InstructionForm upper="PUSH" lower="push">
+			<Encoding>
+				<Opcode byte="E5"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6"/>
+		<InstructionForm upper="PUSH" lower="push">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="E5"/>
+			</Encoding>
+			<Argument reg="ix"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="PUSH" lower="push">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="E5"/>
+			</Encoding>
+			<Argument reg="iy"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+	</Instruction>
+	<Instruction name="RES" summary="todo...">
+		<InstructionForm upper="RES" lower="res">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="86+8*b"/>
+			</Encoding>
+			<Argument arg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="RES" lower="res">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="86+8*b"/>
+			</Encoding>
+			<Argument arg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="RES" lower="res">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="86+8*b"/>
+			</Encoding>
+			<Argument arg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="RES" lower="res">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="80+8*b+r"/>
+			</Encoding>
+			<Argument arg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="RET" summary="todo...">
+		<InstructionForm upper="RET" lower="ret">
+			<Encoding>
+				<Opcode byte="C9"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="10"/>
+		<TimingZ80M1 value="11"/>
+		<TimingR800 value="3"/>
+		<TimingR800Wait value="5"/>
+		<InstructionForm upper="RET" lower="ret">
+			<Encoding>
+				<Opcode byte="D8"/>
+			</Encoding>
+			<Argument reg="c"/>
+		</InstructionForm>
+		<TimingZ80 value="11/5"/>
+		<TimingZ80M1 value="12/6"/>
+		<TimingR800 value="3/1"/>
+		<TimingR800Wait value="5/1"/>
+		<InstructionForm upper="RET" lower="ret">
+			<Encoding>
+				<Opcode byte="F8"/>
+			</Encoding>
+			<Argument arg="m"/>
+		</InstructionForm>
+		<TimingZ80 value="11/5"/>
+		<TimingZ80M1 value="12/6"/>
+		<TimingR800 value="3/1"/>
+		<TimingR800Wait value="5/1"/>
+		<InstructionForm upper="RET" lower="ret">
+			<Encoding>
+				<Opcode byte="D0"/>
+			</Encoding>
+			<Argument arg="nc"/>
+		</InstructionForm>
+		<TimingZ80 value="11/5"/>
+		<TimingZ80M1 value="12/6"/>
+		<TimingR800 value="3/1"/>
+		<TimingR800Wait value="5/1"/>
+		<InstructionForm upper="RET" lower="ret">
+			<Encoding>
+				<Opcode byte="C0"/>
+			</Encoding>
+			<Argument arg="nz"/>
+		</InstructionForm>
+		<TimingZ80 value="11/5"/>
+		<TimingZ80M1 value="12/6"/>
+		<TimingR800 value="3/1"/>
+		<TimingR800Wait value="5/1"/>
+		<InstructionForm upper="RET" lower="ret">
+			<Encoding>
+				<Opcode byte="F0"/>
+			</Encoding>
+			<Argument reg="p"/>
+		</InstructionForm>
+		<TimingZ80 value="11/5"/>
+		<TimingZ80M1 value="12/6"/>
+		<TimingR800 value="3/1"/>
+		<TimingR800Wait value="5/1"/>
+		<InstructionForm upper="RET" lower="ret">
+			<Encoding>
+				<Opcode byte="E8"/>
+			</Encoding>
+			<Argument arg="pe"/>
+		</InstructionForm>
+		<TimingZ80 value="11/5"/>
+		<TimingZ80M1 value="12/6"/>
+		<TimingR800 value="3/1"/>
+		<TimingR800Wait value="5/1"/>
+		<InstructionForm upper="RET" lower="ret">
+			<Encoding>
+				<Opcode byte="E0"/>
+			</Encoding>
+			<Argument arg="po"/>
+		</InstructionForm>
+		<TimingZ80 value="11/5"/>
+		<TimingZ80M1 value="12/6"/>
+		<TimingR800 value="3/1"/>
+		<TimingR800Wait value="5/1"/>
+		<InstructionForm upper="RET" lower="ret">
+			<Encoding>
+				<Opcode byte="C8"/>
+			</Encoding>
+			<Argument arg="z"/>
+		</InstructionForm>
+		<TimingZ80 value="11/5"/>
+		<TimingZ80M1 value="12/6"/>
+		<TimingR800 value="3/1"/>
+		<TimingR800Wait value="5/1"/>
+	</Instruction>
+	<Instruction name="RETI" summary="todo...">
+		<InstructionForm upper="RETI" lower="reti">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="4D"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="14"/>
+		<TimingZ80M1 value="16"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+	</Instruction>
+	<Instruction name="RETN" summary="todo...">
+		<InstructionForm upper="RETN" lower="retn">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="45"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="14"/>
+		<TimingZ80M1 value="16"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+	</Instruction>
+	<Instruction name="RL" summary="todo...">
+		<InstructionForm upper="RL" lower="rl">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="16"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="RL" lower="rl">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="16"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="RL" lower="rl">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="16"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="RL" lower="rl">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="10+r"/>
+			</Encoding>
+			<Argument arg="r"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="RLA" summary="todo...">
+		<InstructionForm upper="RLA" lower="rla">
+			<Encoding>
+				<Opcode byte="17"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="RLC" summary="todo...">
+		<InstructionForm upper="RLC" lower="rlc">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="06"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="RLC" lower="rlc">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="06"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="RLC" lower="rlc">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="06"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="RLC" lower="rlc">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="00+r"/>
+			</Encoding>
+			<Argument arg="r"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="RLCA" summary="todo...">
+		<InstructionForm upper="RLCA" lower="rlca">
+			<Encoding>
+				<Opcode byte="7"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="RLD" summary="todo...">
+		<InstructionForm upper="RLD" lower="rld">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="6F"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="18"/>
+		<TimingZ80M1 value="20"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="8"/>
+	</Instruction>
+	<Instruction name="RR" summary="todo...">
+		<InstructionForm upper="RR" lower="rr">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="1E"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="RR" lower="rr">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="1E"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="RR" lower="rr">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="1E"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="RR" lower="rr">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="18+r"/>
+			</Encoding>
+			<Argument arg="r"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="RRA" summary="todo...">
+		<InstructionForm upper="RRA" lower="rra">
+			<Encoding>
+				<Opcode byte="1F"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="RRC" summary="todo...">
+		<InstructionForm upper="RRC" lower="rrc">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="0E"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="RRC" lower="rrc">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="0E"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="RRC" lower="rrc">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="0E"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="RRC" lower="rrc">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="08+r"/>
+			</Encoding>
+			<Argument arg="r"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="RRCA" summary="todo...">
+		<InstructionForm upper="RRCA" lower="rrca">
+			<Encoding>
+				<Opcode byte="0F"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="RRD" summary="todo...">
+		<InstructionForm upper="RRD" lower="rrd">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="67"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="18"/>
+		<TimingZ80M1 value="20"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="8"/>
+	</Instruction>
+	<Instruction name="RST" summary="todo...">
+		<InstructionForm upper="RST" lower="rst">
+			<Encoding>
+				<Opcode byte="C7"/>
+			</Encoding>
+			<Argument arg="0"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6/7"/>
+		<InstructionForm upper="RST" lower="rst">
+			<Encoding>
+				<Opcode byte="CF"/>
+			</Encoding>
+			<Argument arg="8h"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6/7"/>
+		<InstructionForm upper="RST" lower="rst">
+			<Encoding>
+				<Opcode byte="D7"/>
+			</Encoding>
+			<Argument arg="10h"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6/7"/>
+		<InstructionForm upper="RST" lower="rst">
+			<Encoding>
+				<Opcode byte="DF"/>
+			</Encoding>
+			<Argument arg="18h"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6/7"/>
+		<InstructionForm upper="RST" lower="rst">
+			<Encoding>
+				<Opcode byte="E7"/>
+			</Encoding>
+			<Argument arg="20h"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6/7"/>
+		<InstructionForm upper="RST" lower="rst">
+			<Encoding>
+				<Opcode byte="EF"/>
+			</Encoding>
+			<Argument arg="28h"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6/7"/>
+		<InstructionForm upper="RST" lower="rst">
+			<Encoding>
+				<Opcode byte="F7"/>
+			</Encoding>
+			<Argument arg="30h"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6/7"/>
+		<InstructionForm upper="RST" lower="rst">
+			<Encoding>
+				<Opcode byte="FF"/>
+			</Encoding>
+			<Argument arg="38h"/>
+		</InstructionForm>
+		<TimingZ80 value="11"/>
+		<TimingZ80M1 value="12"/>
+		<TimingR800 value="4"/>
+		<TimingR800Wait value="6/7"/>
+	</Instruction>
+	<Instruction name="SBC" summary="todo...">
+		<InstructionForm upper="SBC" lower="sbc">
+			<Encoding>
+				<Opcode byte="9E"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="SBC" lower="sbc">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="9E"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="SBC" lower="sbc">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="9E"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="SBC" lower="sbc">
+			<Encoding>
+				<Opcode byte="DE"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="SBC" lower="sbc">
+			<Encoding>
+				<Opcode byte="98+r"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="SBC" lower="sbc">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="98+p"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="SBC" lower="sbc">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="98+q"/>
+			</Encoding>
+			<Argument reg="a"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="SBC" lower="sbc">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="42"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="SBC" lower="sbc">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="52"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="SBC" lower="sbc">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="62"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="SBC" lower="sbc">
+			<Encoding>
+				<Opcode byte="ED"/>
+				<Opcode byte="72"/>
+			</Encoding>
+			<Argument reg="hl"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="SCF" summary="todo...">
+		<InstructionForm upper="SCF" lower="scf">
+			<Encoding>
+				<Opcode byte="37"/>
+			</Encoding>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+	</Instruction>
+	<Instruction name="SET" summary="todo...">
+		<InstructionForm upper="SET" lower="set">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="C6+8*b"/>
+			</Encoding>
+			<Argument arg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="SET" lower="set">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="C6+8*b"/>
+			</Encoding>
+			<Argument arg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="SET" lower="set">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="C6+8*b"/>
+			</Encoding>
+			<Argument arg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="SET" lower="set">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="C0+8*b+r"/>
+			</Encoding>
+			<Argument arg="b"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="SLA" summary="todo...">
+		<InstructionForm upper="SLA" lower="sla">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="26"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="SLA" lower="sla">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="26"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="SLA" lower="sla">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="26"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="SLA" lower="sla">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="20+r"/>
+			</Encoding>
+			<Argument arg="r"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="SRA" summary="todo...">
+		<InstructionForm upper="SRA" lower="sra">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="2E"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="SRA" lower="sra">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="2E"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="SRA" lower="sra">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="2E"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="SRA" lower="sra">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="28+r"/>
+			</Encoding>
+			<Argument arg="r"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="SRL" summary="todo...">
+		<InstructionForm upper="SRL" lower="srl">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="3E"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="15"/>
+		<TimingZ80M1 value="17"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="8"/>
+		<InstructionForm upper="SRL" lower="srl">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="3E"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="SRL" lower="srl">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="CB"/>
+				<Opcode byte="o"/>
+				<Opcode byte="3E"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="23"/>
+		<TimingZ80M1 value="25"/>
+		<TimingR800 value="7"/>
+		<TimingR800Wait value="10"/>
+		<InstructionForm upper="SRL" lower="srl">
+			<Encoding>
+				<Opcode byte="CB"/>
+				<Opcode byte="38+r"/>
+			</Encoding>
+			<Argument arg="r"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="SUB" summary="todo...">
+		<InstructionForm upper="SUB" lower="sub">
+			<Encoding>
+				<Opcode byte="96"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="SUB" lower="sub">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="96"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="SUB" lower="sub">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="96"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="SUB" lower="sub">
+			<Encoding>
+				<Opcode byte="D6"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument arg="n"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="SUB" lower="sub">
+			<Encoding>
+				<Opcode byte="90+r"/>
+			</Encoding>
+			<Argument arg="r"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="SUB" lower="sub">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="90+p"/>
+			</Encoding>
+			<Argument arg="ixp"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="SUB" lower="sub">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="90+q"/>
+			</Encoding>
+			<Argument arg="iyq"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+	<Instruction name="XOR" summary="todo...">
+		<InstructionForm upper="XOR" lower="xor">
+			<Encoding>
+				<Opcode byte="AE"/>
+			</Encoding>
+			<Argument arg="(hl)"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="4"/>
+		<InstructionForm upper="XOR" lower="xor">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="AE"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(ix+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="XOR" lower="xor">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="AE"/>
+				<Opcode byte="o"/>
+			</Encoding>
+			<Argument arg="(iy+o)"/>
+		</InstructionForm>
+		<TimingZ80 value="19"/>
+		<TimingZ80M1 value="21"/>
+		<TimingR800 value="5"/>
+		<TimingR800Wait value="7"/>
+		<InstructionForm upper="XOR" lower="xor">
+			<Encoding>
+				<Opcode byte="EE"/>
+				<Opcode byte="n"/>
+			</Encoding>
+			<Argument arg="n"/>
+		</InstructionForm>
+		<TimingZ80 value="7"/>
+		<TimingZ80M1 value="8"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="XOR" lower="xor">
+			<Encoding>
+				<Opcode byte="A8+r"/>
+			</Encoding>
+			<Argument arg="r"/>
+		</InstructionForm>
+		<TimingZ80 value="4"/>
+		<TimingZ80M1 value="5"/>
+		<TimingR800 value="1"/>
+		<TimingR800Wait value="1"/>
+		<InstructionForm upper="XOR" lower="xor">
+			<Encoding>
+				<Opcode byte="DD"/>
+				<Opcode byte="A8+p"/>
+			</Encoding>
+			<Argument arg="ixp"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+		<InstructionForm upper="XOR" lower="xor">
+			<Encoding>
+				<Opcode byte="FD"/>
+				<Opcode byte="A8+q"/>
+			</Encoding>
+			<Argument arg="iyq"/>
+		</InstructionForm>
+		<TimingZ80 value="8"/>
+		<TimingZ80M1 value="10"/>
+		<TimingR800 value="2"/>
+		<TimingR800Wait value="2"/>
+	</Instruction>
+</InstructionSet>
