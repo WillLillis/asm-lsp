@@ -314,6 +314,8 @@ pub enum Arch {
 pub enum RegisterType {
     #[strum(serialize = "General Purpose Register")]
     GeneralPurpose,
+    #[strum(serialize = "Special Purpose Register")]
+    SpecialPurpose,
     #[strum(serialize = "Pointer Register")]
     Pointer,
     #[strum(serialize = "Segment Register")]
@@ -352,6 +354,8 @@ pub enum RegisterWidth {
     Bits32,
     #[strum(serialize = "16 bits")]
     Bits16,
+    #[strum(serialize = "8 bits")]
+    Bits8,
     #[strum(serialize = "8 high bits of lower 16 bits")]
     Upper8Lower16,
     #[strum(serialize = "8 lower bits")]
