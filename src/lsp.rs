@@ -4,6 +4,7 @@ use log::{error, info, log, log_enabled};
 use lsp_types::*;
 use once_cell::sync::Lazy;
 use std::collections::{HashMap, HashSet};
+use std::fmt::Debug;
 use std::fs::File;
 use std::io::BufRead;
 use std::path::PathBuf;
@@ -92,11 +93,17 @@ pub fn get_completes<T: Completable>(
         .collect()
 }
 
-pub fn get_hover_resp<T: Hoverable>(word: &str, map: &HashMap<(Arch, &str), T>) -> Option<Hover> {
-    let (x86_res, x86_64_res) = search_for_hoverable(word, map);
+pub fn get_hover_resp<T: Hoverable + Debug>(
+    word: &str,
+    map: &HashMap<(Arch, &str), T>,
+) -> Option<Hover> {
+    // switch over to vec?
+    info!("Search for: {word}");
+    let (x86_res, x86_64_res, z80_res) = search_for_hoverable(word, map);
 
-    match (x86_res.is_some(), x86_64_res.is_some()) {
-        (true, _) | (_, true) => {
+    info!("z80_res: {:?}", z80_res);
+    match (x86_res.is_some(), x86_64_res.is_some(), z80_res.is_some()) {
+        (true, _, _) | (_, true, _) | (_, _, true) => {
             let mut value = String::new();
             if let Some(x86_res) = x86_res {
                 value += &format!("{}", x86_res);
@@ -104,9 +111,12 @@ pub fn get_hover_resp<T: Hoverable>(word: &str, map: &HashMap<(Arch, &str), T>) 
             if let Some(x86_64_res) = x86_64_res {
                 value += &format!(
                     "{}{}",
-                    if x86_res.is_some() { "\n\n" } else { "" },
+                    if !value.is_empty() { "\n\n" } else { "" },
                     x86_64_res
                 );
+            }
+            if let Some(z80_res) = z80_res {
+                value += &format!("{}{}", if !value.is_empty() { "\n\n" } else { "" }, z80_res);
             }
             Some(Hover {
                 contents: HoverContents::Markup(MarkupContent {
@@ -394,11 +404,12 @@ pub fn get_comp_resp(
 fn search_for_hoverable<'a, T: Hoverable>(
     word: &'a str,
     map: &'a HashMap<(Arch, &str), T>,
-) -> (Option<&'a T>, Option<&'a T>) {
+) -> (Option<&'a T>, Option<&'a T>, Option<&'a T>) {
     let x86_res = map.get(&(Arch::X86, word));
     let x86_64_res = map.get(&(Arch::X86_64, word));
+    let z80_res = map.get(&(Arch::Z80, word));
 
-    (x86_res, x86_64_res)
+    (x86_res, x86_64_res, z80_res)
 }
 
 pub fn get_target_config(params: &InitializeParams) -> TargetConfig {

@@ -48,26 +48,6 @@ pub fn main() -> anyhow::Result<()> {
     let params: InitializeParams = serde_json::from_value(initialization_params.clone()).unwrap();
     let target_config = get_target_config(&params);
 
-    let x86_registers = if target_config.instruction_sets.x86 {
-        info!("Populating register set -> x86...");
-        let xml_conts_regs_x86 = include_str!("../../registers/x86.xml");
-        populate_registers(xml_conts_regs_x86)?
-    } else {
-        Vec::new()
-    };
-
-    let x86_64_registers = if target_config.instruction_sets.x86_64 {
-        info!("Populating register set -> x86_64...");
-        let xml_conts_regs_x86_64 = include_str!("../../registers/x86_64.xml");
-        populate_registers(xml_conts_regs_x86_64)?
-    } else {
-        Vec::new()
-    };
-
-    let mut names_to_registers = NameToRegisterMap::new();
-    populate_name_to_register_map(Arch::X86, &x86_registers, &mut names_to_registers);
-    populate_name_to_register_map(Arch::X86_64, &x86_64_registers, &mut names_to_registers);
-
     // create a map of &Instruction_name -> &Instruction - Use that in user queries
     // The Instruction(s) themselves are stored in a vector and we only keep references to the
     // former map
@@ -120,6 +100,20 @@ pub fn main() -> anyhow::Result<()> {
     // create a map of &Register_name -> &Register - Use that in user queries
     // The Register(s) themselves are stored in a vector and we only keep references to the
     // former map
+    let z80_registers = if target_config.instruction_sets.Z80 {
+        info!("Populating register set -> Z80...");
+        let xml_conts_regs_z80 = include_str!("../../registers/Z80.xml");
+        populate_registers(xml_conts_regs_z80)?
+            .into_iter()
+            .map(|mut reg| {
+                reg.arch = Some(Arch::Z80);
+                reg
+            })
+            .collect()
+    } else {
+        Vec::new()
+    };
+
     let x86_registers = if target_config.instruction_sets.x86 {
         info!("Populating register set -> x86...");
         let xml_conts_regs_x86 = include_str!("../../registers/x86.xml");
@@ -151,6 +145,7 @@ pub fn main() -> anyhow::Result<()> {
     let mut names_to_registers = NameToRegisterMap::new();
     populate_name_to_register_map(Arch::X86, &x86_registers, &mut names_to_registers);
     populate_name_to_register_map(Arch::X86_64, &x86_64_registers, &mut names_to_registers);
+    populate_name_to_register_map(Arch::Z80, &z80_registers, &mut names_to_registers);
 
     let instr_comps = get_completes(&names_to_instructions, Some(CompletionItemKind::OPERATOR));
     let reg_comps = get_completes(&names_to_registers, Some(CompletionItemKind::VARIABLE));

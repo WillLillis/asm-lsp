@@ -308,6 +308,7 @@ pub enum MMXMode {
 pub enum Arch {
     X86,
     X86_64,
+    Z80,
 }
 
 #[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr, Display)]
@@ -394,6 +395,7 @@ impl std::fmt::Display for RegisterBitInfo {
 pub struct Assemblers {
     pub gas: bool,
     pub go: bool,
+    pub vasm: bool,
 }
 
 impl Default for Assemblers {
@@ -401,14 +403,17 @@ impl Default for Assemblers {
         Assemblers {
             gas: true,
             go: true,
+            vasm: false,
         }
     }
 }
 
+#[allow(non_snake_case)]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct InstructionSets {
     pub x86: bool,
     pub x86_64: bool,
+    pub Z80: bool,
 }
 
 impl Default for InstructionSets {
@@ -416,6 +421,7 @@ impl Default for InstructionSets {
         InstructionSets {
             x86: true,
             x86_64: true,
+            Z80: false,
         }
     }
 }
