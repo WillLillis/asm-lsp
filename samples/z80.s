@@ -1,7 +1,7 @@
 ; Taken from page 53 of the manual https://www.zilog.com/docs/z80/z80cpu_um.pdf
         LD HL, DATA     ;STARTING ADDRESS OF DATA STRING
         LD DE, BUFFER   ;STARTING ADDRESS OF TARGET BUFFER
-        LD BC, 132      ;MAXIMUM STRING LENGTH
+        LD B', 132      ;MAXIMUM STRING LENGTH
         LD A, '$'       ;STRING DELIMITER CODE
 LOOP:   
         CP (HL)         ;COMPARE MEMORY CONTENTS WITH
