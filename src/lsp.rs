@@ -39,6 +39,7 @@ pub fn find_word_at_pos(line: &str, col: Column) -> (Column, Column) {
     (start, end.map(|(i, _)| i).unwrap_or(col))
 }
 
+#[allow(dead_code)]
 pub fn get_word_from_file_params(
     pos_params: &TextDocumentPositionParams,
 ) -> anyhow::Result<String> {
