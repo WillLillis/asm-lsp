@@ -1863,8 +1863,7 @@ dependencies = [
 [[package]]
 name = "tree-sitter-asm"
 version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fbdc74797a3118e3f8b440d58b341a7c1d4538e26ddfa1b4254129a0f1280b94"
+source = "git+https://github.com/rush-rs/tree-sitter-asm?branch=main#c7b1167ac0b4ded65850d0751bbbb107ed527566"
 dependencies = [
  "cc",
  "tree-sitter",

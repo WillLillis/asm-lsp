@@ -171,6 +171,11 @@ pub fn get_hover_resp<T: Hoverable, S: Hoverable>(
         return demang;
     }
 
+    let label_lookup = label_hover_resp(word);
+    if label_lookup.is_some() {
+        return label_lookup;
+    }
+
     None
 }
 
@@ -220,6 +225,29 @@ fn get_demangle_resp(word: &str) -> Option<Hover> {
     }
 
     None
+}
+
+fn label_hover_resp(word: &str) -> Option<Hover> {
+    static QUERY_LABEL_INT_DATA: Lazy<tree_sitter::Query> = Lazy::new(|| {
+        tree_sitter::Query::new(
+            tree_sitter_asm::language(),
+            "(meta kind: (meta_ident) @label (int)+ @data)",
+        )
+        .unwrap()
+    });
+
+    static QUERY_LABEL_FLOAT_DATA: Lazy<tree_sitter::Query> = Lazy::new(|| {
+        tree_sitter::Query::new(
+            tree_sitter_asm::language(),
+            "(meta kind: (meta_ident) @label (float)+ @data)",
+        )
+        .unwrap()
+    });
+
+    // iterate through matches, if label name matches, grab the int/float
+    // data and format it into a response...
+
+    todo!()
 }
 
 /// Filter out duplicate completion suggestions
