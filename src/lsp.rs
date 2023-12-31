@@ -8,6 +8,7 @@ use once_cell::sync::Lazy;
 use std::collections::{HashMap, HashSet};
 use std::fs::{create_dir_all, File};
 use std::io::BufRead;
+use std::os::fd::AsRawFd;
 use std::path::PathBuf;
 use symbolic::common::{Language, Name, NameMangling};
 use symbolic_demangle::{Demangle, DemangleOptions};
@@ -152,6 +153,9 @@ pub fn get_completes<T: Completable>(
 
 pub fn get_hover_resp<T: Hoverable, S: Hoverable>(
     word: &str,
+    curr_doc: &Option<FullTextDocument>,
+    parser: &mut Parser,
+    curr_tree: &mut Option<Tree>,
     instruction_map: &HashMap<(Arch, &str), T>,
     register_map: &HashMap<(Arch, &str), S>,
 ) -> Option<Hover> {
@@ -171,9 +175,11 @@ pub fn get_hover_resp<T: Hoverable, S: Hoverable>(
         return demang;
     }
 
-    let label_lookup = label_hover_resp(word);
-    if label_lookup.is_some() {
-        return label_lookup;
+    if let Some(doc) = curr_doc {
+        let label_lookup = label_hover_resp(word, doc.get_content(None), parser, curr_tree);
+        if label_lookup.is_some() {
+            return label_lookup;
+        }
     }
 
     None
@@ -227,27 +233,82 @@ fn get_demangle_resp(word: &str) -> Option<Hover> {
     None
 }
 
-fn label_hover_resp(word: &str) -> Option<Hover> {
-    static QUERY_LABEL_INT_DATA: Lazy<tree_sitter::Query> = Lazy::new(|| {
-        tree_sitter::Query::new(
-            tree_sitter_asm::language(),
-            "(meta kind: (meta_ident) @label (int)+ @data)",
-        )
-        .unwrap()
-    });
+fn label_hover_resp(
+    word: &str,
+    curr_doc: &str,
+    parser: &mut Parser,
+    curr_tree: &mut Option<Tree>,
+) -> Option<Hover> {
+    info!("LSPLOGHOVER<Searching for {}>", word);
+    *curr_tree = parser.parse(curr_doc, curr_tree.as_ref());
+    if let Some(tree) = curr_tree {
+        let mut cursor = tree_sitter::QueryCursor::new();
+        let curr_doc = curr_doc.as_bytes();
 
-    static QUERY_LABEL_FLOAT_DATA: Lazy<tree_sitter::Query> = Lazy::new(|| {
-        tree_sitter::Query::new(
-            tree_sitter_asm::language(),
-            "(meta kind: (meta_ident) @label (float)+ @data)",
-        )
-        .unwrap()
-    });
+        static QUERY_LABEL_ANY_DATA: Lazy<tree_sitter::Query> = Lazy::new(|| {
+            tree_sitter::Query::new(
+                tree_sitter_asm::language(),
+                "(label (ident (reg (word) @label)))
+                (meta kind: (meta_ident)
+                    [
+                        (
+                            (int)
+                            (\",\" (int))*
+                        )
+                        (
+                            (float)
+                            (\",\" (float))*
+                        )
+                    ]
+                ) @data",
+            )
+            .unwrap()
+        });
 
-    // iterate through matches, if label name matches, grab the int/float
-    // data and format it into a response...
+        // difference between this and the CLI tool????
+        let matches: Vec<tree_sitter::QueryMatch<'_, '_>> = cursor
+            .matches(&QUERY_LABEL_ANY_DATA, tree.root_node(), curr_doc)
+            .collect();
 
-    todo!()
+        // Debugging why the CLI Tool and Rust bindings are giving different results...
+        let file = match std::fs::File::create("/home/lillis/projects/asm-lsp/tree.dot") {
+            Ok(f) => f,
+            Err(e) => {
+                let msg = format!("What in the godamn fuck? {e}");
+                info!("LSPLOGHOVER<{}>", msg);
+                panic!("{}", msg);
+            }
+        };
+        let fd = file.as_raw_fd();
+        tree.print_dot_graph(&fd);
+
+        // either iterate through queries, or have a query that captures both
+        // ints or floats
+        info!("LSPLOGHOVER<Matches: {:?}>", matches);
+        for match_ in matches.into_iter() {
+            let caps = match_.captures;
+            if caps.len() == 2 {
+                let label = caps[0].node.utf8_text(curr_doc);
+                let data = caps[1].node.utf8_text(curr_doc);
+                match (label, data) {
+                    (Ok(label), Ok(data)) if label.eq(word) => {
+                        let value = format!("**{}**\n\n{}", label, data);
+                        info!("LSPLOGHOVER<{}>", value);
+                        /*return Some(Hover {
+                            contents: HoverContents::Markup(MarkupContent {
+                                kind: MarkupKind::Markdown,
+                                value,
+                            }),
+                            range: None,
+                        });*/
+                    }
+                    _ => {}
+                }
+            }
+        }
+    }
+
+    None
 }
 
 /// Filter out duplicate completion suggestions

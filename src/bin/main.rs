@@ -210,8 +210,14 @@ fn main_loop(
                     // format response
                     match word {
                         Ok(word) => {
-                            let hover_res =
-                                get_hover_resp(&word, names_to_instructions, names_to_registers);
+                            let hover_res = get_hover_resp(
+                                &word,
+                                &curr_doc,
+                                &mut parser,
+                                &mut tree,
+                                names_to_instructions,
+                                names_to_registers,
+                            );
                             match hover_res {
                                 Some(_) => {
                                     let result = serde_json::to_value(&hover_res).unwrap();
