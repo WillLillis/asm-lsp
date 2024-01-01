@@ -444,6 +444,8 @@ pub fn populate_name_to_register_map<'register>(
     }
 }
 
+// TODO: Populate pseudo directives function and associated helpers
+
 fn get_docs_body(x86_online_docs: &str) -> Option<String> {
     // provide a URL example page -----------------------------------------------------------------
     // 1. If the cache refresh option is enabled or the cache doesn't exist, attempt to fetch the
