@@ -1,21 +1,21 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Assembler name="gas">
-    <Directive name="abort" md_displaytext=".abort" url_fragment="Abort" deprectated="true" md_description="This directive stops the assembly immediately. It is for compatibility with other assemblers. The original idea was that the assembly language source would be piped into the assembler. If the sender of the source quit, it could use this directive tells `as` to quit also. One day `.abort` will not be supported.">
+    <Directive name="abort" md_displaytext=".abort" url_fragment="Abort" deprecated="true" md_description="This directive stops the assembly immediately.">
     </Directive>
     <Directive name="abort (coff)" md_displaytext=".ABORT (COFF)" url_fragment="ABORT-_0028COFF_0029" md_description="When producing COFF output, `as` accepts this directive as a synonym for '`.abort`'.">
     </Directive>
-    <Directive name="align" md_displaytext=".align *[abs-expr[, abs-expr[, abs-expr]]]*" url_fragment="Align" md_description="Pad the location counter (in the current subsection) to a particular storage boundary. The first expression (which must be absolute) is the alignment required, as described below. If this expression is omitted then a default value of 0 is used, effectively disabling alignment requirements.">
+    <Directive name="align" md_displaytext=".align *[abs-expr[, abs-expr[, abs-expr]]]*" url_fragment="Align" md_description="Pad the location counter (in the current subsection) to a particular storage boundary.">
     </Directive>
     <Directive name="altmacro" md_displaytext=".altmacro" url_fragment="Altmacro" md_description="Enable alternate macro mode.">
     </Directive>
-    <Directive name="ascii" md_displaytext=".ascii &quot;string&quot;..." url_fragment="Ascii" md_description="`.ascii` expects zero or more string literals (see [Strings](https://sourceware.org/binutils/docs-2.41/as/Strings.html)) separated by commas. It assembles each string (with no automatic trailing zero byte) into consecutive addresses.">
+    <Directive name="ascii" md_displaytext=".ascii &quot;*string*&quot;..." url_fragment="Ascii" md_description="`.ascii` expects zero or more string literals (see [Strings](https://sourceware.org/binutils/docs-2.41/as/Strings.html)) separated by commas. It assembles each string (with no automatic trailing zero byte) into consecutive addresses.">
     </Directive>
-    <Directive name="asciz" md_displaytext=".asciz &quot;string&quot;..." url_fragment="Asciz" md_description="`.asciz` is just like `.ascii`, but each string is followed by a zero byte. The &quot;z&quot; in '`.asciz`' stands for &quot;zero&quot;. Note that multiple string arguments not separated by commas will be concatenated together and only one final zero byte will be stored.">
+    <Directive name="asciz" md_displaytext=".asciz &quot;*string*&quot;..." url_fragment="Asciz" md_description="`.asciz` is just like `.ascii`, but each string is followed by a zero byte. The &quot;z&quot; in '`.asciz`' stands for &quot;zero&quot;.">
     </Directive>
-    <Directive name="attach_to_group" md_displaytext=".attach_to_group *name*" url_fragment="Attach_005fto_005fgroup" md_description="Attaches the current section to the named group. This is like declaring the section with the `G` attribute, but can be done after the section has been created. Note if the group section does not exist at the point that this directive is used then it will be created.">
+    <Directive name="attach_to_group" md_displaytext=".attach_to_group *name*" url_fragment="Attach_005fto_005fgroup" md_description="Attaches the current section to the named group.">
     </Directive>
     <Directive name="balign" md_displaytext=".balign*[wl] [abs-expr[, abs-expr[, abs-expr]]]*" url_fragment="Balign" md_description="Pad the location counter (in the current subsection) to a particular storage boundary.">
     </Directive>
-    <Directive name="bss" md_displaytext=".bss *subsection*" url_fragment="Bss" md_description="`.bss` tells as to assemble the following statements onto the end of the bss section. For ELF based targets an optional *subsection* expression (which must evaluate to a positive integer) can be provided. In this case the statements are appended to the end of the indicated bss subsection.">
+    <Directive name="bss" md_displaytext=".bss *subsection*" url_fragment="Bss" md_description="`.bss` tells `as` to assemble the following statements onto the end of the bss section.">
     </Directive>
-</InstructionSet>
+</Assembler>

@@ -195,6 +195,7 @@ pub fn main() -> anyhow::Result<()> {
     Ok(())
 }
 
+#[allow(clippy::too_many_arguments)]
 fn main_loop(
     connection: &Connection,
     params: serde_json::Value,
@@ -202,7 +203,7 @@ fn main_loop(
     names_to_directives: &NameToDirectiveMap,
     names_to_registers: &NameToRegisterMap,
     instruction_completion_items: &[CompletionItem],
-    directive_completion_items: &[CompletionItem],
+    _directive_completion_items: &[CompletionItem],
     register_completion_items: &[CompletionItem],
 ) -> anyhow::Result<()> {
     let _params: InitializeParams = serde_json::from_value(params).unwrap();

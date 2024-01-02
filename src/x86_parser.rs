@@ -2,6 +2,7 @@ use crate::types::*;
 
 use anyhow::anyhow;
 use log::{debug, error, info, warn};
+use quick_xml::escape::unescape;
 use quick_xml::events::attributes::Attribute;
 use quick_xml::events::Event;
 use quick_xml::name::QName;
@@ -459,54 +460,50 @@ pub fn populate_directives(xml_contents: &str) -> anyhow::Result<Vec<Directive>>
         match reader.read_event() {
             // start event ------------------------------------------------------------------------
             Ok(Event::Start(ref e)) => {
-                match e.name() {
-                    QName(b"Directive") => {
-                        // start of a new register
-                        curr_directive = Directive::default();
+                if let QName(b"Directive") = e.name() {
+                    // start of a new register
+                    curr_directive = Directive::default();
 
-                        // iterate over the attributes
-                        for attr in e.attributes() {
-                            let Attribute { key, value } = attr.unwrap();
-                            match str::from_utf8(key.into_inner()).unwrap() {
-                                "name" => {
-                                    curr_directive.name =
-                                        String::from(unsafe { str::from_utf8_unchecked(&value) });
-                                }
-                                "md_displaytext" => {
-                                    curr_directive.sig =
-                                        String::from(unsafe { str::from_utf8_unchecked(&value) });
-                                }
-                                "md_description" => {
-                                    curr_directive.description =
-                                        String::from(unsafe { str::from_utf8_unchecked(&value) });
-                                }
-                                "deprecated" => {
-                                    curr_directive.deprecated = FromStr::from_str(unsafe {
-                                        str::from_utf8_unchecked(&value)
-                                    })
-                                    .unwrap();
-                                }
-                                "url_fragment" => {
-                                    curr_directive.url = Some(format!(
-                                        "https://sourceware.org/binutils/docs-2.41/as/{}.html",
-                                        unsafe { str::from_utf8_unchecked(&value) }
-                                    ));
-                                }
-                                _ => {}
+                    // iterate over the attributes
+                    for attr in e.attributes() {
+                        let Attribute { key, value } = attr.unwrap();
+                        match str::from_utf8(key.into_inner()).unwrap() {
+                            "name" => {
+                                curr_directive.name =
+                                    String::from(unsafe { str::from_utf8_unchecked(&value) });
                             }
+                            "md_displaytext" => {
+                                let display =
+                                    String::from(unsafe { str::from_utf8_unchecked(&value) });
+                                curr_directive.sig = unescape(&display).unwrap().to_string();
+                            }
+                            "md_description" => {
+                                let description =
+                                    String::from(unsafe { str::from_utf8_unchecked(&value) });
+                                curr_directive.description =
+                                    unescape(&description).unwrap().to_string();
+                            }
+                            "deprecated" => {
+                                curr_directive.deprecated =
+                                    FromStr::from_str(unsafe { str::from_utf8_unchecked(&value) })
+                                        .unwrap();
+                            }
+                            "url_fragment" => {
+                                curr_directive.url = Some(format!(
+                                    "https://sourceware.org/binutils/docs-2.41/as/{}.html",
+                                    unsafe { str::from_utf8_unchecked(&value) }
+                                ));
+                            }
+                            _ => {}
                         }
                     }
-                    _ => (), // unknown event
                 }
             }
             // end event --------------------------------------------------------------------------
             Ok(Event::End(ref e)) => {
-                match e.name() {
-                    QName(b"Directive") => {
-                        // finish instruction
-                        directives_map.insert(curr_directive.name.clone(), curr_directive.clone());
-                    }
-                    _ => (), // unknown event
+                if let QName(b"Directive") = e.name() {
+                    // finish instruction
+                    directives_map.insert(curr_directive.name.clone(), curr_directive.clone());
                 }
             }
             Ok(Event::Eof) => break,

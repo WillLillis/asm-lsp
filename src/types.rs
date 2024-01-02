@@ -209,7 +209,16 @@ impl std::fmt::Display for Directive {
         // basic fields
         let header: String;
         if let Some(assembler) = &self.assembler {
-            header = format!("{} [{}]", &self.sig, assembler.as_ref());
+            header = format!(
+                "{} [{}]{}",
+                &self.sig,
+                assembler.as_ref(),
+                if self.deprecated {
+                    "\n**DEPRECATED**"
+                } else {
+                    ""
+                }
+            );
         } else {
             header = self.name.clone();
         }

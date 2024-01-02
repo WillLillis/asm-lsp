@@ -14,6 +14,8 @@ _ZStL19piecewise_construct:
 	.text
 	.globl	main
 	.type	main, @function
+    .abort ; for the lolz
+    .asciz  "hello, world!"
 main:
 .LFB1493:
 	.cfi_startproc

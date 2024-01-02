@@ -154,23 +154,23 @@ pub fn get_completes<T: Completable, U: Copy>(
         .collect()
 }
 
-pub fn get_hover_resp<T: Hoverable, S: Hoverable>(
+pub fn get_hover_resp<T: Hoverable, U: Hoverable, V: Hoverable>(
     word: &str,
     instruction_map: &HashMap<(Arch, &str), T>,
-    directive_map: &HashMap<(Assembler, &str), T>,
-    register_map: &HashMap<(Arch, &str), S>,
+    directive_map: &HashMap<(Assembler, &str), U>,
+    register_map: &HashMap<(Arch, &str), V>,
 ) -> Option<Hover> {
-    let instr_lookup = lookup_hover_resp(word, instruction_map);
+    let instr_lookup = lookup_hover_resp_by_arch(word, instruction_map);
     if instr_lookup.is_some() {
         return instr_lookup;
     }
 
-    let directive_lookup = lookup_hover_resp(word, directive_map);
+    let directive_lookup = lookup_hover_resp_by_assembler(word, directive_map);
     if directive_lookup.is_some() {
         return directive_lookup;
     }
 
-    let reg_lookup = lookup_hover_resp(word, register_map);
+    let reg_lookup = lookup_hover_resp_by_arch(word, register_map);
     if reg_lookup.is_some() {
         return reg_lookup;
     }
@@ -184,12 +184,11 @@ pub fn get_hover_resp<T: Hoverable, S: Hoverable>(
     None
 }
 
-// TODO: Same here, try to find a trait bound for empty enums
-fn lookup_hover_resp<T: Hoverable, U: Copy>(
+fn lookup_hover_resp_by_arch<T: Hoverable>(
     word: &str,
-    map: &HashMap<(U, &str), T>,
+    map: &HashMap<(Arch, &str), T>,
 ) -> Option<Hover> {
-    let (x86_res, x86_64_res) = search_for_hoverable(word, map);
+    let (x86_res, x86_64_res) = search_for_hoverable_by_arch(word, map);
 
     match (x86_res.is_some(), x86_64_res.is_some()) {
         (true, _) | (_, true) => {
@@ -203,6 +202,36 @@ fn lookup_hover_resp<T: Hoverable, U: Copy>(
                     if x86_res.is_some() { "\n\n" } else { "" },
                     x86_64_res
                 );
+            }
+            Some(Hover {
+                contents: HoverContents::Markup(MarkupContent {
+                    kind: MarkupKind::Markdown,
+                    value,
+                }),
+                range: None,
+            })
+        }
+        _ => {
+            // don't know of this word
+            None
+        }
+    }
+}
+
+fn lookup_hover_resp_by_assembler<T: Hoverable>(
+    word: &str,
+    map: &HashMap<(Assembler, &str), T>,
+) -> Option<Hover> {
+    let (gas_res, go_res) = search_for_hoverable_by_assembler(word, map);
+
+    match (gas_res.is_some(), go_res.is_some()) {
+        (true, _) | (_, true) => {
+            let mut value = String::new();
+            if let Some(gas_res) = gas_res {
+                value += &format!("{}", gas_res);
+            }
+            if let Some(go_res) = go_res {
+                value += &format!("{}{}", if gas_res.is_some() { "\n\n" } else { "" }, go_res);
             }
             Some(Hover {
                 contents: HoverContents::Markup(MarkupContent {
@@ -637,7 +666,8 @@ pub fn get_sig_help_resp(
                     let mut value = String::new();
                     let mut has_x86 = false;
                     let mut has_x86_64 = false;
-                    let (x86_info, x86_64_info) = search_for_hoverable(instr_name, instr_info);
+                    let (x86_info, x86_64_info) =
+                        search_for_hoverable_by_arch(instr_name, instr_info);
                     if let Some(sig) = x86_info {
                         for form in sig.forms.iter() {
                             if let Some(ref gas_name) = form.gas_name {
@@ -760,7 +790,7 @@ pub fn get_goto_def_resp(
 // If issue is resolved, can add a separate lifetime "'b" to "word"
 // parameter such that 'a: 'b
 // For now, using 'a for both isn't strictly necessary, but fits our use case
-fn search_for_hoverable<'a, T: Hoverable>(
+fn search_for_hoverable_by_arch<'a, T: Hoverable>(
     word: &'a str,
     map: &'a HashMap<(Arch, &str), T>,
 ) -> (Option<&'a T>, Option<&'a T>) {
@@ -768,6 +798,16 @@ fn search_for_hoverable<'a, T: Hoverable>(
     let x86_64_res = map.get(&(Arch::X86_64, word));
 
     (x86_res, x86_64_res)
+}
+
+fn search_for_hoverable_by_assembler<'a, T: Hoverable>(
+    word: &'a str,
+    map: &'a HashMap<(Assembler, &str), T>,
+) -> (Option<&'a T>, Option<&'a T>) {
+    let gas_res = map.get(&(Assembler::Gas, word));
+    let go_res = map.get(&(Assembler::Go, word));
+
+    (gas_res, go_res)
 }
 
 /// Searches for global config in ~/.config/asm-lsp, then the project's directory
