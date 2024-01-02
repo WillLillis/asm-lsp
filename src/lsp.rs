@@ -1,5 +1,7 @@
 use crate::types::Column;
-use crate::{Arch, Completable, Hoverable, Instruction, NameToInstructionMap, TargetConfig};
+use crate::{
+    Arch, Assembler, Completable, Hoverable, Instruction, NameToInstructionMap, TargetConfig,
+};
 use dirs::config_dir;
 use log::{error, info, log, log_enabled};
 use lsp_textdocument::FullTextDocument;
@@ -127,14 +129,16 @@ pub fn text_doc_change_to_ts_edit(
     })
 }
 
+// TODO: Look for trait bound requiring an enum, rather than just Copy here...
+// U should just be a
 /// Given a NameTo_SomeItem_ map, returns a `Vec<CompletionItem>` for the items
 /// contained within the map
-pub fn get_completes<T: Completable>(
-    map: &HashMap<(Arch, &str), T>,
+pub fn get_completes<T: Completable, U: Copy>(
+    map: &HashMap<(U, &str), T>,
     kind: Option<CompletionItemKind>,
 ) -> Vec<CompletionItem> {
     map.iter()
-        .map(|((_arch, name), item_info)| {
+        .map(|((_arch_or_asm, name), item_info)| {
             let value = format!("{}", item_info);
 
             CompletionItem {
@@ -153,11 +157,17 @@ pub fn get_completes<T: Completable>(
 pub fn get_hover_resp<T: Hoverable, S: Hoverable>(
     word: &str,
     instruction_map: &HashMap<(Arch, &str), T>,
+    directive_map: &HashMap<(Assembler, &str), T>,
     register_map: &HashMap<(Arch, &str), S>,
 ) -> Option<Hover> {
     let instr_lookup = lookup_hover_resp(word, instruction_map);
     if instr_lookup.is_some() {
         return instr_lookup;
+    }
+
+    let directive_lookup = lookup_hover_resp(word, directive_map);
+    if directive_lookup.is_some() {
+        return directive_lookup;
     }
 
     let reg_lookup = lookup_hover_resp(word, register_map);
@@ -174,7 +184,11 @@ pub fn get_hover_resp<T: Hoverable, S: Hoverable>(
     None
 }
 
-fn lookup_hover_resp<T: Hoverable>(word: &str, map: &HashMap<(Arch, &str), T>) -> Option<Hover> {
+// TODO: Same here, try to find a trait bound for empty enums
+fn lookup_hover_resp<T: Hoverable, U: Copy>(
+    word: &str,
+    map: &HashMap<(U, &str), T>,
+) -> Option<Hover> {
     let (x86_res, x86_64_res) = search_for_hoverable(word, map);
 
     match (x86_res.is_some(), x86_64_res.is_some()) {
@@ -740,6 +754,7 @@ pub fn get_goto_def_resp(
     None
 }
 
+// TODO: And here as well...
 // Note: Some issues here regarding entangled lifetimes
 // -- https://github.com/rust-lang/rust/issues/80389
 // If issue is resolved, can add a separate lifetime "'b" to "word"

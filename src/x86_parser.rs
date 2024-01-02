@@ -444,7 +444,91 @@ pub fn populate_name_to_register_map<'register>(
     }
 }
 
-// TODO: Populate pseudo directives function and associated helpers
+pub fn populate_directives(xml_contents: &str) -> anyhow::Result<Vec<Directive>> {
+    let mut directives_map = HashMap::<String, Directive>::new();
+
+    // iterate through the XML --------------------------------------------------------------------
+    let mut reader = Reader::from_str(xml_contents);
+    reader.trim_text(true);
+
+    // ref to the assembler directive that's currently under construction
+    let mut curr_directive = Directive::default();
+
+    debug!("Parsing XML contents...");
+    loop {
+        match reader.read_event() {
+            // start event ------------------------------------------------------------------------
+            Ok(Event::Start(ref e)) => {
+                match e.name() {
+                    QName(b"Directive") => {
+                        // start of a new register
+                        curr_directive = Directive::default();
+
+                        // iterate over the attributes
+                        for attr in e.attributes() {
+                            let Attribute { key, value } = attr.unwrap();
+                            match str::from_utf8(key.into_inner()).unwrap() {
+                                "name" => {
+                                    curr_directive.name =
+                                        String::from(unsafe { str::from_utf8_unchecked(&value) });
+                                }
+                                "md_displaytext" => {
+                                    curr_directive.sig =
+                                        String::from(unsafe { str::from_utf8_unchecked(&value) });
+                                }
+                                "md_description" => {
+                                    curr_directive.description =
+                                        String::from(unsafe { str::from_utf8_unchecked(&value) });
+                                }
+                                "deprecated" => {
+                                    curr_directive.deprecated = FromStr::from_str(unsafe {
+                                        str::from_utf8_unchecked(&value)
+                                    })
+                                    .unwrap();
+                                }
+                                "url_fragment" => {
+                                    curr_directive.url = Some(format!(
+                                        "https://sourceware.org/binutils/docs-2.41/as/{}.html",
+                                        unsafe { str::from_utf8_unchecked(&value) }
+                                    ));
+                                }
+                                _ => {}
+                            }
+                        }
+                    }
+                    _ => (), // unknown event
+                }
+            }
+            // end event --------------------------------------------------------------------------
+            Ok(Event::End(ref e)) => {
+                match e.name() {
+                    QName(b"Directive") => {
+                        // finish instruction
+                        directives_map.insert(curr_directive.name.clone(), curr_directive.clone());
+                    }
+                    _ => (), // unknown event
+                }
+            }
+            Ok(Event::Eof) => break,
+            Err(e) => panic!("Error at position {}: {:?}", reader.buffer_position(), e),
+            _ => (), // rest of events that we don't consider
+        }
+    }
+
+    Ok(directives_map.into_values().collect())
+}
+
+pub fn populate_name_to_directive_map<'directive>(
+    assem: Assembler,
+    directives: &'directive Vec<Directive>,
+    names_to_directives: &mut NameToDirectiveMap<'directive>,
+) {
+    for register in directives {
+        for name in &register.get_associated_names() {
+            names_to_directives.insert((assem, name), register);
+        }
+    }
+}
 
 fn get_docs_body(x86_online_docs: &str) -> Option<String> {
     // provide a URL example page -----------------------------------------------------------------

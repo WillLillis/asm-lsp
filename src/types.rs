@@ -167,6 +167,85 @@ impl std::fmt::Display for InstructionForm {
     }
 }
 
+// Directive ------------------------------------------------------------------------------------
+#[derive(Debug, Clone)]
+pub struct Directive {
+    pub name: String,
+    pub alt_names: Vec<String>,
+    pub sig: String,
+    pub description: String,
+    pub deprecated: bool,
+    pub url: Option<String>,
+    pub assembler: Option<Assembler>,
+}
+
+impl Hoverable for &Directive {}
+impl Completable for &Directive {}
+
+impl Default for Directive {
+    fn default() -> Self {
+        let name = String::new();
+        let alt_names = vec![];
+        let sig = String::new();
+        let description = String::new();
+        let deprecated = false;
+        let url = None;
+        let assembler = None;
+
+        Self {
+            name,
+            alt_names,
+            sig,
+            description,
+            deprecated,
+            url,
+            assembler,
+        }
+    }
+}
+
+impl std::fmt::Display for Directive {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        // basic fields
+        let header: String;
+        if let Some(assembler) = &self.assembler {
+            header = format!("{} [{}]", &self.sig, assembler.as_ref());
+        } else {
+            header = self.name.clone();
+        }
+
+        let mut v: Vec<&str> = vec![&header, &self.description, "\n"];
+
+        // url
+        let more_info: String;
+        match &self.url {
+            None => {}
+            Some(url_) => {
+                more_info = format!("\nMore info: {}", url_);
+                v.push(&more_info);
+            }
+        }
+
+        let s = v.join("\n");
+        write!(f, "{}", s)?;
+        Ok(())
+    }
+}
+
+impl<'own> Directive {
+    /// get the names of all the associated directives
+    pub fn get_associated_names(&'own self) -> Vec<&'own str> {
+        let mut names = Vec::<&'own str>::new();
+        names.push(&self.name);
+
+        for name in &self.alt_names {
+            names.push(name);
+        }
+
+        names
+    }
+}
+
 // Register ---------------------------------------------------------------------------------------
 #[derive(Debug, Clone)]
 pub struct Register {
@@ -287,6 +366,9 @@ pub type NameToInstructionMap<'instruction> =
 
 pub type NameToRegisterMap<'register> = HashMap<(Arch, &'register str), &'register Register>;
 
+pub type NameToDirectiveMap<'directive> =
+    HashMap<(Assembler, &'directive str), &'directive Directive>;
+
 // Define a trait for types we display on Hover Requests so we can avoid some duplicate code
 pub trait Hoverable: Display + Clone + Copy {}
 // Define a trait for types we display on Completion Requests so we can avoid some duplicate code
@@ -308,6 +390,12 @@ pub enum MMXMode {
 pub enum Arch {
     X86,
     X86_64,
+}
+
+#[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr)]
+pub enum Assembler {
+    Gas,
+    Go,
 }
 
 #[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr, Display)]

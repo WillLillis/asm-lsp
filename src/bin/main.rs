@@ -154,17 +154,38 @@ pub fn main() -> anyhow::Result<()> {
     populate_name_to_register_map(Arch::X86, &x86_registers, &mut names_to_registers);
     populate_name_to_register_map(Arch::X86_64, &x86_64_registers, &mut names_to_registers);
 
+    let gas_directives = if target_config.assemblers.gas {
+        info!("Populating directive set -> Gas...");
+        let xml_conts_gas = include_str!("../../directives/gas_directives.xml");
+        populate_directives(xml_conts_gas)?
+            .into_iter()
+            .map(|mut dir| {
+                dir.assembler = Some(Assembler::Gas);
+                dir
+            })
+            .collect()
+    } else {
+        Vec::new()
+    };
+
+    let mut names_to_directives = NameToDirectiveMap::new();
+    populate_name_to_directive_map(Assembler::Gas, &gas_directives, &mut names_to_directives);
+
     let instr_completion_items =
         get_completes(&names_to_instructions, Some(CompletionItemKind::OPERATOR));
     let reg_completion_items =
         get_completes(&names_to_registers, Some(CompletionItemKind::VARIABLE));
+    let directive_completion_items =
+        get_completes(&names_to_directives, Some(CompletionItemKind::OPERATOR));
 
     main_loop(
         &connection,
         initialization_params,
         &names_to_instructions,
+        &names_to_directives,
         &names_to_registers,
         &instr_completion_items,
+        &directive_completion_items,
         &reg_completion_items,
     )?;
     io_threads.join()?;
@@ -178,8 +199,10 @@ fn main_loop(
     connection: &Connection,
     params: serde_json::Value,
     names_to_instructions: &NameToInstructionMap,
+    names_to_directives: &NameToDirectiveMap,
     names_to_registers: &NameToRegisterMap,
     instruction_completion_items: &[CompletionItem],
+    directive_completion_items: &[CompletionItem],
     register_completion_items: &[CompletionItem],
 ) -> anyhow::Result<()> {
     let _params: InitializeParams = serde_json::from_value(params).unwrap();
@@ -210,8 +233,12 @@ fn main_loop(
                     // format response
                     match word {
                         Ok(word) => {
-                            let hover_res =
-                                get_hover_resp(&word, names_to_instructions, names_to_registers);
+                            let hover_res = get_hover_resp(
+                                &word,
+                                names_to_instructions,
+                                names_to_directives,
+                                names_to_registers,
+                            );
                             match hover_res {
                                 Some(_) => {
                                     let result = serde_json::to_value(&hover_res).unwrap();
