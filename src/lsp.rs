@@ -129,8 +129,6 @@ pub fn text_doc_change_to_ts_edit(
     })
 }
 
-// TODO: Look for trait bound requiring an enum, rather than just Copy here...
-// U should just be a
 /// Given a NameTo_SomeItem_ map, returns a `Vec<CompletionItem>` for the items
 /// contained within the map
 pub fn get_completes<T: Completable, U: Copy>(
@@ -821,7 +819,6 @@ pub fn get_goto_def_resp(
     None
 }
 
-// TODO: And here as well...
 // Note: Some issues here regarding entangled lifetimes
 // -- https://github.com/rust-lang/rust/issues/80389
 // If issue is resolved, can add a separate lifetime "'b" to "word"
