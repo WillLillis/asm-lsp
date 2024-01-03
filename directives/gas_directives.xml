@@ -18,4 +18,64 @@
     </Directive>
     <Directive name="bss" md_displaytext=".bss *subsection*" url_fragment="Bss" md_description="`.bss` tells `as` to assemble the following statements onto the end of the bss section.">
     </Directive>
+    <Directive name="bundle_align_mode" md_displaytext=".bundle_align_mode *abs-expr*" url_fragment="Bundle-directives" md_description="`.bundle_align_mode` enables or disables *aligned instruction bundle* mode. In this mode, sequences of adjacent instructions are grouped into fixed-sized *bundles*.">
+    </Directive>
+    <Directive name="bundle_lock" md_displaytext=".bundle_lock" url_fragment="Bundle-directives" md_description="The `.bundle_lock` and directive `.bundle_unlock` directives allow explicit control over instruction bundle padding.">
+    </Directive>
+    <Directive name="bundle_unlock" md_displaytext=".bundle_unlock" url_fragment="Bundle-directives" md_description="The `.bundle_lock` and directive `.bundle_unlock` directives allow explicit control over instruction bundle padding.">
+    </Directive>
+    <Directive name="byte" md_displaytext=".byte *expressions*" url_fragment="Byte" md_description="`.byte` expects zero or more expressions, separated by commas. Each expression is assembled into the next byte.">
+    </Directive>
+    <Directive name="cfi_sections" md_displaytext=".cfi_sections *list*" url_fragment="CFI-directives" md_description="`.cfi_sections` may be used to specify whether CFI directives should emit `.eh_frame` section, `.debug_frame` section and/or `.sframe` section.">
+    </Directive>
+    <Directive name="cfi_startproc" md_displaytext=".cfi_startproc [simple]" url_fragment="CFI-directives" md_description="`.cfi_startproc` is used at the beginning of each function that should have an entry in `.eh_frame`. It initializes some internal data structures. Don't forget to close the function by `.cfi_endproc`.">
+    </Directive>
+    <Directive name="cfi_endproc" md_displaytext=".cfi_endproc" url_fragment="CFI-directives" md_description="`.cfi_endproc` is used at the end of a function where it closes its unwind entry previously opened by `.cfi_startproc`, and emits it to `.eh_frame`.">
+    </Directive>
+    <Directive name="cfi_personality" md_displaytext=".cfi_personality *encoding [, exp]*" url_fragment="CFI-directives" md_description="`.cfi_personality` defines personality routine and its encoding.">
+    </Directive>
+    <Directive name="cfi_personality_id" md_displaytext=".cfi_personality_id *id*" url_fragment="CFI-directives" md_description="`.cfi_personality_id` defines a personality routine by its index as defined in a compact unwinding format.">
+    </Directive>
+    <Directive name="cfi_fde_data" md_displaytext=".cfi_fde_data *[opcode1 [, ...]]*" url_fragment="CFI-directives" md_description="`.cfi_fde_data` is used to describe the compact unwind opcodes to be used for the current function.">
+    </Directive>
+    <Directive name="cfi_lsda" md_displaytext=".cfi_lsda *encoding [, exp]*" url_fragment="CFI-directives" md_description="`.cfi_lsda` defines LSDA and its encoding.">
+    </Directive>
+    <Directive name="cfi_inline_lsda" md_displaytext=".cfi_inline_lsda *[align]*" url_fragment="CFI-directives" md_description="`.cfi_inline_lsda` marks the start of a LSDA data section and switches to the corresponding `.gnu.extab` section.">
+    </Directive>
+    <Directive name="cfi_def_cfa" md_displaytext=".cfi_def_cfa *register, offset*" url_fragment="CFI-directives" md_description="`.cfi_def_cfa` defines a rule for computing CFA as: *take address from register and add offset to it*.">
+    </Directive>
+    <Directive name="cfi_def_cfa_register" md_displaytext=".cfi_def_cfa_register *register*" url_fragment="CFI-directives" md_description="`.cfi_def_cfa_register` modifies a rule for computing CFA. From now on register will be used instead of the old one. Offset remains the same.">
+    </Directive>
+    <Directive name="cfi_def_cfa_offset" md_displaytext=".cfi_def_cfa_offset *offset*" url_fragment="CFI-directives" md_description="`.cfi_def_cfa_offset` modifies a rule for computing CFA. Register remains the same, but offset is new.">
+    </Directive>
+    <Directive name="cfi_adjust_cfa_offset" md_displaytext=".cfi_adjust_cfa_offset" url_fragment="CFI-directives" md_description="Same as `.cfi_def_cfa_offset` but *offset* is a relative value that is added/subtracted from the previous offset.">
+    </Directive>
+    <Directive name="cfi_offset" md_displaytext=".cfi_offset *offset, register*" url_fragment="CFI-directives" md_description="Previous value of *register* is saved at offset *offset* from CFA.">
+    </Directive>
+    <Directive name="cfi_val_offset" md_displaytext=".cfi_val_offset *register, offset*" url_fragment="CFI-directives" md_description="Previous value of register is CFA + *offset*.">
+    </Directive>
+    <Directive name="cfi_rel_offset" md_displaytext=".cfi_rel_offset *register, offset*" url_fragment="CFI-directives" md_description="Previous value of *register* is saved at offset *offset* from the current CFA register.">
+    </Directive>
+    <Directive name="cfi_register" md_displaytext=".cfi_register *register1, register2*" url_fragment="CFI-directives" md_description="Previous value of *register1* is saved in register *register2*.">
+    </Directive>
+    <Directive name="cfi_restore" md_displaytext=".cfi_restore *register*" url_fragment="CFI-directives" md_description="`.cfi_restore` says that the rule for *register* is now the same as it was at the beginning of the function, after all initial instruction added by `.cfi_startproc` were executed.">
+    </Directive>
+    <Directive name="cfi_undefined" md_displaytext=".cfi_undefined *register*" url_fragment="CFI-directives" md_description="From now on the previous value of *register* can't be restored anymore.">
+    </Directive>
+    <Directive name="cfi_same_value" md_displaytext=".cfi_same_value *register*" url_fragment="CFI-directives" md_description="Current value of *register* is the same like in the previous frame, i.e. no restoration needed.">
+    </Directive>
+    <Directive name="cfi_remember_state" md_displaytext=".cfi_remember_state" url_fragment="CFI-directives" md_description="`.cfi_remember_state` pushes the set of rules for every register onto an implicit stack.">
+    </Directive>
+    <Directive name="cfi_restore_state" md_displaytext=".cfi_restore_state" url_fragment="CFI-directives" md_description="`.cfi_restore_state` pops the set of rules for every register off the stack and places them in the current row.">
+    </Directive>
+    <Directive name="cfi_return_column" md_displaytext=".cfi_return_column *register*" url_fragment="CFI-directives" md_description="Change return column *register*, i.e. the return address is either directly in *register* or can be accessed by rules for *register*.">
+    </Directive>
+    <Directive name="cfi_signal_frame" md_displaytext=".cfi_signal_frame" url_fragment="CFI-directives" md_description="Mark current function as signal trampoline.">
+    </Directive>
+    <Directive name="cfi_window_save" md_displaytext=".cfi_window_save" url_fragment="CFI-directives" md_description="SPARC register window has been saved.">
+    </Directive>
+    <Directive name="cfi_escape" md_displaytext=".cfi_escape *expression[, ...]*" url_fragment="CFI-directives" md_description="Allows the user to add arbitrary bytes to the unwind info. One might use this to add OS-specific CFI opcodes, or generic CFI opcodes that GAS does not yet support.">
+    </Directive>
+    <Directive name="cfi_val_encoded_addr" md_displaytext=".cfi_val_encoded_addr *register, encoding, label*" url_fragment="CFI-directives" md_description="The current value of *register* is *label*. The value of *label* will be encoded in the output file according to *encoding*; see the description of `.cfi_personality` for details on this encoding.">
+    </Directive>
 </Assembler>

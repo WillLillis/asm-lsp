@@ -298,19 +298,32 @@ pub fn get_comp_resp(
     curr_tree: &mut Option<Tree>,
     params: &CompletionParams,
     instr_comps: &[CompletionItem],
+    dir_comps: &[CompletionItem],
     reg_comps: &[CompletionItem],
 ) -> Option<CompletionList> {
     let cursor_line = params.text_document_position.position.line as usize;
     let cursor_char = params.text_document_position.position.character as usize;
     let mut comp_items = None;
 
-    // prepend register names with "%" in GAS
     if let Some(ctx) = params.context.as_ref() {
         if ctx.trigger_kind == CompletionTriggerKind::TRIGGER_CHARACTER {
-            return Some(CompletionList {
-                is_incomplete: true,
-                items: filtered_comp_list(reg_comps),
-            });
+            match ctx.trigger_character.as_ref().map(|s| s.as_ref()) {
+                // prepend GAS registers with "%"
+                Some("%") => {
+                    return Some(CompletionList {
+                        is_incomplete: true,
+                        items: filtered_comp_list(reg_comps),
+                    });
+                }
+                // prepend GAS directives with "."
+                Some(".") => {
+                    return Some(CompletionList {
+                        is_incomplete: true,
+                        items: filtered_comp_list(dir_comps),
+                    });
+                }
+                _ => {}
+            }
         }
     }
 
@@ -329,6 +342,30 @@ pub fn get_comp_resp(
             },
         });
         let curr_doc = curr_doc.as_bytes();
+
+        static QUERY_DIRECTIVE: Lazy<tree_sitter::Query> = Lazy::new(|| {
+            tree_sitter::Query::new(
+                tree_sitter_asm::language(),
+                "(meta kind: (meta_ident) @dir)",
+            )
+            .unwrap()
+        });
+        let matches_iter = cursor.matches(&QUERY_DIRECTIVE, tree.root_node(), curr_doc);
+
+        for match_ in matches_iter {
+            let caps = match_.captures;
+            for cap in caps.iter() {
+                let arg_start = cap.node.range().start_point;
+                let arg_end = cap.node.range().end_point;
+                if cursor_matches!(cursor_line, cursor_char, arg_start, arg_end) {
+                    let items = filtered_comp_list(dir_comps);
+                    return Some(CompletionList {
+                        is_incomplete: true,
+                        items,
+                    });
+                }
+            }
+        }
 
         // Instruction and two register arguments
         static QUERY_INSTR_REG_REG: Lazy<tree_sitter::Query> = Lazy::new(|| {
