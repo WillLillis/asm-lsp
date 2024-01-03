@@ -346,7 +346,7 @@ pub fn get_comp_resp(
         static QUERY_DIRECTIVE: Lazy<tree_sitter::Query> = Lazy::new(|| {
             tree_sitter::Query::new(
                 tree_sitter_asm::language(),
-                "(meta kind: (meta_ident) @dir)",
+                "(meta kind: (meta_ident) @directive)",
             )
             .unwrap()
         });
