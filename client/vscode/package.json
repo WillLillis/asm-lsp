@@ -1,0 +1,22 @@
+{
+  "name": "asm-lsp",
+  "description": "Language Server for Assembly",
+  "version": "0.0.1",
+  "contributors": [
+    "Placeholder"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bergercookie/asm-lsp"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "activationEvents": [
+    "onLanguage:asm"
+  ],
+  "main": "./extension",
+  "dependencies": {
+    "vscode-languageclient": "^8.1.0"
+  }
+}
