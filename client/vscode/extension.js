@@ -17,7 +17,8 @@ module.exports = {
 
     /** @type {import("vscode-languageclient/node").LanguageClientOptions} */
     const clientOptions = {
-      documentSelector: [{ scheme: "file", language: "lldb.dissassembly" }],
+      //documentSelector: [{ scheme: "file", language: "asm-intel-x86-generic" }],
+      documentSelector: [{ scheme: "file", language: "asm-intel-x86-generic", pattern: "**/*.{s,S,asm}" }],
     };
 
     const client = new LanguageClient(
