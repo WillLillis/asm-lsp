@@ -1,8 +1,16 @@
-[package]
-name = "asm-lsp"
+[workspace]
+default-members = ["asm-lsp"]
+members = [
+    "asm-lsp",
+    "asm-docs-parse",
+]
+resolver = "2"
+
+
+[workspace.package]
 version = "0.6.0"
 authors = ["Nikos Koukis <nickkouk@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 description = "Language Server for x86/x86_64 Assembly Code"
 
@@ -18,14 +26,8 @@ publish = true
 exclude = ["samples/*", "demo/*"]
 license = "BSD-2-Clause"
 
-[lib]
-name = "asm_lsp"
-path = "src/lib.rs"
-[[bin]]
-name = "asm-lsp"
-path = "src/bin/main.rs"
 
-[dependencies]
+[workspace.dependencies]
 anyhow = "1.0.70"
 # write to stderr instead of stdout
 flexi_logger = "0.25.3"
@@ -51,3 +53,6 @@ symbolic = { version = "12.8.0", features = ["demangle"] }
 symbolic-demangle = "12.8.0"
 
 # [dev-dependencies]
+
+asm-lsp = { version = "0.6.0", path = "./asm-lsp/" }
+asm-docs-parse = { version = "0.1.0", path = "./docs-parse-src" }
