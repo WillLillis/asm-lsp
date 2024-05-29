@@ -3,7 +3,7 @@ use std::{collections::HashMap, fmt::Display};
 use strum_macros::{AsRefStr, Display, EnumString};
 
 // Instruction ------------------------------------------------------------------------------------
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize)]
 pub struct Instruction {
     pub name: String,
     pub alt_names: Vec<String>,
@@ -97,7 +97,7 @@ impl<'own> Instruction {
 }
 
 // InstructionForm --------------------------------------------------------------------------------
-#[derive(Default, Debug, Clone)]
+#[derive(Default, Debug, Clone, Serialize)]
 pub struct InstructionForm {
     pub gas_name: Option<String>,
     pub go_name: Option<String>,
@@ -168,7 +168,7 @@ impl std::fmt::Display for InstructionForm {
 }
 
 // Register ---------------------------------------------------------------------------------------
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize)]
 pub struct Register {
     pub name: String,
     pub alt_names: Vec<String>,
@@ -292,25 +292,25 @@ pub trait Hoverable: Display + Clone + Copy {}
 // Define a trait for types we display on Completion Requests so we can avoid some duplicate code
 pub trait Completable: Display {}
 
-#[derive(Debug, Clone, EnumString, AsRefStr)]
+#[derive(Debug, Clone, EnumString, AsRefStr, Serialize)]
 pub enum XMMMode {
     SSE,
     AVX,
 }
 
-#[derive(Debug, Clone, EnumString, AsRefStr)]
+#[derive(Debug, Clone, EnumString, AsRefStr, Serialize)]
 pub enum MMXMode {
     FPU,
     MMX,
 }
 
-#[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr)]
+#[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr, Serialize)]
 pub enum Arch {
     X86,
     X86_64,
 }
 
-#[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr, Display)]
+#[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr, Display, Serialize)]
 pub enum RegisterType {
     #[strum(serialize = "General Purpose Register")]
     GeneralPurpose,
@@ -334,7 +334,7 @@ pub enum RegisterType {
     ProtectedMode,
 }
 
-#[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr, Display)]
+#[derive(Debug, Hash, PartialEq, Eq, Clone, Copy, EnumString, AsRefStr, Display, Serialize)]
 pub enum RegisterWidth {
     #[strum(serialize = "512 bits")]
     Bits512,
@@ -434,7 +434,7 @@ impl Default for TargetConfig {
 }
 
 // Instruction Set Architecture -------------------------------------------------------------------
-#[derive(Debug, Clone, EnumString, AsRefStr)]
+#[derive(Debug, Clone, EnumString, AsRefStr, Serialize)]
 pub enum ISA {
     #[strum(serialize = "RAO-INT")]
     RAOINT,
@@ -557,7 +557,7 @@ pub enum ISA {
 }
 
 // Operand ----------------------------------------------------------------------------------------
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize)]
 pub struct Operand {
     pub type_: OperandType,
     pub input: Option<bool>,
@@ -566,7 +566,7 @@ pub struct Operand {
 }
 
 #[allow(non_camel_case_types)]
-#[derive(Debug, Clone, EnumString, AsRefStr)]
+#[derive(Debug, Clone, EnumString, AsRefStr, Serialize)]
 pub enum OperandType {
     #[strum(serialize = "1")]
     _1,

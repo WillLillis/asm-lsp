@@ -125,6 +125,12 @@ pub fn main() -> anyhow::Result<()> {
         &mut names_to_instructions,
     );
 
+    let x86_instructions = if target_config.instruction_sets.x86 {
+        // let ser_conts_x86 = include_str!("../../opcodes/x86_instructions_ser");
+        todo!()
+    } else {
+        NameToInstructionMap::new()
+    };
     // create a map of &Register_name -> &Register - Use that in user queries
     // The Register(s) themselves are stored in a vector and we only keep references to the
     // former map

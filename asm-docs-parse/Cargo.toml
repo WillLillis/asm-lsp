@@ -15,3 +15,8 @@ license.workspace = true
 
 [dependencies]
 asm-lsp = {path = "../asm-lsp/" }
+clap.workspace = true
+serde.workspace = true
+anyhow.workspace = true
+serde_json.workspace = true
+strum.workspace = true
