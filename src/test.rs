@@ -5,17 +5,18 @@ mod tests {
     use anyhow::Result;
     use lsp_textdocument::FullTextDocument;
     use lsp_types::{
-        HoverContents, MarkupContent, MarkupKind, Position, TextDocumentIdentifier,
-        TextDocumentPositionParams, Url,
+        CompletionContext, CompletionItem, CompletionItemKind, CompletionParams,
+        CompletionTriggerKind, HoverContents, MarkupContent, MarkupKind, PartialResultParams,
+        Position, TextDocumentIdentifier, TextDocumentPositionParams, Url, WorkDoneProgressParams,
     };
-    // use tree_sitter::Parser;
+    use tree_sitter::Parser;
 
     use crate::{
-        get_hover_resp, get_word_from_pos_params, instr_filter_targets, populate_directives,
-        populate_name_to_directive_map, populate_name_to_instruction_map,
-        populate_name_to_register_map, populate_registers, x86_parser::get_cache_dir, Arch,
-        Assembler, Assemblers, Instruction, InstructionSets, NameToDirectiveMap,
-        NameToInstructionMap, NameToRegisterMap, TargetConfig,
+        get_comp_resp, get_completes, get_hover_resp, get_word_from_pos_params,
+        instr_filter_targets, populate_directives, populate_name_to_directive_map,
+        populate_name_to_instruction_map, populate_name_to_register_map, populate_registers,
+        x86_parser::get_cache_dir, Arch, Assembler, Assemblers, Instruction, InstructionSets,
+        NameToDirectiveMap, NameToInstructionMap, NameToRegisterMap, TargetConfig,
     };
 
     // TODO: Add include_dirs
@@ -24,9 +25,9 @@ mod tests {
         names_to_instructions: NameToInstructionMap,
         names_to_registers: NameToRegisterMap,
         names_to_directives: NameToDirectiveMap,
-        // instr_completion_items: Vec<CompletionItem>,
-        // reg_completion_items: Vec<CompletionItem>,
-        // directive_completion_items: Vec<CompletionItem>,
+        instr_completion_items: Vec<CompletionItem>,
+        reg_completion_items: Vec<CompletionItem>,
+        directive_completion_items: Vec<CompletionItem>,
     }
 
     impl GlobalVars {
@@ -35,9 +36,9 @@ mod tests {
                 names_to_instructions: NameToInstructionMap::new(),
                 names_to_registers: NameToRegisterMap::new(),
                 names_to_directives: NameToDirectiveMap::new(),
-                // instr_completion_items: Vec::new(),
-                // reg_completion_items: Vec::new(),
-                // directive_completion_items: Vec::new(),
+                instr_completion_items: Vec::new(),
+                reg_completion_items: Vec::new(),
+                directive_completion_items: Vec::new(),
             }
         }
     }
@@ -155,6 +156,18 @@ mod tests {
             &gas_directives,
             &mut store.names_to_directives,
         );
+        store.instr_completion_items = get_completes(
+            &store.names_to_instructions,
+            Some(CompletionItemKind::OPERATOR),
+        );
+        store.reg_completion_items = get_completes(
+            &store.names_to_registers,
+            Some(CompletionItemKind::VARIABLE),
+        );
+        store.directive_completion_items = get_completes(
+            &store.names_to_directives,
+            Some(CompletionItemKind::OPERATOR),
+        );
 
         return Ok(store);
     }
@@ -210,8 +223,6 @@ mod tests {
             panic!("No document");
         };
 
-        println!("WORD: {}", word);
-
         let resp = get_hover_resp(
             &word,
             &file_word,
@@ -232,6 +243,104 @@ mod tests {
         } else {
             panic!("Invalid hover response contents: {:?}", resp.contents);
         }
+    }
+
+    fn test_autocomplete(
+        source: &str,
+        expected_kind: CompletionItemKind,
+        trigger_kind: CompletionTriggerKind,
+        trigger_character: Option<String>,
+    ) {
+        prepare_globals();
+
+        let globals = GLOBALS
+            .get()
+            .expect("global store not initialized")
+            .lock()
+            .expect("global store mutex poisoned");
+
+        let source_code = source.replace("<cursor>", "");
+
+        let mut parser = Parser::new();
+        parser.set_language(tree_sitter_asm::language()).unwrap();
+        let mut tree = parser.parse(&source_code, None);
+
+        let mut position: Option<Position> = None;
+        for (line_num, line) in source.lines().enumerate() {
+            if let Some((idx, _)) = line.match_indices("<cursor>").next() {
+                position = Some(Position {
+                    line: line_num as u32,
+                    character: idx as u32,
+                });
+                break;
+            }
+        }
+
+        let pos_params = TextDocumentPositionParams {
+            text_document: TextDocumentIdentifier {
+                uri: Url::parse("file://").unwrap(),
+            },
+            position: position.expect("No <cursor> marker found"),
+        };
+
+        let comp_ctx = CompletionContext {
+            trigger_kind,
+            trigger_character,
+        };
+
+        let params = CompletionParams {
+            text_document_position: pos_params,
+            work_done_progress_params: WorkDoneProgressParams {
+                work_done_token: None,
+            },
+            partial_result_params: PartialResultParams {
+                partial_result_token: None,
+            },
+            context: Some(comp_ctx),
+        };
+
+        let resp = get_comp_resp(
+            &source_code,
+            &mut parser,
+            &mut tree,
+            &params,
+            &globals.instr_completion_items,
+            &globals.directive_completion_items,
+            &globals.reg_completion_items,
+        )
+        .unwrap();
+
+        // - We currently have a very course-grained approach to completions,
+        // - We just send all of the appropriate items (e.g. all instrucitons, all
+        // registers, or all directives) and let the editor's lsp client sort out
+        // which to display/ in what order
+        // - Given this, we won't check for equality for all of the expected items,
+        // but instead just that
+        //      1) There are some items
+        //      2) Said items are of the right type
+        assert!(!resp.items.is_empty());
+        for comp in &resp.items {
+            assert!(comp.kind == Some(expected_kind));
+        }
+    }
+
+    fn test_register_autocomplete(
+        source: &str,
+        trigger_kind: CompletionTriggerKind,
+        trigger_character: Option<String>,
+    ) {
+        prepare_globals();
+        let expected_kind = CompletionItemKind::VARIABLE;
+        test_autocomplete(source, expected_kind, trigger_kind, trigger_character);
+    }
+
+    #[test]
+    fn handle_autocomplete_it_providees_reg_comps_after_percent_symbol() {
+        test_register_autocomplete(
+            "pushq %<cursor>",
+            CompletionTriggerKind::TRIGGER_CHARACTER,
+            Some("%".to_string()),
+        );
     }
 
     #[test]
