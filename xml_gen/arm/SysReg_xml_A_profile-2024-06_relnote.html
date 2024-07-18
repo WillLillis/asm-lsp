@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>System Register XML for A-Profile Architecture (2024-06)</title>
+    <style type="text/css">
+      body {
+        font-size: small;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="text-align: center;">
+      <h1 style="text-decoration: underline;">
+       System Register XML<br/>
+       for A-profile Architecture<br/>
+       (2024-06)
+      </h1>
+      <h1 style="text-decoration: underline;">5 July 2024</h1>
+    </div>
+    <br/>
+    <h2>Introduction</h2>
+    <p>
+      This is the <span style="font-style: italic;">2024-06</span> release
+      of the System Register XML for A-profile Architecture, describing:
+    </p>
+    <ul>
+      <li>The AArch64 and AArch32 views of the System registers, including Debug, PMU, AMU, MPAM, Generic Timer, and GIC.</li>
+      <li>The AArch64 and AArch32 system control operations.</li>
+      <li>The memory-mapped Debug, CTI, PMU, AMU, MPAM, GIC, and Generic Timer registers.</li>
+    </ul>
+    <p>
+      The <a href="SysReg_xml_A_profile-2024-06/xhtml/notice.html">Proprietary Notice</a>
+      gives details of the terms and conditions under which this package
+      is provided.
+    </p>
+    <p>
+      If you have comments on the content of this package, create a ticket at <a href="https://support.developer.arm.com">https://support.developer.arm.com</a>.
+      As part of the ticket, include:
+      <ul>
+        <li>The title, "System Register XML for A-profile Architecture".</li>
+        <li>The version, "2024-06".</li>
+        <li>The section name to which your comments refer.</li>
+        <li>A concise explanation of your comments.</li>
+      </ul>
+    </p>
+    <p>
+      Please see the <a href="#documentation">Documentation</a> for
+      more information on the general structure of these descriptions.
+    </p>
+    <br/>
+    <h2>Contents</h2>
+    <table style="width: 814px; height: 70px;" border="1" cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="background-color: rgb(216, 213, 218);">This Version</td>
+          <td style="background-color: rgb(216, 213, 218);">2024-06</td>
+          <td style="background-color: rgb(216, 213, 218);"><a href="SysReg_xml_A_profile-2024-06/xhtml/AArch64-regindex.html">[HTML]</a></td>
+          <td style="background-color: rgb(216, 213, 218);"><a href="SysReg_xml_A_profile-2024-06.pdf">[PDF]</a></td>
+          <td style="background-color: rgb(216, 213, 218);"><a href="SysReg_xml_A_profile-2024-06/AArch64-regindex.xml">[XML]</a></td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1" style="vertical-align: top; background-color: rgb(216, 213, 218);">Change Markups<br></td>
+          <td style="vertical-align: top; background-color: rgb(216, 213, 218);">2024-06 from 2024-03<br></td>
+          <td style="vertical-align: top; background-color: rgb(216, 213, 218);"><a href="SysReg_xml_A_profile-2024-06/diff-from-SysReg_xml_A_profile-2024-03/AArch64-regindex.html">[HTML]</a></td>
+          <td style="vertical-align: top; background-color: rgb(216, 213, 218);"><a href="SysReg_xml_A_profile-2024-06-diff-from-SysReg_xml_A_profile-2024-03.pdf">[PDF]</a></td>
+          <td style="vertical-align: top; background-color: rgb(216, 213, 218);"><br></td>
+        </tr>
+        <tr>
+          <td colspan="1" rowspan="1" style="vertical-align: top; background-color: rgb(216, 213, 218);">Previous Versions<br></td>
+          <td style="vertical-align: top; background-color: rgb(216, 213, 218);">2024-03<br></td>
+          <td style="vertical-align: top; background-color: rgb(216, 213, 218);"><a href="SysReg_xml_A_profile-2024-03/xhtml/AArch64-regindex.html">[HTML]</a></td>
+          <td style="vertical-align: top; background-color: rgb(216, 213, 218);"><br></td>
+          <td style="vertical-align: top; background-color: rgb(216, 213, 218);"><br></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br/>
+    <h2>Product Status</h2>
+    <p>The information in this release covers multiple versions of the architecture. The content relating to different versions is given different quality ratings.</p>
+    <p>The information relating to the 2023 Extensions and the rest of the A-profile Architecture is at Beta quality. Beta quality means that all major features of the specification are described, but some details might be missing.</p>
+
+    <h3>Change history</h3>
+    
+    <ul>
+      <li><!--L2272 --> The feature dependences for FEAT_SSVE_FP8FMA and FEAT_SSVE_FP8DOT2 in ID_AA64SMFR0_EL1 are relaxed to no longer require corresponding ZA-targeting FP8 instructions.</li>
+      <li><!--22660 --> DBGDTRTX_EL0 is corrected to remove the reference to DTRRX.</li>
+      <li><!--22594 --> SCTLR2_EL2.EnANERR and SCTLR2_EL2.EnADERR are extended to include the explicit memory accesses generated as a result of an MRS/MRRS register access being transformed to a memory access by configuration of HCR_EL2.NV2=1.</li>
+      <li><!--22577 --> PMEVTYPER&lt;n&gt;_EL0, PMCCFILTR_EL0 and PMICFILTR_EL0 resets in the upper 32 bits of the registers are updated to be 0 if AArch32 is available.</li>
+      <li><!--22575 --> A new backwards-compatible field "NSMC, bits [59:56]" is added to SMIDR_EL1.</li>
+      <li><!--22564 --> In TRBPTR_EL1, instances of PMBIDR_EL1 are corrected TRBIDR_EL1.</li>
+      <li><!--22529 --> TRBSR_EL1.DAT is relaxed in the AArch64 version of the register to be UNKNOWN when FEAT_TRBE_EXT is implemented, and RES0 otherwise.</li>
+      <li><!--22496 --> The EL0 and EL1 read conditions in CNTVCT_EL0.Bits and CNTVCTSS_EL0.Bits are corrected.</li>
+      <li><!--22494 --> EDPRSR field accessors are updated to have consistent UNKNOWN/WI access if FEAT_DoPD is not implemented, or the Core domain is not powered up, or the PE is in reset state.</li>
+      <li><!--22441 --> CTIDEVARCH.REVISION is clarified to say that the value 0b0000 is not permitted when FEAT_DoPD is implemented.</li>
+      <li><!--22436 --> The list of instruction affected by the SCTLR_ELx.BTx bits are updated to include the PACIASPPC and PACIBSPPC instructions.</li>
+      <li><!--22404 --> The SME non-widening BFloat16 instructions are moved out of FEAT_SVE_B16B16 and into a new feature FEAT_SME_B16B16.</li>
+      <li><!--22399 --> SSBS.SBSS and CPSR.SBSS descriptions of speculation are clarified using the term speculative register values.</li>
+      <li><!--22368 --> GIC*_IPRIORITYR*.Priority_offset_x descriptions are updated to indicate they are RES0 for an INTID configured as non-maskable.</li>
+      <li><!--22332 --> Constraints on ID_AA46DFR0_EL1.TraceFilt are updated to indicate permitted values for ID_AA46DFR0_EL1.TraceFilt when FEAT_ETE is implemented.</li>
+      <li><!--22327 --> Performance Monitors registers with event fields that have conditional accessors when fewer than 31 event counters are implemented are replaced with conditions that use the GetNumEventCounters() function.</li>
+      <li><!--22320 --> The EC syndrome value for trapped AArch32 accesses due to HCR_EL2.TPU is corrected to 0x03.</li>
+      <li><!--22296 --> GICR_VPENDBASER.Dirty is corrected to remove the reserved clause.</li>
+      <li><!--22293 --> ID_AA64PFR0_EL1 is clarified to refer to out of context prediction resources.</li>
+      <li><!--22274 --> The description of ICH_LR&lt;n&gt;.State is clarified to include description of behaviour when a virtual interrupt from a List register is acknowledged.</li>
+      <li><!--22243 --> The incorrect reference to traps in CNTHCTL_EL2.ECV 0b1 value is removed.</li>
+      <li><!--22239 --> External *DEVAFF registers have been updated to match the equivalent content in MPIDR_EL1.</li>
+      <li><!--22237 --> The field descriptions in GICR_VPROPBASER are corrected to refer to the vPE Configuration Table.</li>
+      <li><!--22206 --> Correction to purpose description of PMSELR_EL0 to refer to PMEVCNTR&lt;n&gt;_EL0 and PMCCNTR_EL0.</li>
+      <li><!--22185 --> Configuration text of External registers MPAMCFG_CASSOC, MPAMCFG_CMIN, MPAMCFG_DIS, MPAMCFG_EN, and MPAMCFG_EN_FLAGS is updated to clarify the power and reset domains of MSC components.</li>
+      <li><!--22074 --> External debug register descriptions with respect to RXfull or TXfull are clarified to state the read or write behaviour is 0 or 1.</li>
+      <li><!--21946 --> System registers describing the LPA2 features changes to ID_AA64MMFR0_EL1, {V}TCR_ELx, and {V}TTBRy_ELx are corrected.</li>
+      <li><!--21942 --> The DS field in TCR_EL1, TCR_EL2, VTCR_EL2 and TCR_EL3 affects both input and output addresses.</li>
+      <li><!--21187 --> FPCR.DN is corrected to have no effect on the output of the FABS and FNEG instructions and to have no effect on the following instructions when FPCR.AH is 1:
+        <ul>
+          <li>FMAX.</li>
+          <li>FMAXP.</li>
+          <li>FMAXV.</li>
+          <li>FMIN.</li>
+          <li>FMINP.</li>
+          <li>FMINV.</li>
+        </ul>
+      </li>
+      <li><!--19586 --> HCRX_EL2 behavior when EL2 is not implemented or SCR_EL3.HXEn is 0, and the interaction of the value of HCRX_EL2.MSCEn is clarified.</li>
+      <li><!--19428 --> The Effective value of RW in SCR_EL3 is corrected to consider the scenario where EL2 is not implemented.</li>
+      <li><!--15259 --> ACTLR_EL12 and IMPLEMENTATION DEFINED accesses for ACTLR_EL1 and ACTLR_EL2 are added.</li>
+      <li><!--22349 --> Description for RGSR_EL1.TAG, bits [3:0] when GCR_EL1.RAND=1 is corrected to read "IMPLEMENTATION DEFINED".</li>
+      <li><!--22631 --> External accessors for PMSSCR_EL1 are corrected from RO to RW when constraints allow.</li>
+    </ul>
+    
+    <p>Many simple clarifications and corrections are also present, but are too small to be listed here. Some minor formatting changes are suppressed and not highlighted in the diff output.</p>
+    <p>In keeping with the pseudocode language requirements, accessibility that operates on bit ranges within registers in the form REG&lt;start:end&gt; is uniformly replaced with REG&lt;start+:width&gt;.</p>
+<h3>Known issues</h3>
+    <p>All issues identified in the below list will be fixed in a future release.</p>
+    <ul>
+      <li><!--19874 --> Accessibility for RAS registers will be relaxed to remove traps when there is a minimal RASv2 implementation.</li>
+      <li><!--21697 --> The description of PMSIDR_EL1.FDS will be updated to say the feature FEAT_SPE_FDS is not mandatory if PMSIDR_EL1.LDS is 0.</li>
+      <li><!--18862 --> Corresponding SET and CLR registers will be mapped to each other.</li>
+      <li><!--21788 --> The UCI field in SCTLR_EL1 and SCTLR_EL2 will be corrected to describe IMPLEMENTATION DEFINED behavior when the field is 0.</li>
+    </ul>
+
+    
+    <h3>Potential upcoming changes</h3>
+      <p>Arm is constantly exploring ways to make the architecture presentation precise and clear. Towards this, the following changes are expected in future releases:</p>
+      <ul>
+        <li>
+          Accessibility of unimplemented registers in indexed register arrays will be improved.
+        </li>
+        <li>
+          Accessibility for memory mapped accesses to registers will be improved.
+        </li>
+        <li>
+          Accessibility when there is a width mismatch between the accessor and the register will be improved.
+        </li>
+        <li>
+          Configurability details will be captured more formally to define features, acceptable feature choices, and mapping of features to ID registers.
+        </li>
+      </ul>
+
+      <p>The details of the architecture are presented in pseudocode in Architecture Specification Language (ASL). Arm is defining a new version of the Architecture Specification Language, ASL1, to improve and expand the capabilities of the language. Please see <a href="https://developer.arm.com/Architectures/Architecture%20Specification%20Language">Architecture Specification Language</a> for details on this language. Arm plans to migrate the XML to this language later this year. A preview release shall be made available prior to this migration and announced in future releases as well as linked from the above page.</p>
+
+    <br/>    <h2><a name="documentation"/>Documentation</h2>
+
+    <h3>General</h3>    <p>
+      A description within the XML contains the following sections:
+    </p>
+    <dl>
+      <dt>Purpose</dt>
+      <dd>
+        A short description of the purpose of the register in the
+        Arm Architecture.
+      </dd>      <dt>Configuration</dt>
+      <dd>
+        How the register is architecturally mapped onto another System
+        register or a memory-mapped register.  If the configuration of
+        the PE affects the implementation of the register, then
+        information about this is also included here.
+      </dd>      <dt>Attributes</dt>
+      <dd>
+        The size of the register.
+      </dd>      <dt>Field descriptions</dt>
+      <dd>
+        The register diagram and a description of the behavior of each field within the register.
+      </dd>
+    </dl>    <h3>Memory-mapped registers</h3>
+    <p>
+      A memory-mapped register description also contains the following
+      sections:
+    </p>    <dl>
+      <dt>Accessing ...</dt>
+      <dd>
+        The address or offset of the register in the memory map, and
+        the accessibility.
+      </dd>
+
+    </dl>    <h3>System registers</h3>
+
+    <p>
+      A System register description also contains an "Accessing
+      ..." section, that includes:      <ul>
+        <li>
+          The assembler syntax for the instructions used to access the
+          register, and how the instruction is encoded.
+        </li>        <li>
+          Pseudocode that describes the execution of all instructions
+          used to access the register, including information about
+          traps and enables that apply upon that access.
+        </li>        <li>
+          For some System registers, additional text is provided which
+          gives extra information regarding the access to the
+          register.
+        </li>        <li>
+          The accessibility pseudocode for a register assumes that
+          that register is implemented and that all features which
+          affect its accesses are implemented. In most cases, the
+          behavior upon access to a register is determined in part or
+          in whole by the Exception level at which it is accessed.
+        </li>
+      </ul>    </p>
+
+    <br>
+  </body>
+</html>

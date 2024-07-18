@@ -17,7 +17,7 @@ mod tests {
         get_comp_resp, get_completes, get_hover_resp, get_word_from_pos_params,
         instr_filter_targets, populate_directives, populate_instructions,
         populate_name_to_directive_map, populate_name_to_instruction_map,
-        populate_name_to_register_map, populate_registers, x86_parser::get_cache_dir, Arch,
+        populate_name_to_register_map, populate_registers, parser::get_cache_dir, Arch,
         Assembler, Assemblers, Directive, Instruction, InstructionSets, NameToDirectiveMap,
         NameToInstructionMap, NameToRegisterMap, Register, TargetConfig, TreeEntry,
     };
