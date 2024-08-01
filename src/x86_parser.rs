@@ -22,6 +22,64 @@ use regex::Regex;
 use reqwest;
 use url_escape::encode_www_form_urlencoded;
 
+/// Parse all of the ARM instruction xml files inside of `docs_dir`
+/// Each file is expected to correspond to an `Instruction` object
+///
+/// Current function assumes that the XML file is already read and that it's been given a reference
+/// to its contents (`&str`).
+///
+/// # Errors
+///
+/// This function will return `Err` if an xml file within `docs_path` cannot be parsed,
+/// or if `docs_path` cannot be read
+pub fn populate_arm_instructions(docs_path: &PathBuf) -> Result<Vec<Instruction>> {
+    let mut instructions_map = HashMap::<String, Instruction>::new();
+
+    for dir_entry in std::fs::read_dir(docs_path)? {
+        match dir_entry {
+            Ok(entry) => {
+                if entry.path().extension().unwrap_or_default() != "xml" {
+                    continue;
+                }
+                if let Ok(docs) = std::fs::read_to_string(entry.path()) {
+                    let instr = parse_arm_instruction(&docs)?;
+                    instructions_map.insert(instr.name.clone(), instr.clone());
+                }
+            }
+            _ => continue,
+        }
+    }
+
+    Ok(instructions_map.into_values().collect())
+}
+
+/// Parse an xml file containing the documentation for a single ARM instruction
+///
+/// # Errors
+///
+/// This function is highly specialized to parse a handful of files and will panic or return
+/// `Err` for most mal-formed inputs
+///
+/// # Panics
+///
+/// This function is highly specialized to parse a handful of files and will panic or return
+/// `Err` for most mal-formed/unexpected inputs
+fn parse_arm_instruction(xml_contents: &str) -> Result<Instruction> {
+    // iterate through the XML --------------------------------------------------------------------
+    let mut reader = Reader::from_str(xml_contents);
+
+    // ref to the instruction that's currently under construction
+    let mut instruction = Instruction::default();
+    let mut instruction_form = InstructionForm::default();
+
+    debug!("Parsing instruction XML contents...");
+    loop {
+        // parse the shiz here
+    }
+
+    Ok(instruction)
+}
+
 /// Parse the provided XML contents and return a vector of all the instructions based on that.
 /// If parsing fails, the appropriate error will be returned instead.
 ///

@@ -618,6 +618,8 @@ pub enum Arch {
     X86,
     #[strum(serialize = "x86-64")]
     X86_64,
+    #[strum(serialize = "arm")]
+    ARM,
     #[strum(serialize = "z80")]
     Z80,
 }
@@ -629,6 +631,7 @@ impl std::fmt::Display for Arch {
         match self {
             Self::X86 => write!(f, "x86")?,
             Self::X86_64 => write!(f, "x86-64")?,
+            Self::ARM => write!(f, "arm")?,
             Self::Z80 => write!(f, "z80")?,
         }
         Ok(())
