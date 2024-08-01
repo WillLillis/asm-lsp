@@ -38,12 +38,17 @@ pub fn populate_arm_instructions(docs_path: &PathBuf) -> Result<Vec<Instruction>
     for dir_entry in std::fs::read_dir(docs_path)? {
         match dir_entry {
             Ok(entry) => {
-                if entry.path().extension().unwrap_or_default() != "xml" {
+                let path = entry.path();
+                if path.extension().unwrap_or_default() != "xml" {
+                    info!("Skipping entry {}, invalid extension", path.display());
                     continue;
                 }
-                if let Ok(docs) = std::fs::read_to_string(entry.path()) {
+                if let Ok(docs) = std::fs::read_to_string(&path) {
+                    info!("Attempting to parse {}", path.display());
                     let instr = parse_arm_instruction(&docs)?;
                     instructions_map.insert(instr.name.clone(), instr.clone());
+                } else {
+                    info!("Skipping entry, could not read file {}", path.display());
                 }
             }
             _ => continue,
@@ -75,6 +80,8 @@ fn parse_arm_instruction(xml_contents: &str) -> Result<Instruction> {
     debug!("Parsing instruction XML contents...");
     loop {
         // parse the shiz here
+        // Need to grab name, description, operands/ encoding...
+        //  -- look at paper writeup
     }
 
     Ok(instruction)
