@@ -1342,6 +1342,7 @@ pub fn instr_filter_targets(instr: &Instruction, config: &TargetConfig) -> Instr
             (form.gas_name.is_some() && config.assemblers.gas)
                 || (form.go_name.is_some() && config.assemblers.go)
                 || (form.z80_name.is_some() && config.instruction_sets.z80)
+                || (form.arm_name.is_some() && config.instruction_sets.arm)
         })
         .map(|form| {
             let mut filtered = form.clone();

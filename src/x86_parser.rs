@@ -75,9 +75,11 @@ pub fn parse_arm_instruction(xml_contents: &str) -> Result<Instruction> {
 
     // ref to the instruction that's currently under construction
     let mut instruction = Instruction::default();
+    instruction.arch = Some(Arch::ARM);
     let mut curr_instruction_form = InstructionForm::default();
     let mut in_desc = false;
     let mut in_para = false;
+    let mut in_form = false;
 
     debug!("Parsing instruction XML contents...");
     loop {
@@ -92,27 +94,82 @@ pub fn parse_arm_instruction(xml_contents: &str) -> Result<Instruction> {
                         }
                     }
                 }
+                QName(b"encoding") => {
+                    for attr in e.attributes() {
+                        let Attribute { key, value } = attr.unwrap();
+                        if let Ok("name") = str::from_utf8(key.into_inner()) {
+                            curr_instruction_form.arm_name =
+                                Some(str::from_utf8(&value)?.to_string());
+                        }
+                    }
+                }
                 QName(b"desc") => in_desc = true,
                 QName(b"para") => in_para = true,
+                QName(b"asmtemplate") => {
+                    in_form = true
+                }
                 _ => {}
             },
             Ok(Event::Text(ref txt)) => {
-                if !(in_desc && in_para) {
+                if in_form {
+                    if curr_instruction_form.arm_name.is_none() {
+                        curr_instruction_form.arm_name =
+                            Some(str::from_utf8(txt)?.trim().to_string());
+                    } else {
+                        let cleaned = str::from_utf8(txt)?.replace("&lt;", "").replace("&gt;", "");
+                        if let Some(existing) = curr_instruction_form.arm_form {
+                            curr_instruction_form.arm_form = Some(format!("{existing}{cleaned}"));
+                        } else {
+                            curr_instruction_form.arm_form = Some(cleaned);
+                        }
+                    }
+                } else if !(in_desc && in_para) {
                     continue;
+                } else {
+                    instruction.summary += &format!(
+                        "{}{}",
+                        if instruction.summary.is_empty() {
+                            ""
+                        } else {
+                            "\n"
+                        },
+                        str::from_utf8(txt)?
+                    );
                 }
-                println!("{:?}", str::from_utf8(txt));
-                in_para = false;
             }
+            Ok(Event::Empty(ref e)) => match e.name() {
+                QName(b"docvar") => {
+                    let mut isa_next = false;
+                    for attr in e.attributes() {
+                        let Attribute { key, value } = attr.unwrap();
+                        if isa_next {
+                            if let Ok("value") = str::from_utf8(key.into_inner()) {
+                                curr_instruction_form.isa = Some(ISA::from_str(unsafe {
+                                    str::from_utf8_unchecked(&value)
+                                })?);
+                                break;
+                            }
+                        }
+                        if let Ok("key") = str::from_utf8(key.into_inner()) {
+                            if let Ok("isa") = str::from_utf8(&value) {
+                                isa_next = true;
+                            }
+                        }
+                    }
+                }
+                _ => {}
+            },
             // end event --------------------------------------------------------------------------
             Ok(Event::End(ref e)) => {
                 match e.name() {
-                    QName(b"Instruction") => break,
-                    // TODO: Handle instruction forms here
-                    // QName(b"InstructionForm") => {
-                    //     curr_instruction.push_form(curr_instruction_form.clone());
-                    // }
+                    QName(b"instructionsection") => break,
+                    QName(b"encoding") => {
+                        instruction.push_form(curr_instruction_form);
+                        curr_instruction_form = InstructionForm::default();
+                    }
                     QName(b"desc") => in_desc = false,
                     QName(b"para") => in_para = false,
+                    QName(b"asmtemplate") => in_form = false,
                     _ => {} // unknown event
                 }
             }

@@ -126,14 +126,17 @@ pub struct InstructionForm {
     pub cancelling_inputs: Option<bool>,
     pub nacl_version: Option<u8>,
     pub nacl_zero_extends_outputs: Option<bool>,
-    pub isa: Option<ISA>,
     pub operands: Vec<Operand>,
     // --- Z80-Specific Information ---
     pub z80_name: Option<String>,
     pub z80_form: Option<String>,
     pub z80_opcode: Option<String>,
     pub z80_timing: Option<Z80Timing>,
+    // --- ARM-Specific Information ---
+    pub arm_name: Option<String>,
+    pub arm_form: Option<String>,
     // --- Assembler/Architecture Agnostic Info ---
+    pub isa: Option<ISA>,
     pub urls: Vec<String>,
 }
 
@@ -145,6 +148,9 @@ impl std::fmt::Display for InstructionForm {
         }
         if let Some(val) = &self.go_name {
             s += &format!("*GO*: {val} | ");
+        }
+        if let Some(val) = &self.arm_name {
+            s += &format!("*ARM*: {val} | ");
         }
         if let Some(val) = &self.z80_form {
             s += &format!("*Z80*: {val} | ");
@@ -197,6 +203,8 @@ impl std::fmt::Display for InstructionForm {
                 })
                 .collect::<Vec<String>>()
                 .join("\n")
+        } else if let Some(arm_form) = &self.arm_form {
+            arm_form.to_owned()
         } else {
             String::new()
         };
@@ -755,6 +763,7 @@ pub struct InstructionSets {
     pub x86: bool,
     pub x86_64: bool,
     pub z80: bool,
+    pub arm: bool,
 }
 
 impl Default for InstructionSets {
@@ -763,6 +772,7 @@ impl Default for InstructionSets {
             x86: true,
             x86_64: true,
             z80: false,
+            arm: false,
         }
     }
 }
@@ -785,7 +795,7 @@ impl Default for TargetConfig {
 }
 
 // Instruction Set Architecture -------------------------------------------------------------------
-#[derive(Debug, Clone, PartialEq, Eq, Hash, EnumString, AsRefStr, Serialize, Deserialize)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash, EnumString, AsRefStr, Serialize, Deserialize)]
 pub enum ISA {
     #[strum(serialize = "RAO-INT")]
     RAOINT,
@@ -905,6 +915,8 @@ pub enum ISA {
     AVXNECONVERT,
     #[strum(serialize = "AVX-IFMA")]
     AVXIFMA,
+    // ARM
+    A64,
 }
 
 // Operand ----------------------------------------------------------------------------------------

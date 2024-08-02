@@ -103,6 +103,7 @@ pub fn main() -> Result<()> {
     let mut names_to_info = NameToInfoMaps::default();
     let params: InitializeParams = serde_json::from_value(initialization_params.clone()).unwrap();
     let target_config = get_target_config(&params);
+    info!("BOFFFA");
     info!("Server Configuration: {:?}", target_config);
 
     // create a map of &Instruction_name -> &Instruction - Use that in user queries
@@ -168,6 +169,26 @@ pub fn main() -> Result<()> {
         Vec::new()
     };
 
+    let arm_instructions = if target_config.instruction_sets.arm {
+        let start = std::time::Instant::now();
+        let arm_instrs = include_bytes!("../../docs_store/opcodes/serialized/arm");
+        let instrs = bincode::deserialize::<Vec<Instruction>>(arm_instrs)?
+            .into_iter()
+            .map(|instruction| {
+                // filter out assemblers by user config
+                instr_filter_targets(&instruction, &target_config)
+            })
+            .filter(|instruction| !instruction.forms.is_empty())
+            .collect();
+        info!(
+            "arm instruction set loaded in {}ms",
+            start.elapsed().as_millis()
+        );
+        instrs
+    } else {
+        Vec::new()
+    };
+
     populate_name_to_instruction_map(
         Arch::X86,
         &x86_instructions,
@@ -181,6 +202,11 @@ pub fn main() -> Result<()> {
     populate_name_to_instruction_map(
         Arch::Z80,
         &z80_instructions,
+        &mut names_to_info.instructions,
+    );
+    populate_name_to_instruction_map(
+        Arch::ARM,
+        &arm_instructions,
         &mut names_to_info.instructions,
     );
 

@@ -49,13 +49,9 @@ enum Commands {
 }
 
 fn run(opts: &SerializeDocs) -> Result<()> {
-    // Add directory switch, make architecture a required arg if that's supplied
-    // if dir switch is supplied, do the thing for the appropriate architecture,
-    // if it's not supported, just print an error and exit
     match opts.doc_type {
         DocType::Instruction => {
             let path = opts.input_path.canonicalize()?;
-            let conts = std::fs::read_to_string(&path)?;
             let instrs: Vec<Instruction>;
             match (path.is_dir(), opts.arch) {
                 (true, Some(arch)) => {
@@ -76,10 +72,8 @@ fn run(opts: &SerializeDocs) -> Result<()> {
                     if arch_in.is_some() {
                         println!("WARNING: `Arch` argument is ignored when `input_path` isn't a directory");
                     }
-                    // hacky bs for tests, remove later...
-                    instrs = vec![parse_arm_instruction(&conts)?];
-                    println!("instrs: {}", instrs[0]);
-                    // instrs = populate_instructions(&conts)?;
+                    let conts = std::fs::read_to_string(&path)?;
+                    instrs = populate_instructions(&conts)?;
                 }
             }
             if instrs.is_empty() {
@@ -89,6 +83,7 @@ fn run(opts: &SerializeDocs) -> Result<()> {
             std::fs::write(&opts.output_path, serialized)?;
         }
         DocType::Register => {
+            todo!();
             let path = opts.input_path.canonicalize()?;
             let conts = std::fs::read_to_string(&path)?;
             let regs: Vec<Register>;
