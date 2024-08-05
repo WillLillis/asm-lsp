@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::env::args;
 use std::fs;
-use std::io::{Read, Write};
+use std::io::Write;
 use std::path::PathBuf;
 use std::str::{self, FromStr};
 
@@ -10,6 +10,7 @@ use crate::types::{
     NameToInstructionMap, NameToRegisterMap, Operand, OperandType, Register, RegisterBitInfo,
     RegisterType, RegisterWidth, XMMMode, Z80Timing, Z80TimingInfo, ISA,
 };
+use crate::InstructionAlias;
 
 use anyhow::{anyhow, Result};
 use log::{debug, error, info, warn};
@@ -34,21 +35,31 @@ use url_escape::encode_www_form_urlencoded;
 /// or if `docs_path` cannot be read
 pub fn populate_arm_instructions(docs_path: &PathBuf) -> Result<Vec<Instruction>> {
     let mut instructions_map = HashMap::<String, Instruction>::new();
+    let mut alias_map = HashMap::<String, InstructionAlias>::new();
 
     for dir_entry in std::fs::read_dir(docs_path)? {
         match dir_entry {
             Ok(entry) => {
                 let path = entry.path();
-                if path.extension().unwrap_or_default() != "xml" {
-                    info!("Skipping entry {}, invalid extension", path.display());
+                if path.extension().unwrap_or_default() != "xml"
+                    || path.file_stem().unwrap_or_default() == "notice"
+                    || path.file_stem().unwrap_or_default() == "constraint_text_mappings"
+                {
                     continue;
                 }
                 if let Ok(docs) = std::fs::read_to_string(&path) {
-                    info!("Attempting to parse {}", path.display());
-                    let instr = parse_arm_instruction(&docs)?;
-                    instructions_map.insert(instr.name.clone(), instr.clone());
+                    if let Some((alias, aliased_instr)) = parse_arm_alias(&docs)? {
+                        println!("Adding alias: {aliased_instr}");
+                        alias_map.insert(aliased_instr, alias);
+                    } else if let Some(instr) = parse_arm_instruction(&docs)? {
+                        println!("Adding instruction: {}", instr.name);
+                        instructions_map.insert(instr.name.clone(), instr.clone());
+                    }
                 } else {
-                    info!("Skipping entry, could not read file {}", path.display());
+                    println!(
+                        "WARNING: Skipping entry, could not read file {}",
+                        path.display()
+                    );
                 }
             }
             _ => continue,
@@ -56,6 +67,109 @@ pub fn populate_arm_instructions(docs_path: &PathBuf) -> Result<Vec<Instruction>
     }
 
     Ok(instructions_map.into_values().collect())
+}
+
+/// Parse an xml file containing the documentation for a single ARM instruction
+/// Treats the contents as an instruction alias, and returns `None` if it is not
+///
+/// # Errors
+///
+/// This function is highly specialized to parse a handful of files and will panic or return
+/// `Err` for most mal-formed inputs
+///
+/// # Panics
+///
+/// This function is highly specialized to parse a handful of files and will panic or return
+/// `Err` for most mal-formed/unexpected inputs
+fn parse_arm_alias(xml_contents: &str) -> Result<Option<(InstructionAlias, String)>> {
+    // iterate through the XML --------------------------------------------------------------------
+    let mut reader = Reader::from_str(xml_contents);
+    let mut aliased_instr: Option<String> = None;
+    let mut alias = InstructionAlias::default();
+    let mut curr_template: Option<String> = None;
+    let mut in_desc = false;
+    let mut in_para = false;
+    let mut in_template = false;
+
+    loop {
+        match reader.read_event() {
+            Ok(Event::Start(ref e)) => match e.name() {
+                QName(b"instructionsection") => {
+                    for attr in e.attributes() {
+                        let Attribute { key, value } = attr.unwrap();
+                        if let Ok("title") = str::from_utf8(key.into_inner()) {
+                            alias.title = (unsafe { str::from_utf8_unchecked(&value) }).to_string();
+                        }
+                    }
+                }
+                QName(b"desc") => in_desc = true,
+                QName(b"para") => in_para = true,
+                QName(b"asmtemplate") => in_template = true,
+                QName(b"alphaindex") | QName(b"encodingindex") => return Ok(None),
+                _ => {}
+            },
+            Ok(Event::Text(ref txt)) => {
+                if in_template {
+                    let cleaned = str::from_utf8(txt)?.replace("&lt;", "").replace("&gt;", "");
+                    if let Some(existing) = curr_template {
+                        curr_template = Some(format!("{existing}{cleaned}"));
+                    } else {
+                        curr_template = Some(cleaned);
+                    }
+                } else if in_desc && in_para {
+                    // TODO: Clean off trailing newlines
+                    alias.summary += &format!(
+                        "{}{}",
+                        if alias.summary.is_empty() { "" } else { "\n" },
+                        str::from_utf8(txt)?
+                    );
+                }
+            }
+            Ok(Event::Empty(ref e)) => {
+                if let QName(b"docvar") = e.name() {
+                    let mut alias_next = false;
+                    for attr in e.attributes() {
+                        let Attribute { key, value } = attr.unwrap();
+                        if alias_next {
+                            if let Ok("value") = str::from_utf8(key.into_inner()) {
+                                aliased_instr = Some(str::from_utf8(&value)?.to_owned());
+                                break;
+                            }
+                        }
+                        if let Ok("key") = str::from_utf8(key.into_inner()) {
+                            if let Ok("alias_mnemonic") = str::from_utf8(&value) {
+                                alias_next = true;
+                            }
+                        }
+                    }
+                }
+            }
+            // end event --------------------------------------------------------------------------
+            Ok(Event::End(ref e)) => match e.name() {
+                QName(b"instructionsection") => break,
+                QName(b"asmtemplate") => {
+                    if let Some(template) = curr_template {
+                        alias.asm_templates.push(template);
+                        curr_template = None;
+                    }
+                    in_template = false
+                }
+                QName(b"docvars") => {
+                    if aliased_instr.is_none() {
+                        return Ok(None);
+                    }
+                }
+                _ => {}
+            },
+            _ => {}
+        }
+    }
+
+    if let Some(aliased_name) = aliased_instr {
+        Ok(Some((alias, aliased_name)))
+    } else {
+        Ok(None)
+    }
 }
 
 /// Parse an xml file containing the documentation for a single ARM instruction
@@ -69,17 +183,19 @@ pub fn populate_arm_instructions(docs_path: &PathBuf) -> Result<Vec<Instruction>
 ///
 /// This function is highly specialized to parse a handful of files and will panic or return
 /// `Err` for most mal-formed/unexpected inputs
-pub fn parse_arm_instruction(xml_contents: &str) -> Result<Instruction> {
+fn parse_arm_instruction(xml_contents: &str) -> Result<Option<Instruction>> {
     // iterate through the XML --------------------------------------------------------------------
     let mut reader = Reader::from_str(xml_contents);
 
     // ref to the instruction that's currently under construction
-    let mut instruction = Instruction::default();
-    instruction.arch = Some(Arch::ARM);
+    let mut instruction = Instruction {
+        arch: Some(Arch::ARM),
+        ..Default::default()
+    };
     let mut curr_instruction_form = InstructionForm::default();
     let mut in_desc = false;
     let mut in_para = false;
-    let mut in_form = false;
+    let mut in_template = false;
 
     debug!("Parsing instruction XML contents...");
     loop {
@@ -105,27 +221,25 @@ pub fn parse_arm_instruction(xml_contents: &str) -> Result<Instruction> {
                 }
                 QName(b"desc") => in_desc = true,
                 QName(b"para") => in_para = true,
-                QName(b"asmtemplate") => {
-                    in_form = true
-                }
+                QName(b"asmtemplate") => in_template = true,
+                QName(b"alphaindex") | QName(b"encodingindex") => return Ok(None),
                 _ => {}
             },
             Ok(Event::Text(ref txt)) => {
-                if in_form {
+                if in_template {
                     if curr_instruction_form.arm_name.is_none() {
                         curr_instruction_form.arm_name =
                             Some(str::from_utf8(txt)?.trim().to_string());
                     } else {
                         let cleaned = str::from_utf8(txt)?.replace("&lt;", "").replace("&gt;", "");
-                        if let Some(existing) = curr_instruction_form.arm_form {
-                            curr_instruction_form.arm_form = Some(format!("{existing}{cleaned}"));
+                        if let Some(existing) = curr_instruction_form.arm_name {
+                            curr_instruction_form.arm_name = Some(format!("{existing}{cleaned}"));
                         } else {
-                            curr_instruction_form.arm_form = Some(cleaned);
+                            curr_instruction_form.arm_name = Some(cleaned);
                         }
                     }
-                } else if !(in_desc && in_para) {
-                    continue;
-                } else {
+                } else if in_desc && in_para {
+                    // TODO: Clean off trailing newlines
                     instruction.summary += &format!(
                         "{}{}",
                         if instruction.summary.is_empty() {
@@ -137,8 +251,8 @@ pub fn parse_arm_instruction(xml_contents: &str) -> Result<Instruction> {
                     );
                 }
             }
-            Ok(Event::Empty(ref e)) => match e.name() {
-                QName(b"docvar") => {
+            Ok(Event::Empty(ref e)) => {
+                if let QName(b"docvar") = e.name() {
                     let mut isa_next = false;
                     for attr in e.attributes() {
                         let Attribute { key, value } = attr.unwrap();
@@ -157,8 +271,7 @@ pub fn parse_arm_instruction(xml_contents: &str) -> Result<Instruction> {
                         }
                     }
                 }
-                _ => {}
-            },
+            }
             // end event --------------------------------------------------------------------------
             Ok(Event::End(ref e)) => {
                 match e.name() {
@@ -169,7 +282,7 @@ pub fn parse_arm_instruction(xml_contents: &str) -> Result<Instruction> {
                     }
                     QName(b"desc") => in_desc = false,
                     QName(b"para") => in_para = false,
-                    QName(b"asmtemplate") => in_form = false,
+                    QName(b"asmtemplate") => in_template = false,
                     _ => {} // unknown event
                 }
             }
@@ -179,7 +292,7 @@ pub fn parse_arm_instruction(xml_contents: &str) -> Result<Instruction> {
         }
     }
 
-    Ok(instruction)
+    Ok(Some(instruction))
 }
 
 /// Parse the provided XML contents and return a vector of all the instructions based on that.
@@ -592,7 +705,7 @@ pub fn populate_name_to_instruction_map<'instruction>(
 mod tests {
     use mockito::ServerOpts;
 
-    use crate::x86_parser::{get_cache_dir, populate_instructions};
+    use crate::parser::{get_cache_dir, populate_instructions};
     #[test]
     fn test_populate_instructions() {
         let mut server = mockito::Server::new_with_opts(ServerOpts {

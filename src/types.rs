@@ -16,6 +16,7 @@ pub struct Instruction {
     pub alt_names: Vec<String>,
     pub summary: String,
     pub forms: Vec<InstructionForm>,
+    pub aliases: Vec<InstructionAlias>,
     pub url: Option<String>,
     pub arch: Option<Arch>,
 }
@@ -29,6 +30,7 @@ impl Default for Instruction {
         let alt_names = vec![];
         let summary = String::new();
         let forms = vec![];
+        let aliases = vec![];
         let url = None;
         let arch = None;
 
@@ -37,6 +39,7 @@ impl Default for Instruction {
             alt_names,
             summary,
             forms,
+            aliases,
             url,
             arch,
         }
@@ -62,6 +65,13 @@ impl std::fmt::Display for Instruction {
             v.push(item.as_str());
         }
 
+        // instruction aliases
+        let instruction_alias_strs: Vec<String> =
+            self.aliases.iter().map(|f| format!("{f}")).collect();
+        for item in &instruction_alias_strs {
+            v.push(item.as_str());
+        }
+
         // url
         let more_info: String;
         match &self.url {
@@ -82,6 +92,11 @@ impl<'own> Instruction {
     /// Add a new form at the current instruction
     pub fn push_form(&mut self, form: InstructionForm) {
         self.forms.push(form);
+    }
+
+    /// Add a new alias at the current instruction
+    pub fn push_alias(&mut self, form: InstructionAlias) {
+        self.aliases.push(form);
     }
 
     /// Get the primary names
@@ -203,7 +218,7 @@ impl std::fmt::Display for InstructionForm {
                 })
                 .collect::<Vec<String>>()
                 .join("\n")
-        } else if let Some(arm_form) = &self.arm_form {
+        } else if let Some(arm_form) = &self.arm_name {
             arm_form.to_owned()
         } else {
             String::new()
@@ -217,6 +232,31 @@ impl std::fmt::Display for InstructionForm {
 
         for url in &self.urls {
             s += &format!("\n  + More info: {url}\n");
+        }
+
+        write!(f, "{s}")?;
+        Ok(())
+    }
+}
+
+// InstructionAlias --------------------------------------------------------------------------------
+#[derive(Default, Eq, PartialEq, Hash, Debug, Clone, Serialize, Deserialize)]
+pub struct InstructionAlias {
+    pub title: String,
+    pub summary: String,
+    pub asm_templates: Vec<String>,
+}
+
+impl std::fmt::Display for InstructionAlias {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut s = self.title.to_owned();
+
+        if !self.summary.is_empty() {
+            s += &format!("\n {}", self.summary);
+        }
+
+        for template in &self.asm_templates {
+            s += &format!("\n + {template}");
         }
 
         write!(f, "{s}")?;

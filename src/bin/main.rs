@@ -189,6 +189,7 @@ pub fn main() -> Result<()> {
         Vec::new()
     };
 
+    info!("Instructions: {:#?}", arm_instructions);
     populate_name_to_instruction_map(
         Arch::X86,
         &x86_instructions,

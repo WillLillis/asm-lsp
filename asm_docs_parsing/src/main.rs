@@ -1,10 +1,8 @@
 use std::path::PathBuf;
 
-use ::asm_lsp::x86_parser::{populate_instructions, populate_registers};
+use ::asm_lsp::parser::{populate_instructions, populate_registers};
 use asm_lsp::{
-    populate_directives,
-    x86_parser::{parse_arm_instruction, populate_arm_instructions},
-    Arch, Directive, Instruction, Register,
+    parser::populate_arm_instructions, populate_directives, Arch, Directive, Instruction, Register,
 };
 
 use anyhow::{anyhow, Result};
