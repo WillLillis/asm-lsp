@@ -35,8 +35,9 @@ use url_escape::encode_www_form_urlencoded;
 /// or if `docs_path` cannot be read
 pub fn populate_arm_instructions(docs_path: &PathBuf) -> Result<Vec<Instruction>> {
     let mut instructions_map = HashMap::<String, Instruction>::new();
-    let mut alias_map = HashMap::<String, InstructionAlias>::new();
+    let mut alias_map = HashMap::<String, Vec<InstructionAlias>>::new();
 
+    // parse all instruction and instruction alias docs
     for dir_entry in std::fs::read_dir(docs_path)? {
         match dir_entry {
             Ok(entry) => {
@@ -49,10 +50,11 @@ pub fn populate_arm_instructions(docs_path: &PathBuf) -> Result<Vec<Instruction>
                 }
                 if let Ok(docs) = std::fs::read_to_string(&path) {
                     if let Some((alias, aliased_instr)) = parse_arm_alias(&docs)? {
-                        println!("Adding alias: {aliased_instr}");
-                        alias_map.insert(aliased_instr, alias);
+                        // println!("Adding alias: {aliased_instr}");
+                        let aliases = alias_map.entry(aliased_instr).or_insert(Vec::new());
+                        aliases.push(alias);
                     } else if let Some(instr) = parse_arm_instruction(&docs)? {
-                        println!("Adding instruction: {}", instr.name);
+                        // println!("Adding instruction: {}", instr.name);
                         instructions_map.insert(instr.name.clone(), instr.clone());
                     }
                 } else {
@@ -65,6 +67,27 @@ pub fn populate_arm_instructions(docs_path: &PathBuf) -> Result<Vec<Instruction>
             _ => continue,
         }
     }
+
+    // add aliases to their corresponding instruction, creating them as necessary
+    for (instr_name, aliases) in alias_map.iter() {
+        if !instructions_map.contains_key(instr_name) {
+            instructions_map.insert(
+                instr_name.to_owned(),
+                Instruction {
+                    name: instr_name.to_owned().to_uppercase(),
+                    alt_names: vec![instr_name.to_lowercase(), instr_name.to_uppercase()],
+                    arch: Some(Arch::ARM),
+                    aliases: aliases.to_owned(),
+                    ..Default::default()
+                },
+            );
+        } else {
+            let entry = instructions_map.get_mut(instr_name).unwrap();
+            entry.aliases.append(&mut aliases.to_owned());
+        }
+    }
+
+    println!("Instructions: {:#?}", instructions_map);
 
     Ok(instructions_map.into_values().collect())
 }
@@ -117,12 +140,9 @@ fn parse_arm_alias(xml_contents: &str) -> Result<Option<(InstructionAlias, Strin
                         curr_template = Some(cleaned);
                     }
                 } else if in_desc && in_para {
-                    // TODO: Clean off trailing newlines
-                    alias.summary += &format!(
-                        "{}{}",
-                        if alias.summary.is_empty() { "" } else { "\n" },
-                        str::from_utf8(txt)?
-                    );
+                    if alias.summary.is_empty() {
+                        alias.summary = str::from_utf8(txt)?.to_owned();
+                    }
                 }
             }
             Ok(Event::Empty(ref e)) => {
@@ -192,10 +212,13 @@ fn parse_arm_instruction(xml_contents: &str) -> Result<Option<Instruction>> {
         arch: Some(Arch::ARM),
         ..Default::default()
     };
-    let mut curr_instruction_form = InstructionForm::default();
+    let mut curr_template: Option<String> = None;
     let mut in_desc = false;
     let mut in_para = false;
     let mut in_template = false;
+
+    // TODO: Grab mnomic and use that as name rather than the title
+    // title can be some internal name...
 
     debug!("Parsing instruction XML contents...");
     loop {
@@ -205,17 +228,10 @@ fn parse_arm_instruction(xml_contents: &str) -> Result<Option<Instruction>> {
                     for attr in e.attributes() {
                         let Attribute { key, value } = attr.unwrap();
                         if let Ok("id") = str::from_utf8(key.into_inner()) {
-                            instruction.name =
-                                (unsafe { str::from_utf8_unchecked(&value) }).to_string();
-                        }
-                    }
-                }
-                QName(b"encoding") => {
-                    for attr in e.attributes() {
-                        let Attribute { key, value } = attr.unwrap();
-                        if let Ok("name") = str::from_utf8(key.into_inner()) {
-                            curr_instruction_form.arm_name =
-                                Some(str::from_utf8(&value)?.to_string());
+                            let name = (unsafe { str::from_utf8_unchecked(&value) }).to_string();
+                            instruction.alt_names.push(name.to_lowercase());
+                            instruction.alt_names.push(name.to_uppercase());
+                            instruction.name = name.to_uppercase();
                         }
                     }
                 }
@@ -227,48 +243,19 @@ fn parse_arm_instruction(xml_contents: &str) -> Result<Option<Instruction>> {
             },
             Ok(Event::Text(ref txt)) => {
                 if in_template {
-                    if curr_instruction_form.arm_name.is_none() {
-                        curr_instruction_form.arm_name =
-                            Some(str::from_utf8(txt)?.trim().to_string());
+                    if curr_template.is_none() {
+                        curr_template = Some(str::from_utf8(txt)?.trim().to_owned());
                     } else {
                         let cleaned = str::from_utf8(txt)?.replace("&lt;", "").replace("&gt;", "");
-                        if let Some(existing) = curr_instruction_form.arm_name {
-                            curr_instruction_form.arm_name = Some(format!("{existing}{cleaned}"));
+                        if let Some(existing) = curr_template {
+                            curr_template = Some(format!("{existing}{cleaned}"));
                         } else {
-                            curr_instruction_form.arm_name = Some(cleaned);
+                            curr_template = Some(cleaned);
                         }
                     }
                 } else if in_desc && in_para {
-                    // TODO: Clean off trailing newlines
-                    instruction.summary += &format!(
-                        "{}{}",
-                        if instruction.summary.is_empty() {
-                            ""
-                        } else {
-                            "\n"
-                        },
-                        str::from_utf8(txt)?
-                    );
-                }
-            }
-            Ok(Event::Empty(ref e)) => {
-                if let QName(b"docvar") = e.name() {
-                    let mut isa_next = false;
-                    for attr in e.attributes() {
-                        let Attribute { key, value } = attr.unwrap();
-                        if isa_next {
-                            if let Ok("value") = str::from_utf8(key.into_inner()) {
-                                curr_instruction_form.isa = Some(ISA::from_str(unsafe {
-                                    str::from_utf8_unchecked(&value)
-                                })?);
-                                break;
-                            }
-                        }
-                        if let Ok("key") = str::from_utf8(key.into_inner()) {
-                            if let Ok("isa") = str::from_utf8(&value) {
-                                isa_next = true;
-                            }
-                        }
+                    if instruction.summary.is_empty() {
+                        instruction.summary = str::from_utf8(txt)?.to_owned();
                     }
                 }
             }
@@ -277,8 +264,10 @@ fn parse_arm_instruction(xml_contents: &str) -> Result<Option<Instruction>> {
                 match e.name() {
                     QName(b"instructionsection") => break,
                     QName(b"encoding") => {
-                        instruction.push_form(curr_instruction_form);
-                        curr_instruction_form = InstructionForm::default();
+                        if let Some(template) = curr_template {
+                            instruction.asm_templates.push(template);
+                            curr_template = None;
+                        }
                     }
                     QName(b"desc") => in_desc = false,
                     QName(b"para") => in_para = false,
@@ -688,6 +677,9 @@ pub fn populate_name_to_instruction_map<'instruction>(
     // Add the "true" names first
     for instruction in instructions {
         for name in &instruction.get_primary_names() {
+            if name.eq_ignore_ascii_case("MOV") {
+                info!("BRO WHAT? {name}")
+            }
             names_to_instructions.insert((arch, name), instruction);
         }
     }

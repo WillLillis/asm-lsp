@@ -103,7 +103,6 @@ pub fn main() -> Result<()> {
     let mut names_to_info = NameToInfoMaps::default();
     let params: InitializeParams = serde_json::from_value(initialization_params.clone()).unwrap();
     let target_config = get_target_config(&params);
-    info!("BOFFFA");
     info!("Server Configuration: {:?}", target_config);
 
     // create a map of &Instruction_name -> &Instruction - Use that in user queries
@@ -172,14 +171,9 @@ pub fn main() -> Result<()> {
     let arm_instructions = if target_config.instruction_sets.arm {
         let start = std::time::Instant::now();
         let arm_instrs = include_bytes!("../../docs_store/opcodes/serialized/arm");
-        let instrs = bincode::deserialize::<Vec<Instruction>>(arm_instrs)?
-            .into_iter()
-            .map(|instruction| {
-                // filter out assemblers by user config
-                instr_filter_targets(&instruction, &target_config)
-            })
-            .filter(|instruction| !instruction.forms.is_empty())
-            .collect();
+        // NOTE: No need to filter these instructions by assembler like we do for
+        // x86/x86_64, as our ARM docs don't contain any assembler-specific information (yet)
+        let instrs = bincode::deserialize::<Vec<Instruction>>(arm_instrs)?;
         info!(
             "arm instruction set loaded in {}ms",
             start.elapsed().as_millis()

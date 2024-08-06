@@ -16,6 +16,7 @@ pub struct Instruction {
     pub alt_names: Vec<String>,
     pub summary: String,
     pub forms: Vec<InstructionForm>,
+    pub asm_templates: Vec<String>,
     pub aliases: Vec<InstructionAlias>,
     pub url: Option<String>,
     pub arch: Option<Arch>,
@@ -30,6 +31,7 @@ impl Default for Instruction {
         let alt_names = vec![];
         let summary = String::new();
         let forms = vec![];
+        let asm_templates = vec![];
         let aliases = vec![];
         let url = None;
         let arch = None;
@@ -39,6 +41,7 @@ impl Default for Instruction {
             alt_names,
             summary,
             forms,
+            asm_templates,
             aliases,
             url,
             arch,
@@ -56,13 +59,35 @@ impl std::fmt::Display for Instruction {
             header = self.name.clone();
         }
 
-        let mut v: Vec<&str> = vec![&header, &self.summary, "\n", "## Forms", "\n"];
+        //let mut v: Vec<&str> = vec![&header, &self.summary, "\n", "## Forms", "\n"];
+        let mut v: Vec<&str> = vec![&header, &self.summary, "\n"];
+
+        if !self.forms.is_empty() {
+            v.append(&mut vec!["## Forms", "\n"]);
+        }
 
         // instruction forms
         let instruction_form_strs: Vec<String> =
             self.forms.iter().map(|f| format!("{f}")).collect();
         for item in &instruction_form_strs {
             v.push(item.as_str());
+        }
+
+        if !self.asm_templates.is_empty() {
+            v.append(&mut vec!["## Templates", "\n"]);
+        }
+        // instruction templates
+        let instruction_template_strs: Vec<String> = self
+            .asm_templates
+            .iter()
+            .map(|f| format!(" + `{}`", f.as_str()))
+            .collect();
+        for item in &instruction_template_strs {
+            v.push(item.as_str());
+        }
+
+        if !self.aliases.is_empty() {
+            v.append(&mut vec!["## Aliases", "\n"]);
         }
 
         // instruction aliases
@@ -147,9 +172,6 @@ pub struct InstructionForm {
     pub z80_form: Option<String>,
     pub z80_opcode: Option<String>,
     pub z80_timing: Option<Z80Timing>,
-    // --- ARM-Specific Information ---
-    pub arm_name: Option<String>,
-    pub arm_form: Option<String>,
     // --- Assembler/Architecture Agnostic Info ---
     pub isa: Option<ISA>,
     pub urls: Vec<String>,
@@ -163,9 +185,6 @@ impl std::fmt::Display for InstructionForm {
         }
         if let Some(val) = &self.go_name {
             s += &format!("*GO*: {val} | ");
-        }
-        if let Some(val) = &self.arm_name {
-            s += &format!("*ARM*: {val} | ");
         }
         if let Some(val) = &self.z80_form {
             s += &format!("*Z80*: {val} | ");
@@ -218,8 +237,6 @@ impl std::fmt::Display for InstructionForm {
                 })
                 .collect::<Vec<String>>()
                 .join("\n")
-        } else if let Some(arm_form) = &self.arm_name {
-            arm_form.to_owned()
         } else {
             String::new()
         };
@@ -256,7 +273,7 @@ impl std::fmt::Display for InstructionAlias {
         }
 
         for template in &self.asm_templates {
-            s += &format!("\n + {template}");
+            s += &format!("\n + `{template}`");
         }
 
         write!(f, "{s}")?;
