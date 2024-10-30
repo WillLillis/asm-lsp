@@ -81,7 +81,7 @@ impl TryFrom<GenerateArgs> for GenerateOpts {
                 path.push("asm-lsp");
                 path.push(".asm-lsp.toml");
                 path
-            } else if let Some(path) = value.output_dir {
+            } else if let Some(path) = value.output_dir.as_ref() {
                 let mut canonicalized_path = path.canonicalize().map_err(|e| {
                     format!(
                         "Failed to canonicalize target path: \"{}\" -- {e}",
@@ -110,7 +110,7 @@ impl TryFrom<GenerateArgs> for GenerateOpts {
             }
         };
         let project_path = {
-            if let Some(path) = value.project_path {
+            if let Some(path) = value.project_path.as_ref().or(value.output_dir.as_ref()) {
                 let canonicalized_path = path.canonicalize().map_err(|e| {
                     format!(
                         "Failed to canonicalize project path: \"{}\" -- {e}",
