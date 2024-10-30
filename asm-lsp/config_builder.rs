@@ -189,8 +189,22 @@ fn prompt_project_path(opts: &GenerateOpts) -> PathBuf {
             fallback_enter(&mut true_path);
             return true_path;
         };
+
+        let mut dir_entries = Vec::new();
+        let mut file_entries = Vec::new();
         for entry in dir_reader.filter_map(std::result::Result::ok) {
             let entry_path = entry.path();
+            if entry_path.is_dir() {
+                dir_entries.push(entry_path);
+            } else {
+                file_entries.push(entry_path);
+            }
+        }
+
+        dir_entries.sort();
+        file_entries.sort();
+
+        for entry_path in dir_entries.into_iter().chain(file_entries) {
             path_entries.push(entry_path.clone());
             if let Some(name) = entry_path.file_name() {
                 display_entries.push(name.to_string_lossy().to_string());
