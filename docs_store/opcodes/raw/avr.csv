@@ -1,0 +1,2 @@
+Mnemonic,Operands,Description,Operation,Flags,#Clocks AVRe,#Clocks AVRxm,#Clocks AVRxt,#Clocks AVRrc
+ADD,"Rd,Rr","Add without Carry","Rd ← Rd + Rr","ZCNVSH",1,1,1,1
