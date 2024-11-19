@@ -584,6 +584,13 @@ pub fn gen_config(opts: &GenerateOpts) -> Result<()> {
     let file_config = toml::to_string_pretty::<RootConfig>(&root_config).map_err(|e| {
         anyhow!("Failed to serialize configuration -- {e}\nPlease file a bug report: https://github.com/bergercookie/asm-lsp/issues/new")
     })?;
+    // Sanity check that shouldn't be necessary
+    match toml::from_str::<RootConfig>(&file_config) {
+        Ok(_) => {}
+        Err(e) => {
+            return Err(anyhow!("Failed to generate valid configuration -- {e}\nPlease file a bug report: https://github.com/bergercookie/asm-lsp/issues/new"));
+        }
+    }
     if !opts.quiet {
         println!("{file_config}");
     }
