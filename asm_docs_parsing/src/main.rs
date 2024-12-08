@@ -84,7 +84,15 @@ fn run(opts: &SerializeDocs) -> Result<()> {
                         println!("WARNING: `Arch` argument is ignored when `input_path` isn't a directory");
                     }
                     let conts = std::fs::read_to_string(&path)?;
-                    instrs = populate_instructions(&conts)?;
+                    // TODO: Handle 6502 here
+                    match arch_in {
+                        Some(Arch::MOS6502) => {
+                            instrs = populate_6502_instrucions(&conts)?;
+                        }
+                        _ => {
+                            instrs = populate_instructions(&conts)?;
+                        }
+                    }
                 }
             }
             if instrs.is_empty() {

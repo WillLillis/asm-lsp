@@ -637,6 +637,26 @@ fn parse_arm_instruction(xml_contents: &str) -> Option<Instruction> {
     Some(instruction)
 }
 
+/// Parse the provided HTML contents and return a vector of all the instructions based on that.
+///
+/// # Errors
+///
+/// This function is highly specialized to parse a single file and will panic or return
+/// `Err` for most mal-formed inputs
+///
+/// # Panics
+///
+/// This function is highly specialized to parse a single file and will panic or return
+/// `Err` for most mal-formed/unexpected inputs
+// NOTE: We could use an HTML parsing library like scraper or html5ever, but the input
+// is regular/constrained enough that we can just use some regexes and avoid
+// the extra dependency
+#[must_use]
+fn populate_6502_instructions(html_conts: &str) {
+    // find the start of the instruction descriptions
+
+}
+
 /// Parse the provided XML contents and return a vector of all the instructions based on that.
 /// If parsing fails, the appropriate error will be returned instead.
 ///
