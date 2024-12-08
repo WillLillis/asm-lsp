@@ -15,7 +15,9 @@ use crate::types::{
 use crate::InstructionAlias;
 
 use anyhow::{anyhow, Result};
+use htmlentity::entity::ICodedDataTrait;
 use log::{debug, error, info, warn};
+use once_cell::sync::Lazy;
 use quick_xml::escape::unescape;
 use quick_xml::events::attributes::Attribute;
 use quick_xml::events::Event;
@@ -635,6 +637,140 @@ fn parse_arm_instruction(xml_contents: &str) -> Option<Instruction> {
     }
 
     Some(instruction)
+}
+
+/// Parse the provided HTML contents and return a vector of all the instructions based on that.
+/// <https://www.masswerk.at/6502/6502_instruction_set.html>
+///
+/// # Errors
+///
+/// This function is highly specialized to parse a single file and will panic or return
+/// `Err` for most mal-formed inputs
+///
+/// # Panics
+///
+/// This function is highly specialized to parse a single file and will panic or return
+/// `Err` for most mal-formed/unexpected inputs
+// NOTE: We could use an HTML parsing library like scraper or html5ever, but the input
+// is regular/constrained enough that we can just use some regexes and avoid
+// the extra dependency
+// HACK: This function *will* panic when fed the html file directly from the website,
+// as it is missing several closing `<\table>` tags. They have been added to copy
+// stored in the repo
+#[must_use]
+pub fn populate_6502_instructions(html_conts: &str) -> Vec<Instruction> {
+    static NAME_REGEX: Lazy<Regex> =
+        Lazy::new(|| Regex::new(r#"<dt id="[A-Z]{3}">(?<name>[A-Z]{3})</dt>$"#).unwrap());
+    static SUMMARY_REGEX: Lazy<Regex> =
+        Lazy::new(|| Regex::new(r#"<p aria-label="summary">(?<summary>.+)</p>$"#).unwrap());
+    // static
+    let mut instructions = Vec::new();
+    let start = {
+        let start_marker = r#"<dl class="opcodes">"#;
+        let section_start = html_conts.find(start_marker).unwrap();
+        section_start + start_marker.len() + 1 // + 1 for '\n'
+    };
+    let mut lines = html_conts[start..].lines().peekable();
+    loop {
+        // opcode id
+        let Some(name_line) = lines.next() else {
+            break;
+        };
+        if name_line.is_empty() {
+            continue;
+        }
+        let name = &NAME_REGEX.captures(name_line).unwrap()["name"];
+        assert_eq!(lines.next().unwrap(), "<dd>");
+        // summary
+        let mut summary =
+            SUMMARY_REGEX.captures(lines.next().unwrap()).unwrap()["summary"].to_string();
+        let implementation_notes_marker = r#"<p aria-label="notes on the implementation">"#;
+        let synopsis_marker = r#"<p aria-label="synopsis">"#;
+        if lines
+            .peek()
+            .unwrap()
+            .starts_with(implementation_notes_marker)
+        {
+            summary.push('\n');
+            while !lines.peek().unwrap().starts_with(synopsis_marker) {
+                summary += lines.next().unwrap();
+            }
+        }
+        // synopsis
+        let synopsis_line = lines.next().unwrap();
+        let mut synopsis = String::new();
+        let mut prev_idx = 0;
+        for (i, c) in synopsis_line.chars().enumerate() {
+            match c {
+                '<' => {
+                    if prev_idx != 0 {
+                        let bytes: Vec<u8> = synopsis_line[prev_idx..i].as_bytes().to_vec();
+                        let decoded = htmlentity::entity::decode(&bytes).to_string().unwrap();
+                        synopsis += &decoded;
+                    }
+                }
+                '>' => prev_idx = i + 1,
+                _ => {}
+            }
+        }
+        // flags
+        assert_eq!(
+            r#"<table aria-label="flags">"#,
+            lines.next().unwrap().trim()
+        );
+        // This is always the same
+        assert_eq!(
+            r"<tr><th>N</th><th>Z</th><th>C</th><th>I</th><th>D</th><th>V</th></tr>",
+            lines.next().unwrap().trim()
+        );
+        let flag_line = lines.next().unwrap().trim();
+        let flags: String = flag_line
+            .chars()
+            .skip("<tr><td>".len())
+            .step_by("</td><td>".len() + 1)
+            .take(6) // N, Z, C, I, D, V
+            .collect();
+        assert_eq!("</table>", lines.next().unwrap().trim());
+        // details (table)
+        assert_eq!(
+            r#"<table aria-label="details">"#,
+            lines.next().unwrap().trim()
+        );
+        let mut templates = Vec::new();
+        assert_eq!(
+            r"<tr><th>addressing</th><th>assembler</th><th>opc</th><th>bytes</th><th>cycles</th></tr>",
+            lines.next().unwrap().trim()
+        );
+        loop {
+            let next = lines.next().unwrap().trim();
+            if next.eq("</table>") {
+                break;
+            }
+            let template_marker = "</td><td>";
+            let start_idx = next.find(template_marker).unwrap() + template_marker.len();
+            let end_offset = next[start_idx..].find(template_marker).unwrap();
+            templates.push(next[start_idx..start_idx + end_offset].to_string());
+        }
+        assert_eq!("</dd>", lines.next().unwrap().trim());
+        let combined_summary = format!("{summary}\n{synopsis}\nNZCIDV\n{flags}");
+        instructions.push(Instruction {
+            name: name.to_lowercase(),
+            summary: combined_summary,
+            forms: Vec::new(),
+            asm_templates: templates,
+            aliases: Vec::new(),
+            arch: Arch::MOS6502,
+            url: Some(format!(
+                "https://www.masswerk.at/6502/6502_instruction_set.html#{}",
+                name.to_uppercase()
+            )),
+        });
+        if name.eq("TYA") {
+            break;
+        }
+    }
+
+    instructions
 }
 
 /// Parse the provided XML contents and return a vector of all the instructions based on that.

@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use ::asm_lsp::parser::{
     populate_arm_instructions, populate_gas_directives, populate_instructions,
     populate_masm_nasm_directives, populate_registers, populate_riscv_instructions,
-    populate_riscv_registers,
+    populate_riscv_registers, populate_6502_instructions,
 };
 use asm_lsp::{Arch, Assembler, Directive, Instruction, Register};
 
@@ -80,11 +80,16 @@ fn run(opts: &SerializeDocs) -> Result<()> {
                     ));
                 }
                 (false, arch_in) => {
-                    if arch_in.is_some() {
-                        println!("WARNING: `Arch` argument is ignored when `input_path` isn't a directory");
-                    }
                     let conts = std::fs::read_to_string(&path)?;
-                    instrs = populate_instructions(&conts)?;
+                    // TODO: Handle 6502 here
+                    match arch_in {
+                        Some(Arch::MOS6502) => {
+                            instrs = populate_6502_instructions(&conts);
+                        }
+                        _ => {
+                            instrs = populate_instructions(&conts)?;
+                        }
+                    }
                 }
             }
             if instrs.is_empty() {
