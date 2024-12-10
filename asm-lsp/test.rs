@@ -16,7 +16,7 @@ mod tests {
     use crate::{
         get_comp_resp, get_completes, get_hover_resp, get_word_from_pos_params,
         instr_filter_targets,
-        parser::{populate_arm_instructions, populate_masm_nasm_directives},
+        parser::{populate_6502_instructions, populate_arm_instructions, populate_masm_nasm_directives},
         populate_gas_directives, populate_instructions, populate_name_to_directive_map,
         populate_name_to_instruction_map, populate_name_to_register_map, populate_registers, Arch,
         Assembler, Config, ConfigOptions, Directive, DocumentStore, Instruction, Register,
@@ -2005,6 +2005,33 @@ Width: 8 bits",
         }
     }
     #[test]
+    fn serialized_6502_registers_are_up_to_date() {
+        let mut cmp_map = HashMap::new();
+        let mos6502_regs_ser = include_bytes!("serialized/registers/6502");
+        let ser_vec = bincode::deserialize::<Vec<Register>>(mos6502_regs_ser).unwrap();
+
+        let mos6502_regs_raw = include_str!("../docs_store/registers/raw/6502.xml");
+        let raw_vec = populate_registers(mos6502_regs_raw).unwrap();
+
+        for reg in ser_vec {
+            *cmp_map.entry(reg.clone()).or_insert(0) += 1;
+        }
+        for reg in raw_vec {
+            let entry = cmp_map.get_mut(&reg).unwrap();
+            assert!(
+                *entry != 0,
+                "Expected at least one more instruction entry for {reg:?}, but the count is 0"
+            );
+            *entry -= 1;
+        }
+        for (reg, count) in &cmp_map {
+            assert!(
+                *count == 0,
+                "Expected count to be 0, found {count} for {reg:?}"
+            );
+        }
+    }
+    #[test]
     fn serialized_x86_instructions_are_up_to_date() {
         let mut cmp_map = HashMap::new();
         let x86_instrs_ser = include_bytes!("serialized/opcodes/x86");
@@ -2114,6 +2141,33 @@ Width: 8 bits",
 
         let z80_instrs_raw = include_str!("../docs_store/opcodes/raw/z80.xml");
         let raw_vec = populate_instructions(z80_instrs_raw).unwrap();
+
+        for instr in ser_vec {
+            *cmp_map.entry(instr.clone()).or_insert(0) += 1;
+        }
+        for instr in raw_vec {
+            let entry = cmp_map.get_mut(&instr).unwrap();
+            assert!(
+                *entry != 0,
+                "Expected at least one more instruction entry for {instr:?}, but the count is 0"
+            );
+            *entry -= 1;
+        }
+        for (instr, count) in &cmp_map {
+            assert!(
+                *count == 0,
+                "Expected count to be 0, found {count} for {instr:?}"
+            );
+        }
+    }
+    #[test]
+    fn serialized_6502_instructions_are_up_to_date() {
+        let mut cmp_map = HashMap::new();
+        let mos6502_instrs_ser = include_bytes!("serialized/opcodes/6502");
+        let ser_vec = bincode::deserialize::<Vec<Instruction>>(mos6502_instrs_ser).unwrap();
+
+        let mos6502_instrs_raw = include_str!("../docs_store/opcodes/raw/6502.html");
+        let raw_vec = populate_6502_instructions(mos6502_instrs_raw);
 
         for instr in ser_vec {
             *cmp_map.entry(instr.clone()).or_insert(0) += 1;

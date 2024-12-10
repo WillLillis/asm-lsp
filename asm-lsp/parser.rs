@@ -693,7 +693,7 @@ pub fn populate_6502_instructions(html_conts: &str) -> Vec<Instruction> {
         {
             summary.push('\n');
             while !lines.peek().unwrap().starts_with(synopsis_marker) {
-                summary += lines.next().unwrap();
+                summary += &lines.next().unwrap().replace("<br />", "").replace("</p>", "");
             }
         }
         // synopsis
