@@ -2155,6 +2155,13 @@ Width: 8 bits",
             "../docs_store/registers/raw/6502.xml"
         );
     }
+    #[test]
+    fn serialized_power_isa_registers_are_up_to_date() {
+        serialized_registers_test!(
+            "serialized/registers/power-isa",
+            "../docs_store/registers/raw/power-isa.xml"
+        );
+    }
 
     macro_rules! serialized_instructions_test {
         ($serialized_path:literal, $raw_path:literal, $populate_fn:expr) => {

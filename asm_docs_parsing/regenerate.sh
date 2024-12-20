@@ -26,6 +26,7 @@ cargo build --release
 ../target/release/asm_docs_parsing ../docs_store/registers/raw/riscv.rst.txt -o ../asm-lsp/serialized/registers/riscv --doc-type register --arch riscv
 ../target/release/asm_docs_parsing ../docs_store/registers/raw/z80.xml -o ../asm-lsp/serialized/registers/z80 --doc-type register --arch z80
 ../target/release/asm_docs_parsing ../docs_store/registers/raw/6502.xml -o ../asm-lsp/serialized/registers/6502 --doc-type register --arch 6502
+../target/release/asm_docs_parsing ../docs_store/registers/raw/power-isa.xml -o ../asm-lsp/serialized/registers/power-isa --doc-type register --arch power-isa
 
 # directive binaries
 ../target/release/asm_docs_parsing ../docs_store/directives/raw/gas.xml -o ../asm-lsp/serialized/directives/gas --doc-type directive --assembler gas
