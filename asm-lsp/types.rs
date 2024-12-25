@@ -712,7 +712,9 @@ impl Arch {
             Self::RISCV => load_registers_with_path!(Self::RISCV, "serialized/registers/riscv"),
             Self::Z80 => load_registers_with_path!(Self::Z80, "serialized/registers/z80"),
             Self::MOS6502 => load_registers_with_path!(Self::MOS6502, "serialized/registers/6502"),
-            Self::PowerISA => {} //load_registers_with_path!(Self::PowerISA, "serialized/registers/power-isa"),
+            Self::PowerISA => {
+                load_registers_with_path!(Self::PowerISA, "serialized/registers/power-isa");
+            }
             Self::None => unreachable!(),
         }
     }
