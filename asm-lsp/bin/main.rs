@@ -175,6 +175,7 @@ pub fn run_lsp() -> Result<()> {
     }
     info!("Server Configuration: {:?}", config);
     if let Some(ref client_info) = params.client_info {
+        info!("CLIENT: {client_info:?}");
         if client_info.name.eq("helix") {
             info!("Helix LSP client detected");
             config.set_client(LspClient::Helix);

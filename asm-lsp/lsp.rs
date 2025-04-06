@@ -797,6 +797,7 @@ pub fn get_completes<T: Completable, U: ArchOrAssembler>(
                 *arch_or_asm,
                 CompletionItem {
                     label: (*name).to_string(),
+                    // label: (*name).replace("%", ""),
                     kind,
                     documentation: Some(Documentation::MarkupContent(MarkupContent {
                         kind: MarkupKind::Markdown,
