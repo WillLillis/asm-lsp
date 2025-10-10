@@ -35,8 +35,8 @@ use tree_sitter::InputEdit;
 
 use crate::{
     Arch, ArchOrAssembler, Assembler, Completable, CompletionItems, Config, ConfigOptions,
-    Directive, DocumentStore, Hoverable, Instruction, NameToInstructionMap, RootConfig,
-    ServerStore, TreeEntry, types::Column, ustr,
+    Directive, DocumentStore, Hoverable, Instruction, InstructionFormArch, NameToInstructionMap,
+    RootConfig, ServerStore, TreeEntry, types::Column, ustr,
 };
 
 /// Prints information about the server
@@ -1658,33 +1658,36 @@ pub fn get_sig_help_resp(
                 let instructions = vec![instr1, instr2];
                 for instr in instructions.into_iter().flatten() {
                     for form in &instr.forms {
-                        match instr.arch {
-                            Arch::X86 | Arch::X86_64 => {
-                                if let Some(ref gas_name) = form.gas_name
+                        match (instr.arch, &form.arch_info) {
+                            (
+                                Arch::X86 | Arch::X86_64,
+                                InstructionFormArch::GasGo {
+                                    gas_name, go_name, ..
+                                },
+                            ) => {
+                                if let Some(gas_name) = gas_name
                                     && instr_name.eq_ignore_ascii_case(gas_name)
                                 {
                                     writeln!(&mut value, "**{}**\n{form}", instr.arch).unwrap();
-                                } else if let Some(ref go_name) = form.go_name
+                                } else if let Some(go_name) = go_name
                                     && instr_name.eq_ignore_ascii_case(go_name)
                                 {
                                     writeln!(&mut value, "**{}**\n{form}", instr.arch).unwrap();
                                 }
                             }
-                            Arch::Z80 => {
-                                for form in &instr.forms {
-                                    if let Some(ref z80_name) = form.z80_name
-                                        && instr_name.eq_ignore_ascii_case(z80_name)
-                                    {
-                                        writeln!(&mut value, "{form}").unwrap();
-                                    }
+                            (Arch::Z80, InstructionFormArch::Z80 { name, .. }) => {
+                                if instr_name.eq_ignore_ascii_case(name) {
+                                    writeln!(&mut value, "{form}").unwrap();
                                 }
                             }
-                            Arch::ARM | Arch::RISCV => {
+                            (Arch::ARM | Arch::RISCV, InstructionFormArch::None) => {
                                 for form in &instr.asm_templates {
                                     writeln!(&mut value, "{form}").unwrap();
                                 }
                             }
-                            _ => {}
+                            _ => {
+                                // TODO: See what makes this reachable...
+                            }
                         }
                     }
                 }
@@ -2126,17 +2129,33 @@ pub fn instr_filter_targets(instr: &Instruction, config: &Config) -> Instruction
         .forms
         .iter()
         .filter(|form| {
-            (form.gas_name.is_some() && config.is_assembler_enabled(Assembler::Gas))
-                || (form.go_name.is_some() && config.is_assembler_enabled(Assembler::Go))
+            (matches!(
+                form.arch_info,
+                InstructionFormArch::GasGo {
+                    gas_name: Some(_),
+                    ..
+                }
+            ) && config.is_assembler_enabled(Assembler::Gas))
+                || (matches!(
+                    form.arch_info,
+                    InstructionFormArch::GasGo {
+                        go_name: Some(_),
+                        ..
+                    }
+                ) && config.is_assembler_enabled(Assembler::Go))
         })
         .map(|form| {
             let mut filtered = form.clone();
             // handle cases where gas and go both have names on the same form
             if !config.is_assembler_enabled(Assembler::Gas) {
-                filtered.gas_name = None;
+                if let InstructionFormArch::GasGo { gas_name, .. } = &mut filtered.arch_info {
+                    *gas_name = None;
+                }
             }
             if !config.is_assembler_enabled(Assembler::Go) {
-                filtered.go_name = None;
+                if let InstructionFormArch::GasGo { go_name, .. } = &mut filtered.arch_info {
+                    *go_name = None;
+                }
             }
             filtered
         })

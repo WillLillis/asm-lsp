@@ -22,8 +22,9 @@ use crate::{
 
 pub const BINCODE_CFG: bincode::config::Configuration = bincode::config::standard().with_no_limit();
 
-// Instruction
-#[derive(Debug, Clone, Eq, PartialEq, Hash, Serialize, Deserialize, Encode, BorrowDecode)]
+#[derive(
+    Debug, Default, Clone, Eq, PartialEq, Hash, Serialize, Deserialize, Encode, BorrowDecode,
+)]
 pub struct Instruction {
     pub name: String,
     pub summary: String,
@@ -36,28 +37,6 @@ pub struct Instruction {
 
 impl Hoverable for Instruction {}
 impl Completable for Instruction {}
-
-impl Default for Instruction {
-    fn default() -> Self {
-        let name = String::new();
-        let summary = String::new();
-        let forms = vec![];
-        let asm_templates = vec![];
-        let aliases = vec![];
-        let url = None;
-        let arch = Arch::None;
-
-        Self {
-            name,
-            summary,
-            forms,
-            asm_templates,
-            aliases,
-            url,
-            arch,
-        }
-    }
-}
 
 impl std::fmt::Display for Instruction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -153,83 +132,112 @@ impl<'own> Instruction {
     }
 }
 
-// TODO: Rework this to use a tagged union...
-// InstructionForm
+/// Architecture-specific information for `InstructionForm`
+#[derive(
+    Default, Eq, PartialEq, Hash, Debug, Clone, Serialize, Deserialize, Encode, BorrowDecode,
+)]
+pub enum InstructionFormArch {
+    GasGo {
+        gas_name: Option<String>,
+        go_name: Option<String>,
+        mmx_mode: Option<MMXMode>,
+        xmm_mode: Option<XMMMode>,
+        cancelling_inputs: Option<bool>,
+        nacl_version: Option<u8>,
+        nacl_zero_extends_outputs: Option<bool>,
+    },
+    Z80 {
+        name: String,
+        form: String,
+        opcode: String,
+        timing: Z80Timing,
+    },
+    AVR {
+        mneumonic: String,
+        summary: String,
+        version: String,
+        timing: AvrTiming,
+        status_register: AvrStatusRegister,
+    },
+    #[default]
+    None,
+}
+
 #[derive(
     Default, Eq, PartialEq, Hash, Debug, Clone, Serialize, Deserialize, Encode, BorrowDecode,
 )]
 pub struct InstructionForm {
-    // --- Gas/Go-Specific Information ---
-    pub gas_name: Option<String>,
-    pub go_name: Option<String>,
-    pub mmx_mode: Option<MMXMode>,
-    pub xmm_mode: Option<XMMMode>,
-    pub cancelling_inputs: Option<bool>,
-    pub nacl_version: Option<u8>,
-    pub nacl_zero_extends_outputs: Option<bool>,
-    // --- Z80-Specific Information ---
-    pub z80_name: Option<String>,
-    pub z80_form: Option<String>,
-    pub z80_opcode: Option<String>,
-    pub z80_timing: Option<Z80Timing>,
-    // --- Avr-Specific Information ---
-    pub avr_mneumonic: Option<String>,
-    pub avr_summary: Option<String>,
-    pub avr_version: Option<String>,
-    pub avr_timing: Option<AvrTiming>,
-    pub avr_status_register: Option<AvrStatusRegister>,
+    // // --- Gas/Go-Specific Information ---
+    // pub gas_name: Option<String>,
+    // pub go_name: Option<String>,
+    // pub mmx_mode: Option<MMXMode>,
+    // pub xmm_mode: Option<XMMMode>,
+    // pub cancelling_inputs: Option<bool>,
+    // pub nacl_version: Option<u8>,
+    // pub nacl_zero_extends_outputs: Option<bool>,
+    // // --- Z80-Specific Information ---
+    // pub z80_name: Option<String>,
+    // pub z80_form: Option<String>,
+    // pub z80_opcode: Option<String>,
+    // pub z80_timing: Option<Z80Timing>,
+    // // --- Avr-Specific Information ---
+    // pub avr_mneumonic: Option<String>,
+    // pub avr_summary: Option<String>,
+    // pub avr_version: Option<String>,
+    // pub avr_timing: Option<AvrTiming>,
+    // pub avr_status_register: Option<AvrStatusRegister>,
+    pub arch_info: InstructionFormArch,
     // --- Assembler/Architecture Agnostic Info ---
-    pub isa: Option<ISA>,
+    pub isa: Option<ISA>, // TODO: Can this be removed?
     pub operands: Vec<Operand>,
-    pub urls: Vec<String>,
+    pub urls: Vec<String>, // TODO: Can this be moved into the enum?
 }
 
 impl std::fmt::Display for InstructionForm {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut s = String::new();
-        if let Some(val) = &self.gas_name {
-            write!(s, "*GAS*: {val} | ")?;
-        }
-        if let Some(val) = &self.go_name {
-            write!(s, "*GO*: {val} | ")?;
-        }
-        if let Some(val) = &self.z80_form {
-            write!(s, "*Z80*: {val} | ")?;
-        }
-        if let Some(val) = &self.avr_mneumonic {
-            let version_str = self
-                .avr_version
-                .as_ref()
-                .map_or_else(String::new, |version| format!(" ({version})"));
-            write!(s, "*AVR*: {val}{version_str} | ")?;
-        }
-
-        if let Some(val) = &self.mmx_mode {
-            write!(s, "*MMX*: {} | ", val.as_ref())?;
-        }
-        if let Some(val) = &self.xmm_mode {
-            write!(s, "*XMM*: {} | ", val.as_ref())?;
-        }
-        if let Some(val) = &self.z80_opcode {
-            if val.contains(',') {
-                write!(s, "*Opcodes*: {val} | ")?;
-            } else {
-                write!(s, "*Opcode*: {val} | ")?;
+        // Name
+        match &self.arch_info {
+            InstructionFormArch::GasGo {
+                gas_name,
+                go_name,
+                mmx_mode,
+                xmm_mode,
+                ..
+            } => {
+                write!(s, "*GAS*: {gas_name} | ")?;
+                write!(s, "*GO*: {go_name} | ")?;
+                write!(s, "*MMX*: {} | ", mmx_mode.as_ref())?;
+                write!(s, "*XMM*: {} | ", xmm_mode.as_ref())?;
+                // cancelling inputs
+                // nacl_version
+                // nacl_zero_extends_outputs
             }
+            InstructionFormArch::Z80 { name, opcode, .. } => {
+                write!(s, "*Z80*: {name} | ")?;
+                write!(
+                    s,
+                    "*Opcode{}*: {opcode} | ",
+                    if opcode.contains(',') { "s" } else { "" }
+                )?;
+            }
+            InstructionFormArch::AVR {
+                mneumonic, version, ..
+            } => {
+                write!(s, "*AVR*: {mneumonic}{version} | ")?;
+            }
+            InstructionFormArch::None => {},
         }
-
-        // cancelling inputs
-        // nacl_version
-        // nacl_zero_extends_outputs
 
         // ISA
         if let Some(val) = &self.isa {
             write!(s, "*ISA*: {} | ", val.as_ref())?;
         }
 
-        if !s.is_empty() {
-            s = format!("- {}\n\n", &s[..s.len() - 3]);
-        }
+        // TODO: Make sure we can remove this, then write directly to the formatter
+        // if !s.is_empty() {
+        //     s = format!("- {}\n\n", &s[..s.len() - 3]);
+        // }
 
         // Operands
         let operands_str: String = if self.operands.is_empty() {
@@ -257,18 +265,21 @@ impl std::fmt::Display for InstructionForm {
 
         s += &operands_str;
 
-        if let Some(ref timing) = self.z80_timing {
-            write!(s, "\n  + {timing}")?;
-        }
-
-        if let Some(summary) = &self.avr_summary {
-            write!(s, "\n\n{summary}")?;
-        }
-        if let Some(sreg) = &self.avr_status_register {
-            write!(s, "\n\n{sreg}")?;
-        }
-        if let Some(ref timing) = self.avr_timing {
-            writeln!(s, "\n\n{timing}")?;
+        match &self.arch_info {
+            InstructionFormArch::Z80 { timing, .. } => {
+                write!(s, "\n  + {timing}")?;
+            }
+            InstructionFormArch::AVR {
+                summary,
+                timing,
+                status_register,
+                ..
+            } => {
+                write!(s, "\n\n{summary}")?;
+                write!(s, "\n\n{status_register}")?;
+                writeln!(s, "\n\n{timing}")?;
+            }
+            _ => {}
         }
 
         for url in &self.urls {
@@ -770,6 +781,7 @@ pub enum MMXMode {
 #[allow(non_camel_case_types)]
 #[derive(
     Debug,
+    Default,
     Hash,
     PartialEq,
     Eq,
@@ -819,6 +831,7 @@ pub enum Arch {
     #[serde(rename = "mips")]
     Mips,
     /// For testing purposes *only*. This is not a valid config option
+    #[default]
     #[serde(skip)]
     None,
 }

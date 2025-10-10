@@ -21,13 +21,9 @@ use serde::Deserialize;
 use url_escape::encode_www_form_urlencoded;
 
 use crate::{
-    AvrStatusRegister, AvrTiming, InstructionAlias,
     types::{
-        Arch, Assembler, Directive, ISA, Instruction, InstructionForm, MMXMode, NameToDirectiveMap,
-        NameToInstructionMap, NameToRegisterMap, Operand, OperandType, Register, RegisterBitInfo,
-        RegisterType, RegisterWidth, XMMMode, Z80Timing, Z80TimingInfo,
-    },
-    ustr,
+        Arch, Assembler, Directive, Instruction, InstructionForm, MMXMode, NameToDirectiveMap, NameToInstructionMap, NameToRegisterMap, Operand, OperandType, Register, RegisterBitInfo, RegisterType, RegisterWidth, XMMMode, Z80Timing, Z80TimingInfo, ISA
+    }, ustr, AvrStatusRegister, AvrTiming, InstructionAlias, InstructionFormArch
 };
 
 /// Parse all of the register information witin the documentation file
@@ -1018,6 +1014,45 @@ pub fn populate_power_isa_instructions(json_conts: &str) -> Result<Vec<Instructi
     Ok(instructions)
 }
 
+macro_rules! set_gasgo_field {
+    ($arch:expr, $field:ident, $value:expr) => {
+        if let InstructionFormArch::None = &$arch {
+            $arch = InstructionFormArch::GasGo {
+                gas_name: None,
+                go_name: None,
+                mmx_mode: None,
+                xmm_mode: None,
+                cancelling_inputs: None,
+                nacl_version: None,
+                nacl_zero_extends_outputs: None,
+            };
+        }
+        if let InstructionFormArch::GasGo { ref mut $field, .. } = $arch {
+            *$field = $value;
+        } else {
+            unreachable!();
+        }
+    };
+}
+
+macro_rules! set_z80_field {
+    ($arch:expr, $field:ident, $value:expr) => {
+        if let InstructionFormArch::None = &$arch {
+            $arch = InstructionFormArch::Z80 {
+                name: String::new(),
+                form: String::new(),
+                opcode: String::new(),
+                timing: Z80Timing::default(),
+            };
+        }
+        if let InstructionFormArch::Z80 { ref mut $field, .. } = $arch {
+            *$field = $value;
+        } else {
+            unreachable!();
+        }
+    };
+}
+
 /// Parse the provided XML contents and return a vector of all the instructions based on that.
 /// If parsing fails, the appropriate error will be returned instead.
 ///
@@ -1101,27 +1136,47 @@ pub fn populate_instructions(xml_contents: &str) -> Result<Vec<Instruction>> {
                             let Attribute { key, value } = attr.unwrap();
                             match ustr::get_str(key.into_inner()) {
                                 "gas-name" => {
-                                    curr_instruction_form.gas_name =
-                                        Some(ustr::get_str(&value).to_owned());
+                                    set_gasgo_field!(
+                                        curr_instruction_form.arch_info,
+                                        gas_name,
+                                        Some(ustr::get_str(&value).to_owned())
+                                    );
                                 }
                                 "go-name" => {
-                                    curr_instruction_form.go_name =
-                                        Some(ustr::get_str(&value).to_owned());
+                                    set_gasgo_field!(
+                                        curr_instruction_form.arch_info,
+                                        go_name,
+                                        Some(ustr::get_str(&value).to_owned())
+                                    );
                                 }
                                 "mmx-mode" => {
-                                    let value_ = value.as_ref();
-                                    curr_instruction_form.mmx_mode =
-                                        Some(MMXMode::from_str(ustr::get_str(value_))?);
+                                    set_gasgo_field!(
+                                        curr_instruction_form.arch_info,
+                                        mmx_mode,
+                                        Some(MMXMode::from_str(ustr::get_str(&value))?)
+                                    );
                                 }
                                 "xmm-mode" => {
-                                    let value_ = value.as_ref();
-                                    curr_instruction_form.xmm_mode =
-                                        Some(XMMMode::from_str(ustr::get_str(value_))?);
+                                    set_gasgo_field!(
+                                        curr_instruction_form.arch_info,
+                                        xmm_mode,
+                                        Some(XMMMode::from_str(ustr::get_str(&value))?)
+                                    );
                                 }
                                 "cancelling-inputs" => match ustr::get_str(&value) {
-                                    "true" => curr_instruction_form.cancelling_inputs = Some(true),
+                                    "true" => {
+                                        set_gasgo_field!(
+                                            curr_instruction_form.arch_info,
+                                            cancelling_inputs,
+                                            Some(true)
+                                        );
+                                    },
                                     "false" => {
-                                        curr_instruction_form.cancelling_inputs = Some(false);
+                                        set_gasgo_field!(
+                                            curr_instruction_form.arch_info,
+                                            cancelling_inputs,
+                                            Some(false)
+                                        );
                                     }
                                     val => {
                                         return Err(anyhow!(
@@ -1130,17 +1185,26 @@ pub fn populate_instructions(xml_contents: &str) -> Result<Vec<Instruction>> {
                                     }
                                 },
                                 "nacl-version" => {
-                                    curr_instruction_form.nacl_version =
-                                        value.as_ref().first().copied();
+                                    set_gasgo_field!(
+                                        curr_instruction_form.arch_info,
+                                        nacl_version,
+                                        value.as_ref().first().copied()
+                                    );
                                 }
                                 "nacl-zero-extends-outputs" => match ustr::get_str(&value) {
                                     "true" => {
-                                        curr_instruction_form.nacl_zero_extends_outputs =
-                                            Some(true);
+                                        set_gasgo_field!(
+                                            curr_instruction_form.arch_info,
+                                            nacl_zero_extends_outputs,
+                                            Some(true)
+                                        );
                                     }
                                     "false" => {
-                                        curr_instruction_form.nacl_zero_extends_outputs =
-                                            Some(false);
+                                        set_gasgo_field!(
+                                            curr_instruction_form.arch_info,
+                                            nacl_zero_extends_outputs,
+                                            Some(false)
+                                        );
                                     }
                                     val => {
                                         return Err(anyhow!(
@@ -1149,8 +1213,11 @@ pub fn populate_instructions(xml_contents: &str) -> Result<Vec<Instruction>> {
                                     }
                                 },
                                 "z80name" => {
-                                    curr_instruction_form.z80_name =
-                                        Some(ustr::get_str(&value).to_owned());
+                                    set_z80_field!(
+                                        curr_instruction_form.arch_info,
+                                        name,
+                                        ustr::get_str(&value).to_owned()
+                                    );
                                 }
                                 "form" => {
                                     let value_ = ustr::get_str(&value);
